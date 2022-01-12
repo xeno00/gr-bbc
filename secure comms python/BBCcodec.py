@@ -18,7 +18,15 @@
 from glowworm import gw_hash
 from math import log
 
-def encode_BBC(message, hash=gw_hash):
+
+def encode_BBC(message, hash:function=gw_hash):
+    """
+    encode_BBC uses the BBC algorithm to place marks in a codeword.
+
+    :param message:  message to be encoded
+    :param hash:  hash function to determine mark positions for substrings
+    :return:  the encoded message AKA codeword
+    """
     # add checksum bits and calculate the message length
     message.extend(0,0)
     length = len(message)
@@ -31,7 +39,14 @@ def encode_BBC(message, hash=gw_hash):
     return mark_array
 
 
-def decode_BBC(codeword, hash=gw_hash):
+def decode_BBC(codeword:list, hash:function=gw_hash):
+    """
+    decode_BBC uses the BBC algorithm to decode a list of marks (codewords).
+
+        :param codeword:  list of marks to be decoded
+        :param hash:  hash function to determine mark positions
+        :return:  list of identified messages (without checksum bits)
+    """
     # initialize the current assumed message and array of valid messages
     message = []
     messages = []
@@ -48,10 +63,20 @@ def decode_BBC(codeword, hash=gw_hash):
 # - does python evaluate a result of 1 as true for a mathematical expression or do I need
 #   <expression> == 1
 # - typo in paper as marked in .pdf? The following code assumes yes
-def _decode_BBC_recursive(codeword, length, hash, index, message, message_list):
-    # base case, we've reached the end of the message tree with a valid message
+def _decode_BBC_recursive(codeword:list, length:int, hash:function, index, message, message_list:list):
+    """
+    _decode_BBC_recursive is the recursive functionality to decode a BBC code
+
+        :param codeword:  message to be decoded
+        :param length:  potential maximum length of message
+        :param hash:  hash function to determine mark positions
+        :param index:  current bit index !! NEEDS TO BE REMOVED REMAP TO len(msg)
+        :param message: current message tree
+        :param message_list:  array of valid messages contained in the codeword
+    """
+    # base case, we've reached the end of the message tree with a valid message, add the message and remove checksum
     if index == (length-1):
-        message_list.append(message)
+        message_list.append(message[:-2])
     # test both possible next message values
     else:
         # assuming the next message bit is a 0, check for a mark in the codeword
