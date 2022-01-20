@@ -15,3 +15,12 @@ for n in range(len(item)):
         for j in range(n+1):
             print(item[j])
         print()
+
+str1 = "hello world"
+int1 = int.from_bytes(str1.encode(encoding='ascii'), byteorder='little')
+int1 = int1>>2
+int1 = int1<<2
+str2 = int1.to_bytes(11, byteorder='little').decode(encoding='ascii')
+print(str1, " len=", len(str1))
+print(str2, " len=", len(str2))
+
