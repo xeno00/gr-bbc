@@ -3,29 +3,24 @@
 # Project: ECE-499 Secure Communications
 # 
 # Description:
-# Encode and decode a message using the BBC algorithm as described by 
-# Bahn, Baird, and Carlisle. The BBC algorithm is an unkeyed approach
-# to jamming resistance. Without the use of keys, omnidirectional
-# communication may be achieved with relatively low power and high
-# speed. In BBC, codewords are binary strings with length 2^len(message+2)
-# assuming 2 checksum bits concatenated to the end of the message.
-# Since the mark (1 in codeword) density is low, the transmit power 
-# requirement is low. 
+# Implementation of the BBC codec with arrays rather than binary numbers.
+# Slow but easier to understand.
 
-# TODO: add doxygen headers
 # TODO: answer decoding questions
+# TODO: write glowworm.py
+# TODO: change n to n+1 for encode loop?
 
-from glowworm import gw_hash
+from glowworm import GW_hash
+# Here, GW_hash must return a list of indicies to place ones and must handle complete arrays, and must have its own memory (i.e. no delBit)
 from math import log
 
 
-def encode_BBC(message, hash:function=gw_hash):
+def encode_BBC(message:list):
     """
     encode_BBC uses the BBC algorithm to place marks in a codeword.
 
-    :param message:  message to be encoded
-    :param hash:  hash function to determine mark positions for substrings
-    :return:  the encoded message AKA codeword
+    :param message:  message to be encoded, as a list of ones and zeros
+    :return:  the encoded message AKA codeword, as a list of ones and zeros
     """
     # add checksum bits and calculate the message length
     message.extend(0,0)
@@ -34,12 +29,12 @@ def encode_BBC(message, hash:function=gw_hash):
     mark_array = [0 for m in range(2 ** (length))]
     # place marks (1's) at each subset hash location
     for i in range(length):
-        mark_array[hash(message[0:i])] = 1
+        mark_array[GW_hash(message[0:i])] = 1
     # return the codeword
     return mark_array
 
 
-def decode_BBC(codeword:list, hash:function=gw_hash):
+def decode_BBC(codeword:list):
     """
     decode_BBC uses the BBC algorithm to decode a list of marks (codewords).
 
@@ -51,29 +46,32 @@ def decode_BBC(codeword:list, hash:function=gw_hash):
     message = []
     messages = []
     # make the first recursive call to decode
-    _decode_BBC_recursive(codeword, log(len(codeword,2)), hash, 0, message, messages)
+    _decode_BBC_recursive(codeword, message, messages)
     return messages
 
-# - is this depth first recusion?
+# - is this depth first recusion? yes
 # - is the L term from the paper the same as the message length or the
-#   codeword length? This assumes codeword length
+#   codeword length? It is the message length since it is the terminating condition
 # - would best practice have these parameters named differently than the
 #   caller function?
-# - would it be faster to store the length instead of using a logarithm?
+# - would it be faster to store the length instead of using a logarithm? Yes, but program for mechanics not speed right now.
 # - does python evaluate a result of 1 as true for a mathematical expression or do I need
 #   <expression> == 1
-# - typo in paper as marked in .pdf? The following code assumes yes
-def _decode_BBC_recursive(codeword:list, length:int, hash:function, index, message, message_list:list):
+# - typo in paper as marked in .pdf? The following code assumes yes. Dr. Bahn thinks yes.
+# - Prune the recursive tree once to checksum bits
+# - Configure hashing to do one bit at a time
+# - Configure hashing to delete a bit from the hash state
+# - Move from recursive to iterative
+def _decode_BBC_recursive(codeword:list, message, message_list:list):
     """
     _decode_BBC_recursive is the recursive functionality to decode a BBC code
 
-        :param codeword:  message to be decoded
-        :param length:  potential maximum length of message
-        :param hash:  hash function to determine mark positions
-        :param index:  current bit index !! NEEDS TO BE REMOVED REMAP TO len(msg)
+        :param codeword:  message to be decoded, as a list of 1s and 0s
         :param message: current message tree
         :param message_list:  array of valid messages contained in the codeword
     """
+    length = log(len(codeword,2))
+    index = len(message)
     # base case, we've reached the end of the message tree with a valid message, add the message and remove checksum
     if index == (length-1):
         message_list.append(message[:-2])

@@ -6,3 +6,6 @@
 # The Glow Worm Hash and supporting functions to be used with for
 # mark placement in the BBC codec.
 
+#TODO: write some code
+
+#def gw_hash():
