@@ -24,3 +24,7 @@ str2 = int1.to_bytes(11, byteorder='little').decode(encoding='ascii')
 print(str1, " len=", len(str1))
 print(str2, " len=", len(str2))
 
+import os
+print(os.getcwd())
+
+

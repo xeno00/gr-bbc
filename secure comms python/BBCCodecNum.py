@@ -29,23 +29,26 @@
 #uint64 t, i, h; //temporary
 #const uint64 CHECKVALUE = 0xCCA4220FC78D45E0;
 
-import glowworm.c
 from math import log
+import glowworm as gw
+#import ctypes
+#gw = ctypes.CDLL("secure comms python/glowworm.so")
 
 
-def encode_BBC(message:str="hello world", num_checksum:int=0):
-    length = len(message)*8 + num_checksum # get length (number of bits of message) while still string, assuming ACII
-    message = int.from_bytes(message.encode(encoding='ascii'), byteorder='little') # convert to bytes
+def encode_BBC(message, num_checksum:int=0):
+    length = 1024
+    if(type(message)==str):
+        length = len(message)*8 + num_checksum # get length (number of bits of message) while still string, assuming ACII so each letter is a byte
+        message = int.from_bytes(message.encode(encoding='ascii'), byteorder='little') # convert to bytes
     message = message << num_checksum # add checksum bits and calculate the message length
-    t, i, h, n = 0          # temporary for hash
-    shift_register = [0 for i in 32] # same as s in paper. needs 32 64b words.
+    t, i, h, n = 0, 0, 0, 0          # temporary for hash
+    shift_register = [0 for i in range(32)] # same as s in paper. needs 32 64b words.
     codeword = 0b0          # initialize the codeword to all 0's
-    glowwormInit(shift_register, n,t,i,h) # initialize the hash # FLAG: check question 5 above
+    gw.init(shift_register, n,t,i,h) # initialize the hash # FLAG: check question 5 above
 
-    # Set marks using xor
+    # Set marks using array indexing with hash's output
     for n in range(length): # Set bounds (n) for each substring
-        glowwormAddBit(message&(1<<n), shift_register, n, t) # message&(1<<j) same as b in paper,
-        codeword ^= shift_register
+        codeword |= (1<<gw.add_bit(message&(1<<n), shift_register, n, t))
     
     # End state assums new shift register memory allocated inside of the decode function, since no delBit here.
     return codeword
@@ -53,18 +56,18 @@ def encode_BBC(message:str="hello world", num_checksum:int=0):
 
 def decode_BBC(codeword:int, length:int, num_checksum:int=0):
     # initialize the current assumed message and array of valid messages
-    message = []
+    message = 0b0
     messages = []
     n, t, i, h = 0          # temporary for hash
-    shift_register = [0 for i in 32]  # same as s in paper. needs 32 64b words.
+    shift_register = [0 for i in range(32)]  # same as s in paper. needs 32 64b words.
     codeword = 0b0          # initialize the codeword to all 0's
-    glowwormInit(shift_register, n,t,i,h) # initialize the hash # FLAG: check question 5 above
+    gw.init(shift_register, n,t,i,h) # initialize the hash # FLAG: check question 5 above
     # make the first recursive call to decode
-    _decode_BBC_recursive(codeword, length, 0, message, messages, num_checksum, shift_register, n , t)
+    _decode_BBC_recursive(codeword, length, 0, message, messages, num_checksum, shift_register, t)
     return messages
 
 
-def _decode_BBC_recursive(codeword:int, length:int, index, message:int, message_list:list, num_checksum:int=0, s, t):
+def _decode_BBC_recursive(codeword:int, length:int, index, message:int, message_list:list, num_checksum:int, s, t):
 
     # base case, we've reached the end of the message tree with a valid message, add the message and remove checksum
     if index == (length-1):
@@ -73,12 +76,11 @@ def _decode_BBC_recursive(codeword:int, length:int, index, message:int, message_
     # test both possible next message values
     else:
         # assuming the next message bit is a 0, check for a mark in the codeword
-        glowwormAddBit(0, s, index+1, t) 
-        if (codeword & 0xFFFFFFFF)(s):
-            print()
-        if codeword[hash(message.append(0))]:
-            _decode_BBC_recursive(codeword, length, hash, index+1, message.append(0), message_list)
-        if codeword[hash(message.append(1))]:
-            _decode_BBC_recursive(codeword, length, hash, index+1, message.append(1), message_list)
-    # Change shift regeister state for other branch
-    glowwormDelBit()
+        if codeword & (1<<gw.add_bit(0, s, index+1, t) ):
+            _decode_BBC_recursive(codeword, length, hash, index+1, message, message_list)
+        gw.del_bit(0, s, index+2, t)
+
+        # assuming the next message bit is a 1, check for a mark in the codeword
+        if codeword & (1<<gw.add_bit(1, s, index+1, t) ):
+            _decode_BBC_recursive(codeword, length, hash, index+1, message+2**index, message_list)
+        gw.del_bit(1, s, index+2, t)
