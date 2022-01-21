@@ -13,14 +13,16 @@
 //uint64 t, i, h; //temporary
 //const uint64 CHECKVALUE = 0xCCA4220FC78D45E0;
 
+//C:/Program\ Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe -fPIC -shared -o secure\ comms\ python/glowworm.so secure\ comms\ python/glowworm.c
+
 typedef unsigned long long uint64; //64-bit unsigned int
 
 #define glowwormAddBit(b,s,n,t) (            \
-    t  = s[n % 32] ˆ ((b) ? 0xffffffff : 0), \
-    t  = (t|(t>>1)) ˆ (t<<1),                \
-    t ˆ= (t>>4) ˆ (t>>8) ˆ (t>>16) ˆ (t>>32),\
+    t  = s[n % 32] ^ ((b) ? 0xffffffff : 0), \
+    t  = (t|(t>>1)) ^ (t<<1),                \
+    t ^= (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32),\
     n++,                                     \
-    s[n % 32] ˆ= t                           \
+    s[n % 32] ^= t                           \
 )
 
 #define glowwormDelBit(b,s,n,t) (            \
