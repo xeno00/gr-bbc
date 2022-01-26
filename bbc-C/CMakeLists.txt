@@ -3,4 +3,4 @@ project(bbc_C C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(bbc_C main.c)
+add_executable(bbc_C main.c main.h)
