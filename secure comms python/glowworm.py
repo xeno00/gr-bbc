@@ -11,11 +11,11 @@
 
 def add_bit(b, s, n, t):
     t = s[n % 32]^(0xffffffff if b else 0)
-    t  = (t|(t>>1)) ^ (t<<1)                
+    t = (t|(t>>1)) ^ ((t<<1) & 0xffffffffffffffff)       # Have to enforce 64 bit condition on left shift     
     t ^= (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)
-    n +=1                                     
-    s[n % 32] ^= t  
-    return s[n % 32]                         
+    #n = n + 1        removed since cant modify global variable                             
+    s[(n+1) % 32] ^= t  #s[(n) % 32] ^= t, modified to reflect n change
+    return s[(n+1) % 32]    #return s[(n) % 32], modified to reflect n change                      
 
 
 def del_bit(b, s, n, t):
@@ -23,6 +23,7 @@ def del_bit(b, s, n, t):
     add_bit(b,s,n,t), 
     n -= 1
     return s[n % 32]
+    
 
 def init(s, n, t, i, h):
     h = 1
@@ -31,5 +32,5 @@ def init(s, n, t, i, h):
         s[i]=0
     for i in range(4096):
         h=add_bit(h&1, s, n, t)
+        n+=1 # moved out 1 level from original hash since function cannot modify n in global scope
     n = 0
-

@@ -13,6 +13,7 @@ import ctypes
 
 # __________
 print("running")
-cw1 = bbc.encode_BBC("hello world")
+message = 0b0110
+cw1 = bbc.encode_BBC(message)
 print(cw1)
 print("completed")

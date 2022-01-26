@@ -36,7 +36,7 @@ import glowworm as gw
 
 
 def encode_BBC(message, num_checksum:int=0):
-    length = 1024
+    length = 4
     if(type(message)==str):
         length = len(message)*8 + num_checksum # get length (number of bits of message) while still string, assuming ACII so each letter is a byte
         message = int.from_bytes(message.encode(encoding='ascii'), byteorder='little') # convert to bytes
@@ -48,7 +48,9 @@ def encode_BBC(message, num_checksum:int=0):
 
     # Set marks using array indexing with hash's output
     for n in range(length): # Set bounds (n) for each substring
-        codeword |= (1<<gw.add_bit(message&(1<<n), shift_register, n, t))
+        bit = message&(1<<n)
+        mark_loc = gw.add_bit(bit, shift_register, n, t) % (2^(length+2))
+        codeword |= (1<<mark_loc)
     
     # End state assums new shift register memory allocated inside of the decode function, since no delBit here.
     return codeword
