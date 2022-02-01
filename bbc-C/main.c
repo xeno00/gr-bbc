@@ -23,10 +23,11 @@ int main (int argc, char *argv[]) {
 
     int lenM = 30; // Number of message bits.
     int lenK = 2; // Number of check bits.
+    int totalLength = lenM+lenK;
 
     // This creates 2^codewordBits combo. It should be at least 1 higher than the minimum required.
     // Consider the formula: [ log(lenM+lenK) / log (2) ]+ 1
-    int codewordBits = 10;
+    int codewordBits = 30;
 
     uint64 mask = (1 << codewordBits) - 1; // This creates a mask with codewordBits number of 1s
 
@@ -76,11 +77,11 @@ int main (int argc, char *argv[]) {
     uint64 mark;
 
     // Create a 'marks' array to store all marks.
-    uint64 marks[lenM+lenK];
+    uint64 marks[totalLength];
 
     // The mark is calculated using the last 'codewordBits' of the data in the buffer;
     //      the position of the data within the buffer 's' depends on n%32.
-    for (int j = 0; j < lenM + lenK; j++ ){
+    for (int j = 0; j < totalLength; j++ ){
         glowwormAddBit( (uint64)raw[j] , s, n, t);
         mark = s[n%32] & mask;
         printf("%d: %llx with mark %d\n", n, s[n%32], mark);
@@ -92,7 +93,7 @@ int main (int argc, char *argv[]) {
 
     // Test the deletion of bits using glowWorm.
     //  We should end up with the same hashes in reverse order given the same input string.
-    for (int j = lenM + lenK -1 ; j >= 0; j-- ){
+    for (int j = totalLength - 1 ; j >= 0; j-- ){
         glowwormDelBit( (uint64)raw[j] , s, n, t);
         printf("%d: %llx\n", n, s[n%32]);
     }
@@ -123,7 +124,6 @@ int main (int argc, char *argv[]) {
     uint64 decodeMark0;
     uint64 decodeMark1;
 
-    int totalLength = lenM+lenK;
     uint64 decodedMsg[ totalLength ];
 
     // search for the message first.
