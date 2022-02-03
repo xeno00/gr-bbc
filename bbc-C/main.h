@@ -55,4 +55,6 @@ typedef unsigned long long uint64; //64-bit unsigned int
 
 int foundInArray( uint64* array, int arrayLength, uint64 value);
 
+void printArray( uint64* array, int arrayLength );
+
 #endif //BBC_C_MAIN_H
