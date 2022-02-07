@@ -53,8 +53,13 @@ typedef unsigned long long uint64; //64-bit unsigned int
 // END: **** Copied from "The Glowworm hash: Increased Speed and Security for BBC Unkeyed Jam Resistance" *********
 
 
-int foundInArray( uint64* array, int arrayLength, uint64 value);
+int foundInArray( uint64 array[], int arrayLength, uint64 value);
 
-void printArray( uint64* array, int arrayLength );
+void printArray( uint64 array[], int arrayLength );
+
+void DFSDecoder(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int totalLength, int badMarksLen, uint64 mask, uint64 s[], uint64 n, uint64 t, uint64 i, uint64 h);
+
+void basicDecoder(uint64 marks[], uint64 decodedMsg[], int lenM, int lenK, int totalLength, uint64 mask, uint64 s[], uint64 n, uint64 t, uint64 i, uint64 h);
+
 
 #endif //BBC_C_MAIN_H
