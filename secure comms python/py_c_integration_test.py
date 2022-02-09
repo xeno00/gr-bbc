@@ -11,9 +11,13 @@ import ctypes
 #gw[1] refrences the first real function in the c file, in this case, add1
 #print(gw[1]())
 
-# __________
-print("running")
-message = 0b0110
-cw1 = bbc.encode_BBC(message)
-print(cw1)
-print("completed")
+
+import glowworm as gw
+s = [0 for i in range(32)] # same as s in paper. needs 32 64b words.
+gw.init(s)
+print(0xaf0a5f77bc7293a8%128)
+print(gw.n, gw.add_bit(0, s) %32)
+print(gw.n, gw.add_bit(1, s) %32)
+print(gw.n, gw.add_bit(1, s) %32)
+print(gw.n, gw.add_bit(1, s) %32)
+
