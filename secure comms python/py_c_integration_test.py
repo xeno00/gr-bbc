@@ -1,5 +1,6 @@
 import BBCCodecNum as bbc
-import ctypes
+import glowworm as gw
+#import ctypes
 #gw = ctypes.CDLL("secure comms python/glowworm.so")
 
 #print(type(gw))
@@ -11,13 +12,20 @@ import ctypes
 #gw[1] refrences the first real function in the c file, in this case, add1
 #print(gw[1]())
 
-
-import glowworm as gw
-s = [0 for i in range(32)] # same as s in paper. needs 32 64b words.
+s = [0 for i in range(32)]
 gw.init(s)
-print(0xaf0a5f77bc7293a8%128)
-print(gw.n, gw.add_bit(0, s) %32)
-print(gw.n, gw.add_bit(1, s) %32)
-print(gw.n, gw.add_bit(1, s) %32)
-print(gw.n, gw.add_bit(1, s) %32)
+
+print(gw.add_bit(0,s)%64)
+print(gw.add_bit(1,s)%64)
+print(gw.add_bit(0,s)%64)
+print(gw.add_bit(1,s)%64)
+print(gw.add_bit(0,s)%64)
+print(gw.add_bit(1,s)%64)
+
+
+
+message = 0b101010
+codeword = bbc.encode(message)
+print("our codeword is ", codeword)
+
 

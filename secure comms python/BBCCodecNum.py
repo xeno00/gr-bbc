@@ -33,9 +33,9 @@ from math import log
 import glowworm as gw
 #import ctypes
 #gw = ctypes.CDLL("secure comms python/glowworm.so")
-DEFAULT_LENGTH = 5
+DEFAULT_LENGTH = 6
 
-def encode_BBC(message, num_checksum:int=0):
+def encode(message, num_checksum:int=0):
     # Configure message and length
     length = DEFAULT_LENGTH
     if(type(message)==str):
@@ -48,17 +48,17 @@ def encode_BBC(message, num_checksum:int=0):
     codeword = 0b0          # initialize the codeword to all 0's
     gw.init(shift_register) # initialize the hash # FLAG: check question 5 above
 
-    # Set marks using array indexing with hash's output
+    # Set marks using array indexing with hash's output (LSB first)
     for i in range(length): # Set bounds (n) for each substring
-        bit = message&(1<<i)
-        mark_loc = gw.add_bit(bit, shift_register) % (2^(length+2))
+        bit = message & (1<<i)
+        mark_loc = gw.add_bit(bit, shift_register) % (2**length)
         codeword |= (1<<mark_loc)
     
     # End state assums new shift register memory allocated inside of the decode function, since no delBit here.
     return codeword
 
 
-def decode_BBC(codeword:int, length:int, num_checksum:int=0):
+def decode(codeword:int, length:int, num_checksum:int=0):
     # initialize the current assumed message and array of valid messages
     message = 0b0
     messages = []
