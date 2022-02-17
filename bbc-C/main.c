@@ -134,12 +134,12 @@ int main (int argc, char *argv[]) {
     uint64 decodedMsg[totalLength];
     //basicDecoder(marks, decodedMsg, lenM, lenK, totalLength, mask, s, n, t, i ,h);
 
-    DFSDecoder(newMarks, decodedMsg, lenM, lenK, totalLength, badMarksLen, mask, s, n, t, i , h);
+    DFSDecoder2(newMarks, decodedMsg, lenM, lenK, totalLength, badMarksLen, mask, s, n, t, i , h);
 
 
     // print the decoded message
-    printf("\n\nDecoded message:\n");
-    printArray(decodedMsg, totalLength);
+    //printf("\n\nDecoded message:\n");
+    //printArray(decodedMsg, totalLength);
 
     return 0;
 }
@@ -167,6 +167,183 @@ void printArray( uint64 array[], int arrayLength ){
     }
     printf("\n");
 }
+
+
+
+
+// DFS Decoder 2 implements true DFS covering all valid branches!
+void DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int totalLength, int badMarksLen, uint64 mask, uint64 s[], uint64 n, uint64 t, uint64 i, uint64 h){
+
+    // Create a variable to store the current "mark"
+    uint64 decodeMark;
+
+    /* We'll use 8 states:
+     * 1: Add 0 and check for mark
+     * 2: Remove 0 (flows into case 3)
+     * 3: then add 1 and check for mark
+     * 4: Remove 1 (flows into case 5)
+     * 5: Examine Previous bit (check if 1)
+     * 6: Remove 1 and check message length
+     * 7: Check if message length reached
+     * 8: Check message and examine previous bit.
+     *
+     * While some states can be combined, this requires only checking one state variable.
+     */
+
+    int decoderState = 1;
+    int msgBit = 0;
+    int stepCount = 0;
+    int isMsgValid;
+    int validCount = 0;
+
+    while( msgBit <= lenM+lenK && msgBit >= 0){
+
+        // save/print statistics
+        stepCount++;
+        //printf("\nCurrent Array: ");
+        //printArray(decodedMsg, msgBit);
+        //printf("Current bit: %d\n", msgBit);
+
+
+        switch( decoderState ){
+
+            case 1: // Add 0
+                // Test the existence of an added 0
+                glowwormAddBit( (uint64) 0 , s, n, t);
+                decodeMark = s[n%32] & mask;
+
+                // See if the 0-bit was valid. If it wasn't, then go to state 3; if it was, state 7
+                if( !newMarks[ decodeMark ] ) {
+
+                    decoderState = 2;
+
+                    //printf("State 1: Didn't find 0 at position %d.\n", msgBit);
+                }
+                else{
+                    decodedMsg[msgBit] = (uint64) 0;
+                    msgBit++;
+
+                    decoderState = 7;
+
+                    //printf("State 1: Found 0 at position %d.\n", msgBit);
+                }
+                break;
+
+            case 2: // Remove 0 (flows into case 3)
+                glowwormDelBit( 0, s, n, t);
+                //printf("State 2: Removing 0 at position %d.\n", msgBit);
+                decoderState = 3;
+
+            case 3:  // Add 1 and check for mark
+
+
+                // Test the existence of an added 1
+                glowwormAddBit( (uint64) 1 , s, n, t);
+                decodeMark = s[n%32] & mask;
+
+                // See if the 1-bit was valid. If it wasn't, then go to state 4; if it was, state 7
+                if( !newMarks[ decodeMark ] ){
+
+                    decoderState = 4;
+
+                    //printf("State 3: Didn't find 1 at position %d.\n", msgBit);
+                }
+                else{
+                    decodedMsg[msgBit] = (uint64) 1;
+                    msgBit++;
+
+                    decoderState = 7;
+
+                    //printf("State 3: Found 1 at position %d.\n", msgBit);
+                }
+                break;
+
+
+            case 4: // Remove 1 (flows into case 5)
+                glowwormDelBit( 1, s, n, t);
+                //printf("State 4: Removing 1 at position %d.\n", msgBit);
+                decoderState = 5;
+
+            case 5:// Examine Prev Bit and backtrack as needed
+
+                if( decodedMsg[--msgBit] ){
+                    // Previous bit is a 1
+
+                    decoderState = 6;
+                    //printf("Backtrack 5: Found a 1 at position %d.\n", msgBit);
+                }
+                else{
+                    // Previous bit is a 0
+                    decoderState = 2;
+                    //printf("Backtrack 5: Found a 0 at position %d.\n", msgBit);
+                }
+                break;
+
+            case 6: // Remove 1 and check for len = 0
+
+                glowwormDelBit( 1, s, n, t);
+
+                if( msgBit == 0 ){
+                    //printf("State 6: Msg Length %d.\n", msgBit);
+                    return; // need a better way to do this
+                }
+                else{
+                    //printf("State 6: Msg Length %d.\n", msgBit);
+                    decoderState = 5;
+                }
+
+                break;
+
+            case 7: // Check if msg length reached
+
+                if( msgBit != (lenM+lenK) ){
+                    //printf("State 7: Msg length %d.\n", msgBit);
+                    decoderState = 1;
+                    break;
+                }
+                // else flow into case 8
+                //printf("State 7: Msg length reached @ %d.\n", msgBit);
+                decoderState = 8;
+
+            case 8: //check valid message
+                //printf("\nSteps: %d\n", stepCount);
+
+                //printf("Current Array: ");
+                //printArray(decodedMsg, msgBit);
+
+                isMsgValid = 1;
+                for( int j = 0; j < lenK && isMsgValid; j++){
+                    //printf("\nChecking Possible Message at position %d: %d\n", lenM+j, decodedMsg[lenM+j] );
+                    isMsgValid = ( decodedMsg[lenM+j] == 0 );
+                }
+
+                if( isMsgValid ) {
+                    printf("Found Possible Message #%4d: ", ++validCount);
+                    printArray(decodedMsg, msgBit);
+                }
+
+                if( decodedMsg[--msgBit] ){
+                    // Previous bit is a 1
+                    decoderState = 6;
+                    //printf("Backtrack 8(5): Found a 1 at position %d.\n", msgBit);
+                }
+                else{
+                    // Previous bit is a 0
+                    decoderState = 2;
+                    //printf("Backtrack 8(5): Found a 0 at position %d.\n", msgBit);
+                }
+                break;
+
+            default: break;
+
+        }
+    }
+
+
+}
+
+
+
 
 // ********************************
 // *** Proof of concept decoder *** #2 (DFS)
