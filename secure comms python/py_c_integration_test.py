@@ -25,7 +25,11 @@ print(gw.add_bit(1,s)%64)
 
 
 message = 0b101010
-codeword = bbc.encode(message)
+message1 = "Hi"
+message2 = 42
+codeword = bbc.encode(message2)
 print("our codeword is ", codeword)
+decoded  = bbc.decode(codeword, 6, 0)
+print("our decoded messages include ", decoded)
 
 
