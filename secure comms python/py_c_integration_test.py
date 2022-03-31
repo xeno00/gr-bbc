@@ -22,14 +22,14 @@ print(gw.add_bit(1,s)%64)
 print(gw.add_bit(0,s)%64)
 print(gw.add_bit(1,s)%64)
 
-
-
-message = 0b101010
-message1 = "Hi"
-message2 = 42
-codeword = bbc.encode(message2)
+# a 1024 bit message
+message = "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+length = 152
+mes = 2126878914293937816159096234051292569148680520 # from "Hi! my name is ____""
+message = "Hi! my name is ____"
+codeword = bbc.encode(message)
 print("our codeword is ", codeword)
-decoded  = bbc.decode(codeword, 6, 0)
+decoded  = bbc.decode(codeword, 152, 0)
 print("our decoded messages include ", decoded)
 
 
