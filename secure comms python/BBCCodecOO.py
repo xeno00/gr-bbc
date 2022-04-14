@@ -7,105 +7,110 @@
 # CURRENT MODEL
 from math import ceil
 import glowworm as gw
-MSG_LEN = 1024
+MSG_LEN = 2**10
+COD_LEN = 2**20
 DEFAULT_CHECKSUM = 0
 
 class Codec:
     # The codec is comprised of an encoder and decoder, with an associated message/codeword pair
     def __init__(self):
-        self.secret  = InfoPair()
-        self.encoder = Encoder(self.secret)
-        self.decoder = Decoder(self.secret)
+        self.encoder = Encoder()
+        self.decoder = Decoder()
 
     # Resulting functionality should be "mycodec.encode("My password is xwing")"
-    def encode_message(self, message):
-        self.secret.set_message(message)
-        self.encoder = Encoder(self.secret)
-        return self.encoder.encode()
+    def bbc_encode(self, message):
+        self.encoder = Encoder()
+        return self.encoder.encode(message)
 
     # Resulting functionality should be "mycodec.decode(bytearray1)"
-    def decode_message(self, codeword):
-        self.secret.set_codeword(codeword)
-        self.decoder = Decoder(self.secret)
-        return self.decoder.decode()
+    def bbc_decode(self, codeword):
+        self.decoder = Decoder()
+        return self.decoder.decode(codeword)
 
 
-class InfoPair:
-    def __init__(self):
-        self.message = bytearray(ceil(MSG_LEN/8))
-        self.codeword = bytearray(ceil(2**MSG_LEN/8))
-        self.num_checksum = DEFAULT_CHECKSUM
+#class InfoPair:
+#    def __init__(self):
+#        self.message = bytearray(ceil(MSG_LEN/8))
+#        self.codeword = bytearray(ceil(COD_LEN/8))
+#        self.num_checksum = DEFAULT_CHECKSUM
 
-    def set_message(self, message):
-        self.message = bytearray(message)
+#    def set_message(self, message):
+#        self.message = bytearray(message)
 
-    def set_codeword(self, codeword):
-        self.codeword = bytearray(codeword)
+#    def set_codeword(self, codeword):
+#        self.codeword = bytearray(codeword)
 
-    def read_file(self, type:int=1, location:str="data.txt"):
-        try:
-            with open(location, "rb") as source:
-                if(type):
-                    source.readinto(self.message)
-                else:
-                    source.readinto(self.codeword)
-        except:
-            print("The file could not be read.") 
+#    def read_file(self, type:int=1, location:str="data.txt"):
+#        try:
+#            with open(location, "rb") as source:
+#                if(type):
+#                    source.readinto(self.message)
+#                else:
+#                    source.readinto(self.codeword)
+#        except:
+#            print("The file could not be read.") 
 
 
 class Encoder:
-    def __init__(self, secret:InfoPair):
-        self.message =  secret.message
-        self.codeword = 0
+    def __init__(self):
         self.shift_register = self.init_shift_register()
 
-    def init_shift_register():
+    def init_shift_register(self):
         shift_register = [0 for i in range(32)]
         gw.init(shift_register)
         return (shift_register)
 
-    def encode(self):
+    def parse_input(self, input):
+        input = input.encode(encoding="ASCII")
+        message = bytearray(MSG_LEN)
+        memoryview(message)[0:(len(input))] = input
+        return message
+
+    def encode(self, input):
+        message = self.parse_input(input)
+        codeword = bytearray(COD_LEN)
         for i in range(MSG_LEN):
-            bit = ((memoryview(self.message)[int((i-i%8)/8)]) >> (i%8)) & 0b1
-            mark_loc = gw.add_bit(bit, self.shift_register) % 1024
-            memoryview(self.codeword)[int((mark_loc-mark_loc%8)/8)] += 1<<(mark_loc%8)
-        return(self.codeword)
+            element = memoryview(message)[int((i-i%8)/8)]
+            bit = ((element) >> (i%8)) & 0b1
+            mark_loc = gw.add_bit(bit, self.shift_register) % COD_LEN
+            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)] += 1<<(mark_loc%8)
+        return(codeword)
 
 
 class Decoder:
-    def __init__(self, secret:InfoPair):
-        self.messages = []
-        self.message = 0
-        self.codeword = secret.codeword
-        self.num_checksum = secret.num_checksum
+    def __init__(self):
+        self.message_list = []
+        self.num_checksum = DEFAULT_CHECKSUM
         self.shift_register = self.init_shift_register()
 
-    def init_shift_register():
+    def init_shift_register(self):
         shift_register = [0 for i in range(32)]
         gw.init(shift_register)
         return (shift_register)
     
-    def decode(self):
-        self._decode_BBC_recursive(0) # make the first recursive call to decode
-        return self.messages
+    def decode(self, codeword):
+        self.message_list = []
+        message = bytearray(MSG_LEN)
+        self._decode_BBC_recursive(message, codeword, 0) # make the first recursive call to decode
+        return self.message_list
     
-    def _decode_BBC_recursive(self, index):
+    def _decode_BBC_recursive(self, message, codeword, index):
         if index == (MSG_LEN):
                 self.message_list.append(bytes(memoryview(self.message)[0:MSG_LEN-1-self.num_checksum]).decode(encoding='ascii'))
-                self.message = 0
+                #message = 0
 
         else:
             # assuming the next message bit is a 0, check for a mark in the codeword
-            val = (gw.add_bit(0, self.shift_register) % (MSG_LEN))
-            if (self.codeword & (1<<val)) != 0:
-                self._decode_BBC_recursive(index+1)
+            val = (gw.add_bit(0, self.shift_register) % (COD_LEN))
+            if (memoryview(codeword)[int((val-val%8)/8)])>>(val%8) == 1: #TODO
+                self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(0, self.shift_register)
 
             # assuming the next message bit is a 1, check for a mark in the codeword
-            val = (gw.add_bit(1, self.shift_register) % (MSG_LEN))
-            if (self.codeword & (1<<val)) != 0: #(1<<val) == (codeword & (1<<val)):
-                self.message += 2**index
-                self._decode_BBC_recursive(index+1)
+            val = (gw.add_bit(1, self.shift_register) % (COD_LEN))
+            if memoryview(codeword)[int((val-val%8)/8)]>>(val%8) == 1: #(1<<val) == (codeword & (1<<val)):
+                memoryview(message)[int((index-index%8)/8)] += (1<<index%8)
+                self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(1, self.shift_register)
         
 
