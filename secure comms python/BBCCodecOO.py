@@ -28,29 +28,6 @@ class Codec:
         return self.decoder.decode(codeword)
 
 
-#class InfoPair:
-#    def __init__(self):
-#        self.message = bytearray(ceil(MSG_LEN/8))
-#        self.codeword = bytearray(ceil(COD_LEN/8))
-#        self.num_checksum = DEFAULT_CHECKSUM
-
-#    def set_message(self, message):
-#        self.message = bytearray(message)
-
-#    def set_codeword(self, codeword):
-#        self.codeword = bytearray(codeword)
-
-#    def read_file(self, type:int=1, location:str="data.txt"):
-#        try:
-#            with open(location, "rb") as source:
-#                if(type):
-#                    source.readinto(self.message)
-#                else:
-#                    source.readinto(self.codeword)
-#        except:
-#            print("The file could not be read.") 
-
-
 class Encoder:
     def __init__(self):
         self.shift_register = self.init_shift_register()
@@ -95,23 +72,44 @@ class Decoder:
         return self.message_list
     
     def _decode_BBC_recursive(self, message, codeword, index):
-        if index == (MSG_LEN):
-                self.message_list.append(bytes(memoryview(self.message)[0:MSG_LEN-1-self.num_checksum]).decode(encoding='ascii'))
-                #message = 0
-
+        if index == (MSG_LEN-1):
+                self.message_list.append(bytes(memoryview(message)[0:MSG_LEN-1-self.num_checksum]).decode(encoding='ascii'))
         else:
             # assuming the next message bit is a 0, check for a mark in the codeword
             val = (gw.add_bit(0, self.shift_register) % (COD_LEN))
-            if (memoryview(codeword)[int((val-val%8)/8)])>>(val%8) == 1: #TODO
+            bit = ((memoryview(codeword)[int((val-val%8)/8)])>>(val%8))& 0b1
+            if bit == 1: #TODO
                 self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(0, self.shift_register)
 
             # assuming the next message bit is a 1, check for a mark in the codeword
             val = (gw.add_bit(1, self.shift_register) % (COD_LEN))
-            if memoryview(codeword)[int((val-val%8)/8)]>>(val%8) == 1: #(1<<val) == (codeword & (1<<val)):
+            bit =  (memoryview(codeword)[int((val-val%8)/8)]>>(val%8))& 0b1
+            if bit == 1: #(1<<val) == (codeword & (1<<val)):
                 memoryview(message)[int((index-index%8)/8)] += (1<<index%8)
                 self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(1, self.shift_register)
         
 
         
+#class InfoPair:
+#    def __init__(self):
+#        self.message = bytearray(ceil(MSG_LEN/8))
+#        self.codeword = bytearray(ceil(COD_LEN/8))
+#        self.num_checksum = DEFAULT_CHECKSUM
+
+#    def set_message(self, message):
+#        self.message = bytearray(message)
+
+#    def set_codeword(self, codeword):
+#        self.codeword = bytearray(codeword)
+
+#    def read_file(self, type:int=1, location:str="data.txt"):
+#        try:
+#            with open(location, "rb") as source:
+#                if(type):
+#                    source.readinto(self.message)
+#                else:
+#                    source.readinto(self.codeword)
+#        except:
+#            print("The file could not be read.") 
