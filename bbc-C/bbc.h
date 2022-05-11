@@ -44,12 +44,22 @@ extern uint64 CHECKVALUE;
 )
 
 
+/** TO TEST GLOWWORMDELBIT **
+// Test the deletion of bits using glowWorm.
+//  We should end up with the same hashes in reverse order given the same input string.
+for (int j = totalLength - 1 ; j >= 0; j-- ){
+    glowwormDelBit( (uint64)raw[j] , s, n, t);
+    printf("%d: %llx\n", n, s[n%32]);
+}
+*/
 #define glowwormDelBit(b, s, n, t) ( \
     n--, \
     glowwormAddBit(b,s,n,t), \
     n--, \
     s[n % 32] \
 )
+
+
 #define glowwormInit(s, n, t, i, h) { \
     h = 1; \
     n = 0; \
@@ -68,6 +78,8 @@ int foundInArray( uint64 array[], int arrayLength, uint64 value);
 
 void printArray( uint64 array[], int arrayLength );
 
+int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 mask, uint64* decodeMark,
+                int* decoderState, int* stepCount, int* msgBit, int* isMsgValid, int* isThereMore);
 
 int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int totalLength, int badMarksLen, uint64 mask);
 
