@@ -41,7 +41,7 @@ int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 
         // save/print statistics
         ++*stepCount;
         //printf("\nCurrent Array: ");
-        //printArray(decodedMsg, msgBit);
+        //printUint64Array(decodedMsg, msgBit);
         //printf("Current bit: %d\n", msgBit);
 
 
@@ -149,14 +149,14 @@ int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 
                 //printf("\nSteps: %d\n", stepCount);
 
                 //printf("Current Array: ");
-                //printArray(decodedMsg, msgBit);
+                //printUint64Array(decodedMsg, msgBit);
 
 
                 //assume message is valid, then see if it's not
                 *isMsgValid = 1;
                 for( int j = 0; j < lenK && *isMsgValid; j++){
                     //printf("\nChecking Possible Message at position %d: %d\n", lenM+j, decodedMsg[lenM+j] );
-                    *isMsgValid = ( decodedMsg[lenM+j] == 0 );
+                    *isMsgValid = ( decodedMsg[lenM+j] == 1 );
                 }
 
                 if( decodedMsg[--*msgBit] ){
@@ -172,8 +172,8 @@ int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 
 
                 // Print valid message
                 if( *isMsgValid ) {
-                    //printf("Found Possible Message #%4d: ", ++validCount);
-                    //printArray(decodedMsg, msgBit);
+                    //printf("Found Possible Message ");//#%4d: ", ++validCount);
+                    //printUint64Array(decodedMsg, *msgBit);
 
                     return *stepCount;
                 }
@@ -217,7 +217,7 @@ int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
 
     // print the decoded message
     //printf("\n\nDecoded message:\n");
-    //printArray(decodedMsg, totalLength);
+    //printUint64Array(decodedMsg, totalLength);
 
     */
     //***************************************************************
@@ -251,7 +251,7 @@ int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
         // save/print statistics
         stepCount++;
         //printf("\nCurrent Array: ");
-        //printArray(decodedMsg, msgBit);
+        //printUint64Array(decodedMsg, msgBit);
         //printf("Current bit: %d\n", msgBit);
 
 
@@ -359,7 +359,7 @@ int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
                 //printf("\nSteps: %d\n", stepCount);
 
                 //printf("Current Array: ");
-                //printArray(decodedMsg, msgBit);
+                //printUint64Array(decodedMsg, msgBit);
 
                 isMsgValid = 1;
                 for( int j = 0; j < lenK && isMsgValid; j++){
@@ -370,7 +370,7 @@ int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
                 // Print valid message
                 if( isMsgValid ) {
                     //printf("Found Possible Message #%4d: ", ++validCount);
-                    //printArray(decodedMsg, msgBit);
+                    //printUint64Array(decodedMsg, msgBit);
                 }
 
                 if( decodedMsg[--msgBit] ){
@@ -423,6 +423,12 @@ int DFSDecoder2(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
 //      24          6               99
 //      28          6               102
 //      30          6               87 (Invalid Msg: Check Bit Error!)
+
+
+//Note: Requires "Marks" array.
+// Deprecated: Create a 'marks' array to store all marks.
+//uint64 marks[ totalLength + badMarksLen ];
+
 void DFSDecoder(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int totalLength, int badMarksLen, uint64 mask, uint64 s[], uint64 n, uint64 t, uint64 i, uint64 h){
 
     // Create a variable to store the current "mark"
@@ -439,7 +445,7 @@ void DFSDecoder(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, int tot
     while( msgBit < lenM ){
         stepCount++;
         printf("\nCurrent Array: ");
-        printArray(decodedMsg, msgBit);
+        printUint64Array(decodedMsg, msgBit);
         switch( decoderState ){
 
             case 0: // Add 0
@@ -625,7 +631,20 @@ int foundInArray( uint64 array[], int arrayLength, uint64 value){
 }
 
 
-void printArray( uint64 array[], int arrayLength ){
+void printUint64Array(uint64 array[], int arrayLength ){
+
+    if( !arrayLength ){
+        printf("Empty Array\n");
+        return;
+    }
+    for( int j = 0; j < arrayLength; j++ ){
+        printf("%d", array[j]);
+    }
+    printf("\n");
+}
+
+
+void printIntArray(int array[], int arrayLength ){
 
     if( !arrayLength ){
         printf("Empty Array\n");
