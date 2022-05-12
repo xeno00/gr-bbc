@@ -9,7 +9,24 @@ uint64 gwN;    //current string length counter
 uint64 gwT, gwI, gwH;     //temporary variables
 uint64 CHECKVALUE = 0xCCA4220FC78D45E0;   // This should be the value of 'h' when glowworm is initialized.
 
-// DFS Decoder 3 improves on DFSDecoder2 and returns every true message!
+/**
+ *  DFS Decoder 3 improves on DFSDecoder2 and returns every valid message it finds. It assumes that the check bits
+ *  are composed of 1 only, and this can be modified easily. In order for it to return beyond the first true message,
+ *  its state must be preserved; this is done via the pointers to decodeMark, decodeState, stepCount, msgBit,
+ *  isMsgValid, and isThereMore.
+ * @param newMarks The array of marks (either 0 for no marks, or 1 for mark).
+ * @param decodedMsg The array in which to insert the decoded message
+ * @param lenM The length of the message, excluding check bits
+ * @param lenK The number of check bits
+ * @param mask The mask to use for for glowWorm
+ * @param decodeMark Pointer to the decoded mark
+ * @param decoderState Pointer to the decoder state (1-8)
+ * @param stepCount Pointer to the total step count
+ * @param msgBit Pointer to the current bit of the message
+ * @param isMsgValid Pointer to store if the message in decodedMsg is valid
+ * @param isThereMore Pointer to store if there is more to decode
+ * @return The number of steps it took to find a valid message
+ */
 int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 mask, uint64* decodeMark,
                 int* decoderState, int* stepCount, int* msgBit, int* isMsgValid, int* isThereMore){
 
@@ -618,6 +635,13 @@ void basicDecoder(uint64 marks[], uint64 decodedMsg[], int lenM, int lenK, int t
 
 }
 
+/**
+ * Finds a certain value in the array. Can be easily modified to return the position.
+ * @param array The array to be searched
+ * @param arrayLength The length of the array
+ * @param value The value to search for
+ * @return If the value was found in the array (true or false).
+ */
 int foundInArray( uint64 array[], int arrayLength, uint64 value){
 
     int found = 0;
@@ -630,7 +654,11 @@ int foundInArray( uint64 array[], int arrayLength, uint64 value){
     return found;
 }
 
-
+/**
+ * Prints the contents of an array containing uint64 values
+ * @param array The array to print
+ * @param arrayLength The length of the array
+ */
 void printUint64Array(uint64 array[], int arrayLength ){
 
     if( !arrayLength ){
@@ -643,7 +671,11 @@ void printUint64Array(uint64 array[], int arrayLength ){
     printf("\n");
 }
 
-
+/**
+ * Prints the contents of an array containing int values
+ * @param array The array to print
+ * @param arrayLength The length of the array
+ */
 void printIntArray(int array[], int arrayLength ){
 
     if( !arrayLength ){

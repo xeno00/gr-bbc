@@ -77,6 +77,7 @@ for (int j = totalLength - 1 ; j >= 0; j-- ){
 int foundInArray( uint64 array[], int arrayLength, uint64 value);
 
 void printUint64Array( uint64 array[], int arrayLength );
+
 void printIntArray( int array[], int arrayLength );
 
 int DFSDecoder3(int newMarks[], uint64 decodedMsg[], int lenM, int lenK, uint64 mask, uint64* decodeMark,
