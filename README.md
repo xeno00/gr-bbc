@@ -1,5 +1,5 @@
 # sturdy-train
-BBC Secure Communications
+**BBC Secure Communications**
 
 **Project Description:**
     The purpose of this repo is to implement a codec using the BBC algorithm as described by Bahn, Baird, and Carlisle. 
