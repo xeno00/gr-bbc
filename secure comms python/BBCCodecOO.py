@@ -5,7 +5,7 @@
 # Description:
 # Implement the BBC codec with object oriented programming and bytearrays
 # CURRENT MODEL
-from math import ceil
+#from math import ceil
 import glowworm as gw
 MSG_LEN = 2**10
 COD_LEN = 2**20
