@@ -15,7 +15,7 @@ first = True
 class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
     """Embedded Python Block example - a simple multiply const"""
 
-    def __init__(self, msg_len=2**10, cod_len=2**20):
+    def __init__(self, msg_len=2**6, cod_len=2**12):
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,

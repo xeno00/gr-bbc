@@ -75,22 +75,22 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.codeword = codeword = "HELLOWORLD"
-        self.MESSAGE_LENGTH = MESSAGE_LENGTH = 2**10
-        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**20
+        self.MESSAGE_LENGTH = MESSAGE_LENGTH = 2**6
+        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**12
 
         ##################################################
         # Blocks
         ##################################################
         self.epy_block_2 = epy_block_2.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
         self.epy_block_0 = epy_block_0.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
-        self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, 2**10)
-        self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, 2**20)
+        self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, MESSAGE_LENGTH)
+        self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in codeword], True, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, 32000,True)
         self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_char*1, '', "")
         self.blocks_tag_debug_0.set_display(True)
-        self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_char*1, 2**20)
-        self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_char*1, 1024)
+        self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_char*1, CODEWORD_LENGTH)
+        self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, 'testOutput.txt', False)
         self.blocks_file_sink_0.set_unbuffered(False)
 

@@ -12,7 +12,7 @@ DEFAULT_CHECKSUM = 0
 
 class blk(gr.sync_block):
 
-    def __init__(self, msg_len=2**10, cod_len=2**20):
+    def __init__(self, msg_len=2**6, cod_len=2**12):
         #GR Interpretable variables, names and ports
         gr.sync_block.__init__(self,
             name='BBC Encoder',

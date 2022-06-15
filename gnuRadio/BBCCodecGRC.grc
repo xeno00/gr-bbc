@@ -37,7 +37,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 2**20
+    value: 2**12
   states:
     bus_sink: false
     bus_source: false
@@ -49,7 +49,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 2**10
+    value: 2**6
   states:
     bus_sink: false
     bus_source: false
@@ -281,7 +281,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: '1024'
+    num_items: MESSAGE_LENGTH
     type: byte
     vlen: '1'
   states:
@@ -299,7 +299,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: 2**20
+    num_items: CODEWORD_LENGTH
     type: byte
     vlen: '1'
   states:
@@ -375,7 +375,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: 2**20
+    num_items: CODEWORD_LENGTH
     type: byte
     vlen: '1'
   states:
@@ -393,7 +393,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_items: 2**10
+    num_items: MESSAGE_LENGTH
     type: byte
     vlen: '1'
   states:
@@ -428,9 +428,9 @@ blocks:
       from gnuradio import gr\nDEFAULT_CHECKSUM = 0\nglobal first\nfirst = True\n\n\
       class blk(gr.sync_block):  # other base classes are basic_block, decim_block,\
       \ interp_block\n    \"\"\"Embedded Python Block example - a simple multiply\
-      \ const\"\"\"\n\n    def __init__(self, msg_len=2**10, cod_len=2**20):\n   \
-      \     \"\"\"arguments to this function show up as parameters in GRC\"\"\"\n\
-      \        gr.sync_block.__init__(\n            self,\n            name='BBC Decoder',\
+      \ const\"\"\"\n\n    def __init__(self, msg_len=2**6, cod_len=2**12):\n    \
+      \    \"\"\"arguments to this function show up as parameters in GRC\"\"\"\n \
+      \       gr.sync_block.__init__(\n            self,\n            name='BBC Decoder',\
       \   # will show up in GRC\n            in_sig=[(np.byte, cod_len)],\n      \
       \      out_sig=[(np.byte, msg_len)]\n        )\n        # if an attribute with\
       \ the same name as a parameter is found,\n        # a callback is registered\
@@ -485,9 +485,9 @@ blocks:
     minoutbuf: '0'
     msg_len: MESSAGE_LENGTH
   states:
-    _io_cache: ('BBC Decoder', 'blk', [('msg_len', '1024'), ('cod_len', '1048576')],
-      [('0', 'byte', 1048576)], [('0', 'byte', 1024)], 'Embedded Python Block example
-      - a simple multiply const', [])
+    _io_cache: ('BBC Decoder', 'blk', [('msg_len', '64'), ('cod_len', '4096')], [('0',
+      'byte', 4096)], [('0', 'byte', 64)], 'Embedded Python Block example - a simple
+      multiply const', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -546,7 +546,7 @@ blocks:
       \ of your block. The arguments to __init__  will\nbe the parameters. All of\
       \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
       from gnuradio import gr\nDEFAULT_CHECKSUM = 0\n\nclass blk(gr.sync_block):\n\
-      \n    def __init__(self, msg_len=2**10, cod_len=2**20):\n        #GR Interpretable\
+      \n    def __init__(self, msg_len=2**6, cod_len=2**12):\n        #GR Interpretable\
       \ variables, names and ports\n        gr.sync_block.__init__(self,\n       \
       \     name='BBC Encoder',\n            in_sig=[(np.byte, msg_len)],\n      \
       \      out_sig=[(np.byte, cod_len)]\n        )\n        #self.cod_len = cod_len\n\
@@ -590,8 +590,8 @@ blocks:
     minoutbuf: '0'
     msg_len: MESSAGE_LENGTH
   states:
-    _io_cache: ('BBC Encoder', 'blk', [('msg_len', '1024'), ('cod_len', '1048576')],
-      [('0', 'byte', 1024)], [('0', 'byte', 1048576)], '', [])
+    _io_cache: ('BBC Encoder', 'blk', [('msg_len', '64'), ('cod_len', '4096')], [('0',
+      'byte', 64)], [('0', 'byte', 4096)], '', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -688,7 +688,6 @@ connections:
 - [epy_block_0, '0', blocks_vector_to_stream_1_0, '0']
 - [epy_block_0_0, '0', zeromq_push_sink_0, '0']
 - [epy_block_0_0, msgs, blocks_message_debug_0, print]
-- [epy_block_2, '0', blocks_probe_signal_vx_0_0, '0']
 - [epy_block_2, '0', blocks_vector_to_stream_1, '0']
 - [virtual_source_0, '0', blocks_stream_to_vector_0_0, '0']
 
