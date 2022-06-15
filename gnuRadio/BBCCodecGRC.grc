@@ -325,7 +325,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 324.0]
+    coordinate: [416, 316.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -437,7 +437,7 @@ blocks:
       \ (properties work, too).\n        self.myDecoder = Decoder(msg_len, cod_len)\n\
       \n    def work(self, input_items, output_items):\n        \"\"\"example: multiply\
       \ with constant\"\"\"\n        output_items[0][:][:] = self.myDecoder.decode(input_items[0][:][:])\n\
-      \        return len(output_items[0])\n\n#################################################################################################\n\
+      \        return len(output_items[0])\n\n###############################################################################\n\
       class Decoder:\n    def __init__(self, msg_len, cod_len):\n        self.message_list\
       \ = []\n        self.num_checksum = DEFAULT_CHECKSUM\n        self.shift_register\
       \ = self.init_shift_register()\n        self.msg_len = msg_len\n        self.cod_len\
@@ -464,8 +464,8 @@ blocks:
       \          memoryview(message)[int((index-index%8)/8)] += (1<<index%8)\n   \
       \             try:\n                    self._decode_BBC_recursive(message,\
       \ codeword, index+1)\n                except:\n                    print(\"\
-      current codeword: \", codeword)\n                    print(\"max depth on 1\
-      \ path: \", index) #DEBUG\n            del_bit(1, self.shift_register)\n\n#################################################################################################\n\
+      current message: \", message)\n                    print(\"max depth on 1 path:\
+      \ \", index) #DEBUG\n            del_bit(1, self.shift_register)\n\n###############################################################################\n\
       MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
       \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
       \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
@@ -595,7 +595,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 260.0]
+    coordinate: [616, 268.0]
     rotation: 0
     state: enabled
 - name: inStreamProbe
@@ -604,12 +604,12 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    type: byte
+    type: float
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 232.0]
+    coordinate: [416, 236.0]
     rotation: 0
     state: disabled
 - name: virtual_sink_0
@@ -635,7 +635,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1024, 324.0]
+    coordinate: [1032, 316.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0

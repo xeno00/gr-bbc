@@ -32,7 +32,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         output_items[0][:][:] = self.myDecoder.decode(input_items[0][:][:])
         return len(output_items[0])
 
-#################################################################################################
+###############################################################################
 class Decoder:
     def __init__(self, msg_len, cod_len):
         self.message_list = []
@@ -80,11 +80,11 @@ class Decoder:
                 try:
                     self._decode_BBC_recursive(message, codeword, index+1)
                 except:
-                    print("current codeword: ", codeword)
+                    print("current message: ", message)
                     print("max depth on 1 path: ", index) #DEBUG
             del_bit(1, self.shift_register)
 
-#################################################################################################
+###############################################################################
 MAX_VAL = 0xffffffffffffffff
 global n
 n = 0       
