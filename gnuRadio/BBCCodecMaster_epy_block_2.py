@@ -12,7 +12,7 @@ DEFAULT_CHECKSUM = 0
 
 class blk(gr.sync_block):
 
-    def __init__(self, msg_len=2**6, cod_len=2**12):
+    def __init__(self, msg_len=2**3, cod_len=2**9):
         #GR Interpretable variables, names and ports
         gr.sync_block.__init__(self,
             name='BBC Encoder',
@@ -20,11 +20,15 @@ class blk(gr.sync_block):
             out_sig=[(np.byte, cod_len)]
         )
         #self.cod_len = cod_len
-        self.myEncoder = Encoder(msg_len, cod_len)
+        # Convert from bits to Bytes
+        self.myEncoder = Encoder(msg_len*8, cod_len*8)
     
     # Use BBC to encode the incoming vectors
     def work(self, input_items, output_items):
-        output_items[0][:][:] = self.myEncoder.encode(input_items[0][:][:])
+        #print("Encoder in and out ", int(len(input_items)), int(len(output_items)))
+        result = self.myEncoder.encode(input_items[0][:][:])
+        print("type of encoder result: ", type(result))
+        output_items[0][:][:] = result
         return len(output_items[0])
     
 ###############################################################################
@@ -51,8 +55,9 @@ class Encoder:
     def encode(self, input):
         #print("parsing ", input)
         message = self.parse_input(input)
+        #print("Encoder output- message--", message, "Length of message: ", len(message), "B")
         #print("message ", message)
-        codeword = bytearray(self.cod_len)
+        codeword = bytearray(int(self.cod_len/8))
         for i in range(self.msg_len):
             element = memoryview(message)[int((i-i%8)/8)]
             bit = ((element) >> (i%8)) & 0b1

@@ -1,9 +1,5 @@
 """
-Embedded Python Blocks:
-
-Each time this file is saved, GRC will instantiate the first class it finds
-to get ports and parameters of your block. The arguments to __init__  will
-be the parameters. All of them are required to have default values!
+D E C O D E R
 """
 
 import numpy as np
@@ -15,7 +11,7 @@ first = True
 class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
     """Embedded Python Block example - a simple multiply const"""
 
-    def __init__(self, msg_len=2**6, cod_len=2**12):
+    def __init__(self, msg_len=2**3, cod_len=2**9):
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,
@@ -25,11 +21,15 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         )
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
-        self.myDecoder = Decoder(msg_len, cod_len)
+        # Convert from bits to Bytes
+        self.myDecoder = Decoder(msg_len*8, cod_len*8)
 
     def work(self, input_items, output_items):
         """example: multiply with constant"""
-        output_items[0][:][:] = self.myDecoder.decode(input_items[0][:][:])
+        print("test")
+        result = self.myDecoder.decode(input_items[0][:][:])
+        print("type of decoder result: ", type(result[0]))
+        output_items[0][:][:] = bytearray(result[0].encode()) # TODO: ADD ITERATIVE OUTPUT
         return len(output_items[0])
 
 ###############################################################################
@@ -53,23 +53,26 @@ class Decoder:
             #print(codeword)
             first = False
             self.message_list = []
-            message = bytearray(self.msg_len)
+            message = bytearray(int(self.msg_len/8))
             self._decode_BBC_recursive(message, codeword, 0) # make the first recursive call to decode
             #return self.message_list
-            print(self.message_list)
+            #print("Message list- decoder--", self.message_list)
+            return self.message_list
     
     def _decode_BBC_recursive(self, message, codeword, index):
+        # BASE CASE
         if index == (self.msg_len-1):
-                self.message_list.append(bytes(memoryview(message)[0:self.msg_len-1-self.num_checksum]).decode(encoding='ascii'))
+            self.message_list.append(bytes(memoryview(message)[0:self.msg_len-1-self.num_checksum]).decode(encoding='ascii'))
+            
+        # assuming the next message bit is a 0, check for a mark in the codeword
         else:
-            # assuming the next message bit is a 0, check for a mark in the codeword
             val = (add_bit(0, self.shift_register) % (self.cod_len))
             bit = ((memoryview(codeword)[int((val-val%8)/8)])>>(val%8))& 0b1
             if bit == 1: #TODO
                 try:
                     self._decode_BBC_recursive(message, codeword, index+1)
                 except:
-                    print("max depth on 0 path: ", index)
+                    print("Line 68. Recursion max length reached. current message: ", message, "Length at error = ", index) #DEBUG
             del_bit(0, self.shift_register)
 
             # assuming the next message bit is a 1, check for a mark in the codeword
@@ -80,8 +83,7 @@ class Decoder:
                 try:
                     self._decode_BBC_recursive(message, codeword, index+1)
                 except:
-                    print("current message: ", message)
-                    print("max depth on 1 path: ", index) #DEBUG
+                    print("Line 79. Recursion max length reached. current message: ", message, "Length at error = ", index) #DEBUG
             del_bit(1, self.shift_register)
 
 ###############################################################################

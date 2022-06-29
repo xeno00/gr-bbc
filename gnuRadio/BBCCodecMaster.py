@@ -31,6 +31,7 @@ from PyQt5 import Qt
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from gnuradio import zeromq
 import BBCCodecMaster_epy_block_0 as epy_block_0  # embedded python block
 import BBCCodecMaster_epy_block_2 as epy_block_2  # embedded python block
 
@@ -74,25 +75,24 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.codeword = codeword = "HELLOWORLD"
-        self.MESSAGE_LENGTH = MESSAGE_LENGTH = 2**6
-        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**12
+        self.codeword = codeword = "HELLO WO"
+        self.MESSAGE_LENGTH = MESSAGE_LENGTH = 2**3
+        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**9
 
         ##################################################
         # Blocks
         ##################################################
+        self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, -1)
         self.epy_block_2 = epy_block_2.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
         self.epy_block_0 = epy_block_0.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
         self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
-        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in codeword], True, 1, [])
+        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in codeword], False, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, 32000,True)
         self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_char*1, '', "")
         self.blocks_tag_debug_0.set_display(True)
         self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_char*1, MESSAGE_LENGTH)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, 'testOutput.txt', False)
-        self.blocks_file_sink_0.set_unbuffered(False)
 
 
         ##################################################
@@ -104,7 +104,7 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_throttle_0, 0), (self.blocks_tag_debug_0, 0))
         self.connect((self.blocks_vector_source_x_0_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_vector_to_stream_1, 0), (self.blocks_stream_to_vector_0_0, 0))
-        self.connect((self.blocks_vector_to_stream_1_0, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.blocks_vector_to_stream_1_0, 0), (self.zeromq_push_sink_0, 0))
         self.connect((self.epy_block_0, 0), (self.blocks_vector_to_stream_1_0, 0))
         self.connect((self.epy_block_2, 0), (self.blocks_vector_to_stream_1, 0))
 

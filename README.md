@@ -23,4 +23,20 @@
     
     bbc-C
         <insert files>
-        
+
+
+
+
+
+
+
+
+
+# Error Documentation
+## GNURADIO COMPANION
+**Error in Work when output_items[0] has no length, that is there is nothing to output**
+gr::log :ERROR: thread_body_wrapper - ERROR thread[thread-per-block[6]: <block BBC Decoder(2)>]: TypeError: int() argument must be a string, a bytes-like object or a number, not 'NoneType'
+
+
+**Unidentified Error**
+
