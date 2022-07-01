@@ -7,9 +7,9 @@
 # GNU Radio Python Flow Graph
 # Title: BBCCodec
 # Author: James Morrison
-# GNU Radio version: 3.9.5.0
+# GNU Radio version: 3.10.3.0
 
-from distutils.version import StrictVersion
+from packaging.version import Version as StrictVersion
 
 if __name__ == '__main__':
     import ctypes
@@ -75,19 +75,19 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.codeword = codeword = "HELLO WO"
+        self.message = message = "HELLO WO"
         self.MESSAGE_LENGTH = MESSAGE_LENGTH = 2**3
-        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**9
+        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 2**12
 
         ##################################################
         # Blocks
         ##################################################
-        self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, -1)
+        self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, (-1))
         self.epy_block_2 = epy_block_2.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
         self.epy_block_0 = epy_block_0.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
         self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
-        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in codeword], False, 1, [])
+        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in message], False, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, 32000,True)
         self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_char*1, '', "")
         self.blocks_tag_debug_0.set_display(True)
@@ -117,12 +117,12 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
 
         event.accept()
 
-    def get_codeword(self):
-        return self.codeword
+    def get_message(self):
+        return self.message
 
-    def set_codeword(self, codeword):
-        self.codeword = codeword
-        self.blocks_vector_source_x_0_0.set_data([ord(i) for i in self.codeword], [])
+    def set_message(self, message):
+        self.message = message
+        self.blocks_vector_source_x_0_0.set_data([ord(i) for i in self.message], [])
 
     def get_MESSAGE_LENGTH(self):
         return self.MESSAGE_LENGTH

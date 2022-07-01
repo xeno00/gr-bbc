@@ -1,9 +1,5 @@
 """
-Embedded Python Blocks:
-
-Each time this file is saved, GRC will instantiate the first class it finds
-to get ports and parameters of your block. The arguments to __init__  will
-be the parameters. All of them are required to have default values!
+E N C O D E R
 """
 
 import numpy as np
@@ -11,25 +7,26 @@ from gnuradio import gr
 DEFAULT_CHECKSUM = 0
 
 class blk(gr.sync_block):
-
-    def __init__(self, msg_len=2**3, cod_len=2**9):
-        #GR Interpretable variables, names and ports
+    
+    def __init__(self, msg_len=2**3, cod_len=2**12):
         gr.sync_block.__init__(self,
             name='BBC Encoder',
             in_sig=[(np.byte, msg_len)],
             out_sig=[(np.byte, cod_len)]
         )
-        #self.cod_len = cod_len
         # Convert from bits to Bytes
         self.myEncoder = Encoder(msg_len*8, cod_len*8)
     
-    # Use BBC to encode the incoming vectors
+    # Use BBC to encode the incoming message vectors
     def work(self, input_items, output_items):
-        #print("Encoder in and out ", int(len(input_items)), int(len(output_items)))
         result = self.myEncoder.encode(input_items[0][:][:])
-        print("type of encoder result: ", type(result))
-        output_items[0][:][:] = result
-        return len(output_items[0])
+        try:
+            output_items[0][:][:] = result
+            return len(output_items[0])
+        except:
+            print("DEBUG encoder line 31: output typing failed.\n")
+            print("Type of encoder result: ", type(result))
+            print("Type of stream: ", type(self.out_sig))
     
 ###############################################################################
 class Encoder:
@@ -44,27 +41,20 @@ class Encoder:
         return (shift_register)
 
     def parse_input(self, my_input):
-        #print("parsing", my_input)
-        #if(type(my_input)==type("string")):
-        #    my_input = my_input.encode(encoding="ASCII")
-        message = bytearray(my_input.tobytes())#bytearray(MSG_LEN)
-        #print("message = ", message)
-        #memoryview(message)[0:(len(input))] = input
+        message = bytearray(my_input.tobytes())
+        #TODO: add error exception for wrong sized input vector
         return message
 
     def encode(self, input):
-        #print("parsing ", input)
         message = self.parse_input(input)
-        #print("Encoder output- message--", message, "Length of message: ", len(message), "B")
-        #print("message ", message)
         codeword = bytearray(int(self.cod_len/8))
+        
         for i in range(self.msg_len):
             element = memoryview(message)[int((i-i%8)/8)]
             bit = ((element) >> (i%8)) & 0b1
             mark_loc = add_bit(bit, self.shift_register) % self.cod_len
             memoryview(codeword)[int((mark_loc-mark_loc%8)/8)] |= (1<<(mark_loc%8))
-            # Was error for adding 10000000, so changed to | instead of +
-        #print(codeword==0)
+            # TODO: add + vs | change to python library
         return(codeword)
         
  ##############################################################################
@@ -78,7 +68,7 @@ def add_bit(b, s):
     t = (t ^ (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)) & MAX_VAL
     n += 1                           
     s[n % 32] ^= (t&MAX_VAL)  #s[(n) % 32] ^= t, modified to reflect n change
-    return s[n % 32]    #return s[(n) % 32], modified to reflect n change                      
+    return s[n % 32]        #return s[(n) % 32], modified to reflect n change                      
 
 def del_bit(b, s):
     global n

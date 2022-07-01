@@ -37,7 +37,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 2**9
+    value: 2**12
   states:
     bus_sink: false
     bus_source: false
@@ -57,7 +57,7 @@ blocks:
     coordinate: [192, 68.0]
     rotation: 0
     state: true
-- name: codeword
+- name: message
   id: variable
   parameters:
     comment: ''
@@ -154,7 +154,7 @@ blocks:
     repeat: 'False'
     tags: '[]'
     type: byte
-    vector: '[ord(i) for i in codeword]'
+    vector: '[ord(i) for i in message]'
     vlen: '1'
   states:
     bus_sink: false
@@ -203,21 +203,20 @@ blocks:
   id: epy_block
   parameters:
     _source_code: "\"\"\"\nD E C O D E R\n\"\"\"\n\nimport numpy as np\nfrom gnuradio\
-      \ import gr\nDEFAULT_CHECKSUM = 0\nglobal first\nfirst = True\n\nclass blk(gr.sync_block):\
-      \  # other base classes are basic_block, decim_block, interp_block\n    \"\"\
-      \"Embedded Python Block example - a simple multiply const\"\"\"\n\n    def __init__(self,\
-      \ msg_len=2**3, cod_len=2**9):\n        \"\"\"arguments to this function show\
-      \ up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n         \
+      \ import gr\nDEFAULT_CHECKSUM = 0\nglobal first\n#TODO: REMOVE FIRST HANDLING\
+      \ TO MAKE VERSATILE\nfirst = True\n\nclass blk(gr.sync_block):\n\n    def __init__(self,\
+      \ msg_len=2**3, cod_len=2**12):\n        gr.sync_block.__init__(\n         \
       \   self,\n            name='BBC Decoder',   # will show up in GRC\n       \
       \     in_sig=[(np.byte, cod_len)],\n            out_sig=[(np.byte, msg_len)]\n\
-      \        )\n        # if an attribute with the same name as a parameter is found,\n\
-      \        # a callback is registered (properties work, too).\n        # Convert\
-      \ from bits to Bytes\n        self.myDecoder = Decoder(msg_len*8, cod_len*8)\n\
-      \n    def work(self, input_items, output_items):\n        \"\"\"example: multiply\
-      \ with constant\"\"\"\n        print(\"test\")\n        result = self.myDecoder.decode(input_items[0][:][:])\n\
-      \        print(\"type of decoder result: \", type(result[0]))\n        output_items[0][:][:]\
-      \ = bytearray(result[0].encode()) # TODO: ADD ITERATIVE OUTPUT\n        return\
-      \ len(output_items[0])\n\n###############################################################################\n\
+      \        )\n        # Convert from bits to Bytes\n        self.myDecoder = Decoder(msg_len*8,\
+      \ cod_len*8)\n\n    # Use BBC to decode the incoming codeword vectors\n    def\
+      \ work(self, input_items, output_items):\n        result = self.myDecoder.decode(input_items[0][:][:])\n\
+      \        #TODO: add function to iteratively push results out\n        try:\n\
+      \            output_items[0][:][:] = bytearray(result[0].encode())\n       \
+      \     return len(output_items[0])\n        except:\n            print(\"DEBUG\
+      \ decoder line 33: output typing failed.\\n\")\n            print(\"Type of\
+      \ decoder result: \", type(bytearray(result[0].encode())))\n            print(\"\
+      Type of stream: \", type(self.out_sig))\n\n###############################################################################\n\
       class Decoder:\n    def __init__(self, msg_len, cod_len):\n        self.message_list\
       \ = []\n        self.num_checksum = DEFAULT_CHECKSUM\n        self.shift_register\
       \ = self.init_shift_register()\n        self.msg_len = msg_len\n        self.cod_len\
@@ -225,13 +224,12 @@ blocks:
       \ [0 for i in range(32)]\n        init(shift_register)\n        return (shift_register)\n\
       \    \n    def decode(self, codeword):\n        codeword = bytearray(codeword.tobytes())\
       \ #added for GRC implementation\n        global first\n        if(first):\n\
-      \            #print(codeword)\n            first = False\n            self.message_list\
-      \ = []\n            message = bytearray(int(self.msg_len/8))\n            self._decode_BBC_recursive(message,\
-      \ codeword, 0) # make the first recursive call to decode\n            #return\
-      \ self.message_list\n            #print(\"Message list- decoder--\", self.message_list)\n\
-      \            return self.message_list\n    \n    def _decode_BBC_recursive(self,\
-      \ message, codeword, index):\n        # BASE CASE\n        if index == (self.msg_len-1):\n\
-      \            self.message_list.append(bytes(memoryview(message)[0:self.msg_len-1-self.num_checksum]).decode(encoding='ascii'))\n\
+      \            first = False\n            self.message_list = []\n           \
+      \ message = bytearray(int(self.msg_len/8))\n            self._decode_BBC_recursive(message,\
+      \ codeword, 0) # make the first recursive call to decode\n            print(\"\
+      Message list- decoder--\\n\", self.message_list)\n            return self.message_list\n\
+      \    \n    def _decode_BBC_recursive(self, message, codeword, index):\n    \
+      \    # BASE CASE\n        if index == (self.msg_len-1):\n            self.message_list.append(bytes(memoryview(message)[0:self.msg_len-1-self.num_checksum]).decode(encoding='ascii'))\n\
       \            \n        # assuming the next message bit is a 0, check for a mark\
       \ in the codeword\n        else:\n            val = (add_bit(0, self.shift_register)\
       \ % (self.cod_len))\n            bit = ((memoryview(codeword)[int((val-val%8)/8)])>>(val%8))&\
@@ -243,7 +241,7 @@ blocks:
       \ message bit is a 1, check for a mark in the codeword\n            val = (add_bit(1,\
       \ self.shift_register) % (self.cod_len))\n            bit =  (memoryview(codeword)[int((val-val%8)/8)]>>(val%8))&\
       \ 0b1\n            if bit == 1: #(1<<val) == (codeword & (1<<val)):\n      \
-      \          memoryview(message)[int((index-index%8)/8)] += (1<<index%8)\n   \
+      \          memoryview(message)[int((index-index%8)/8)] |= (1<<index%8)\n   \
       \             try:\n                    self._decode_BBC_recursive(message,\
       \ codeword, index+1)\n                except:\n                    print(\"\
       Line 79. Recursion max length reached. current message: \", message, \"Length\
@@ -268,9 +266,8 @@ blocks:
     minoutbuf: '0'
     msg_len: MESSAGE_LENGTH
   states:
-    _io_cache: ('BBC Decoder', 'blk', [('msg_len', '8'), ('cod_len', '512')], [('0',
-      'byte', 512)], [('0', 'byte', 8)], 'Embedded Python Block example - a simple
-      multiply const', [])
+    _io_cache: ('BBC Decoder', 'blk', [('msg_len', '8'), ('cod_len', '4096')], [('0',
+      'byte', 4096)], [('0', 'byte', 8)], '', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -280,45 +277,38 @@ blocks:
 - name: epy_block_2
   id: epy_block
   parameters:
-    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
-      \ GRC will instantiate the first class it finds\nto get ports and parameters\
-      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
-      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
-      from gnuradio import gr\nDEFAULT_CHECKSUM = 0\n\nclass blk(gr.sync_block):\n\
-      \n    def __init__(self, msg_len=2**3, cod_len=2**9):\n        #GR Interpretable\
-      \ variables, names and ports\n        gr.sync_block.__init__(self,\n       \
-      \     name='BBC Encoder',\n            in_sig=[(np.byte, msg_len)],\n      \
-      \      out_sig=[(np.byte, cod_len)]\n        )\n        #self.cod_len = cod_len\n\
-      \        # Convert from bits to Bytes\n        self.myEncoder = Encoder(msg_len*8,\
-      \ cod_len*8)\n    \n    # Use BBC to encode the incoming vectors\n    def work(self,\
-      \ input_items, output_items):\n        #print(\"Encoder in and out \", int(len(input_items)),\
-      \ int(len(output_items)))\n        result = self.myEncoder.encode(input_items[0][:][:])\n\
-      \        print(\"type of encoder result: \", type(result))\n        output_items[0][:][:]\
-      \ = result\n        return len(output_items[0])\n    \n###############################################################################\n\
+    _source_code: "\"\"\"\nE N C O D E R\n\"\"\"\n\nimport numpy as np\nfrom gnuradio\
+      \ import gr\nDEFAULT_CHECKSUM = 0\n\nclass blk(gr.sync_block):\n    \n    def\
+      \ __init__(self, msg_len=2**3, cod_len=2**12):\n        gr.sync_block.__init__(self,\n\
+      \            name='BBC Encoder',\n            in_sig=[(np.byte, msg_len)],\n\
+      \            out_sig=[(np.byte, cod_len)]\n        )\n        # Convert from\
+      \ bits to Bytes\n        self.myEncoder = Encoder(msg_len*8, cod_len*8)\n  \
+      \  \n    # Use BBC to encode the incoming message vectors\n    def work(self,\
+      \ input_items, output_items):\n        result = self.myEncoder.encode(input_items[0][:][:])\n\
+      \        try:\n            output_items[0][:][:] = result\n            return\
+      \ len(output_items[0])\n        except:\n            print(\"DEBUG encoder line\
+      \ 31: output typing failed.\\n\")\n            print(\"Type of encoder result:\
+      \ \", type(result))\n            print(\"Type of stream: \", type(self.out_sig))\n\
+      \    \n###############################################################################\n\
       class Encoder:\n    def __init__(self, msg_len, cod_len):\n        self.shift_register\
       \ = self.init_shift_register()\n        self.msg_len = msg_len\n        self.cod_len\
       \ = cod_len\n\n    def init_shift_register(self):\n        shift_register =\
       \ [0 for i in range(32)]\n        init(shift_register)\n        return (shift_register)\n\
-      \n    def parse_input(self, my_input):\n        #print(\"parsing\", my_input)\n\
-      \        #if(type(my_input)==type(\"string\")):\n        #    my_input = my_input.encode(encoding=\"\
-      ASCII\")\n        message = bytearray(my_input.tobytes())#bytearray(MSG_LEN)\n\
-      \        #print(\"message = \", message)\n        #memoryview(message)[0:(len(input))]\
-      \ = input\n        return message\n\n    def encode(self, input):\n        #print(\"\
-      parsing \", input)\n        message = self.parse_input(input)\n        #print(\"\
-      Encoder output- message--\", message, \"Length of message: \", len(message),\
-      \ \"B\")\n        #print(\"message \", message)\n        codeword = bytearray(int(self.cod_len/8))\n\
-      \        for i in range(self.msg_len):\n            element = memoryview(message)[int((i-i%8)/8)]\n\
+      \n    def parse_input(self, my_input):\n        message = bytearray(my_input.tobytes())\n\
+      \        #TODO: add error exception for wrong sized input vector\n        return\
+      \ message\n\n    def encode(self, input):\n        message = self.parse_input(input)\n\
+      \        codeword = bytearray(int(self.cod_len/8))\n        \n        for i\
+      \ in range(self.msg_len):\n            element = memoryview(message)[int((i-i%8)/8)]\n\
       \            bit = ((element) >> (i%8)) & 0b1\n            mark_loc = add_bit(bit,\
       \ self.shift_register) % self.cod_len\n            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)]\
-      \ |= (1<<(mark_loc%8))\n            # Was error for adding 10000000, so changed\
-      \ to | instead of +\n        #print(codeword==0)\n        return(codeword)\n\
-      \        \n ##############################################################################\n\
+      \ |= (1<<(mark_loc%8))\n            # TODO: add + vs | change to python library\n\
+      \        return(codeword)\n        \n ##############################################################################\n\
       MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
       \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
       \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
       \ on left shift     \n    t = (t ^ (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)) & MAX_VAL\n\
       \    n += 1                           \n    s[n % 32] ^= (t&MAX_VAL)  #s[(n)\
-      \ % 32] ^= t, modified to reflect n change\n    return s[n % 32]    #return\
+      \ % 32] ^= t, modified to reflect n change\n    return s[n % 32]        #return\
       \ s[(n) % 32], modified to reflect n change                      \n\ndef del_bit(b,\
       \ s):\n    global n\n    n -= 1\n    add_bit(b,s), \n    n -= 1\n    return\
       \ s[n % 32]\n    \ndef init(s):\n    global n\n    n = 0\n    h = 1\n    for\
@@ -332,8 +322,8 @@ blocks:
     minoutbuf: '0'
     msg_len: MESSAGE_LENGTH
   states:
-    _io_cache: ('BBC Encoder', 'blk', [('msg_len', '8'), ('cod_len', '512')], [('0',
-      'byte', 8)], [('0', 'byte', 512)], '', [])
+    _io_cache: ('BBC Encoder', 'blk', [('msg_len', '8'), ('cod_len', '4096')], [('0',
+      'byte', 8)], [('0', 'byte', 4096)], '', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -400,3 +390,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: 3.10.3.0

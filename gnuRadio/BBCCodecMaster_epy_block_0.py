@@ -6,31 +6,32 @@ import numpy as np
 from gnuradio import gr
 DEFAULT_CHECKSUM = 0
 global first
+#TODO: REMOVE FIRST HANDLING TO MAKE VERSATILE
 first = True
 
-class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
-    """Embedded Python Block example - a simple multiply const"""
+class blk(gr.sync_block):
 
-    def __init__(self, msg_len=2**3, cod_len=2**9):
-        """arguments to this function show up as parameters in GRC"""
+    def __init__(self, msg_len=2**3, cod_len=2**12):
         gr.sync_block.__init__(
             self,
             name='BBC Decoder',   # will show up in GRC
             in_sig=[(np.byte, cod_len)],
             out_sig=[(np.byte, msg_len)]
         )
-        # if an attribute with the same name as a parameter is found,
-        # a callback is registered (properties work, too).
         # Convert from bits to Bytes
         self.myDecoder = Decoder(msg_len*8, cod_len*8)
 
+    # Use BBC to decode the incoming codeword vectors
     def work(self, input_items, output_items):
-        """example: multiply with constant"""
-        print("test")
         result = self.myDecoder.decode(input_items[0][:][:])
-        print("type of decoder result: ", type(result[0]))
-        output_items[0][:][:] = bytearray(result[0].encode()) # TODO: ADD ITERATIVE OUTPUT
-        return len(output_items[0])
+        #TODO: add function to iteratively push results out
+        try:
+            output_items[0][:][:] = bytearray(result[0].encode())
+            return len(output_items[0])
+        except:
+            print("DEBUG decoder line 33: output typing failed.\n")
+            print("Type of decoder result: ", type(bytearray(result[0].encode())))
+            print("Type of stream: ", type(self.out_sig))
 
 ###############################################################################
 class Decoder:
@@ -50,13 +51,11 @@ class Decoder:
         codeword = bytearray(codeword.tobytes()) #added for GRC implementation
         global first
         if(first):
-            #print(codeword)
             first = False
             self.message_list = []
             message = bytearray(int(self.msg_len/8))
             self._decode_BBC_recursive(message, codeword, 0) # make the first recursive call to decode
-            #return self.message_list
-            #print("Message list- decoder--", self.message_list)
+            print("Message list- decoder--\n", self.message_list)
             return self.message_list
     
     def _decode_BBC_recursive(self, message, codeword, index):
@@ -79,7 +78,7 @@ class Decoder:
             val = (add_bit(1, self.shift_register) % (self.cod_len))
             bit =  (memoryview(codeword)[int((val-val%8)/8)]>>(val%8))& 0b1
             if bit == 1: #(1<<val) == (codeword & (1<<val)):
-                memoryview(message)[int((index-index%8)/8)] += (1<<index%8)
+                memoryview(message)[int((index-index%8)/8)] |= (1<<index%8)
                 try:
                     self._decode_BBC_recursive(message, codeword, index+1)
                 except:

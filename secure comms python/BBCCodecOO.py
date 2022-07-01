@@ -39,18 +39,18 @@ class Encoder:
 
     def parse_input(self, input):
         input = input.encode(encoding="ASCII")
-        message = bytearray(MSG_LEN)
+        message = bytearray(int(MSG_LEN/8))
         memoryview(message)[0:(len(input))] = input
         return message
 
     def encode(self, input):
         message = self.parse_input(input)
-        codeword = bytearray(COD_LEN)
+        codeword = bytearray(int(COD_LEN/8))
         for i in range(MSG_LEN):
             element = memoryview(message)[int((i-i%8)/8)]
             bit = ((element) >> (i%8)) & 0b1
             mark_loc = gw.add_bit(bit, self.shift_register) % COD_LEN
-            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)] += 1<<(mark_loc%8)
+            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)] |= 1<<(mark_loc%8)
         return(codeword)
 
 
@@ -78,7 +78,7 @@ class Decoder:
             # assuming the next message bit is a 0, check for a mark in the codeword
             val = (gw.add_bit(0, self.shift_register) % (COD_LEN))
             bit = ((memoryview(codeword)[int((val-val%8)/8)])>>(val%8))& 0b1
-            if bit == 1: #TODO
+            if bit == 1:
                 self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(0, self.shift_register)
 
@@ -86,30 +86,6 @@ class Decoder:
             val = (gw.add_bit(1, self.shift_register) % (COD_LEN))
             bit =  (memoryview(codeword)[int((val-val%8)/8)]>>(val%8))& 0b1
             if bit == 1: #(1<<val) == (codeword & (1<<val)):
-                memoryview(message)[int((index-index%8)/8)] += (1<<index%8)
+                memoryview(message)[int((index-index%8)/8)] |= (1<<index%8)
                 self._decode_BBC_recursive(message, codeword, index+1)
             gw.del_bit(1, self.shift_register)
-        
-
-        
-#class InfoPair:
-#    def __init__(self):
-#        self.message = bytearray(ceil(MSG_LEN/8))
-#        self.codeword = bytearray(ceil(COD_LEN/8))
-#        self.num_checksum = DEFAULT_CHECKSUM
-
-#    def set_message(self, message):
-#        self.message = bytearray(message)
-
-#    def set_codeword(self, codeword):
-#        self.codeword = bytearray(codeword)
-
-#    def read_file(self, type:int=1, location:str="data.txt"):
-#        try:
-#            with open(location, "rb") as source:
-#                if(type):
-#                    source.readinto(self.message)
-#                else:
-#                    source.readinto(self.codeword)
-#        except:
-#            print("The file could not be read.") 
