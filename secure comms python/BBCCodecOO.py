@@ -82,7 +82,8 @@ class Decoder:
     def _decode_BBC_recursive(self, message, codeword, index):
 
         if index == (self.MSG_LEN-1):
-                self.message_list.append(bytes(memoryview(message)[0:self.MSG_LEN-1-self.num_checksum]).decode(encoding='ascii'))
+                #self.message_list.append(bytes(memoryview(message)[0:self.MSG_LEN-1-self.num_checksum]).decode(encoding='ascii'))
+                self.message_list.append(bytes(memoryview(message)[0:self.MSG_LEN - 1 - self.num_checksum])) # the output will now be a bytearray, can attempt to decode later
         else:
             # assuming the next message bit is a 0, check for a mark in the codeword
             val = (gw.add_bit(0, self.shift_register) % (self.COD_LEN))
