@@ -98,5 +98,5 @@ class Decoder:
             if bit == 1: #(1<<val) == (codeword & (1<<val)):
                 memoryview(message)[int((index-index%8)/8)] |= (1<<index%8)
                 self._decode_BBC_recursive(message, codeword, index+1)
+                memoryview(message)[int((index-index%8)/8)] &= (0xff ^ (1<<index%8)) #set one bit low
             gw.del_bit(1, self.shift_register)
-            memoryview(message)[int((index-index%8)/8)] = 0
