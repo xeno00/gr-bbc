@@ -1,20 +1,24 @@
 """
 E N C O D E R
 """
-
 import numpy as np
 from gnuradio import gr
+from gnuradio import grc
+import inspect
 DEFAULT_CHECKSUM = 0
 
 class blk(gr.sync_block):
     
-    def __init__(self, msg_len=2**3, cod_len=2**12):
+    def __init__(self, msg_len=2**7, cod_len=2**17):
+        msg_len = get_top_variable("MESSAGE_LENGTH", default=msg_len)
+        cod_len = get_top_variable("CODEWORD_LENGTH", default=cod_len)
+        
         gr.sync_block.__init__(self,
             name='BBC Encoder',
-            in_sig=[(np.byte, msg_len)],
-            out_sig=[(np.byte, cod_len)]
+            in_sig=[(np.byte,  msg_len if isinstance(msg_len, int) else int(msg_len))],    
+            out_sig=[(np.byte, cod_len if isinstance(cod_len, int) else int(cod_len))]
         )
-        # Convert from bits to Bytes
+        # Convert from Bytes to bits
         self.myEncoder = Encoder(msg_len*8, cod_len*8)
     
     # Use BBC to encode the incoming message vectors
@@ -86,3 +90,56 @@ def init(s):
     for i in range(4096):
         h=add_bit(h&1, s)
     n = 0    
+###############################################################################
+    
+
+def get_top_variable(variable_name="", default=None):
+    '''
+    Returns the value of a variable from the flow graph.
+    '''
+
+    # Let's go!
+    try:
+        ## Run Condition: GNURadio is starting the flowgraph
+        top = inspect.currentframe().f_back.f_back.f_locals
+
+        # Check if top has the variable name we're looking for
+        if top.__contains__(variable_name):
+
+            # Let the user know we found the variable
+            print(f"[Block Debug] While starting, I found top variable \'{variable_name}\': type={type(top[variable_name])}, value={top[variable_name]}")
+
+            # Return the value of the variable name
+            return top[variable_name]
+
+        ## Run Condition: Saving the flowgraph
+        top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals
+
+        # Make sure top has 'self'
+        if top.__contains__("self") and \
+                (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph)) and \
+                (hasattr(top['self'], 'blocks')):
+
+            # Get a list of all blocks
+            block_names = [block.name for block in top['self'].blocks]
+
+            # Find the index to the variable we need
+            block_index = block_names.index(variable_name)
+
+            # Store the result
+            result = top['self'].blocks[block_index].params['value'].value
+
+            # Let the user know we found the variable
+            print(f"[Block Debug] While modifying the flowgraph, I found top variable \'{variable_name}\': type={type(result)}, value={result}")
+
+            # Return the value of the variable we found
+            return result
+
+    # Something went wrong
+    except Exception as e:
+        print("[Block Debug]: Threw an exception", e)
+    except:
+        print("[Block Debug]: Threw an unknown exception.")
+
+    # Return the default result
+    return default
