@@ -1,7 +1,7 @@
 from msilib.schema import BBControl
 
 
-import BBCCodecOO as bbc
+import BBCCodecIterative as bbc
 import sys
 
 sys.setrecursionlimit(1028)
@@ -13,8 +13,9 @@ s1 = "AB"
 s2 = "DF"
 MSG_LEN=len(s1)*8  # needs to be in bits for BBCCodecOO.py
 COD_LEN = 2**10    # needs to be in bits for BBCCodecOO.py
+CHK_LEN = 0
 
-mycodec = bbc.Codec(MSG_LEN, COD_LEN)
+mycodec = bbc.Codec(MSG_LEN, COD_LEN, CHK_LEN)
 #b = bytearray()  # what is this for?
 #b.extend(s.encode(encoding="ASCII")) # what is this for?
 
@@ -27,10 +28,10 @@ bbcencoded = (int.from_bytes(bbcencoded1,"little") | int.from_bytes(bbcencoded2,
 # rearrange the codeword to be more visually appealing
 bbcencodedcorr1 =  ' '.join([format(bbcencoded1[i],'#010b')[2:] for i in range(int(COD_LEN/8)-1,-1,-1)])
 bbcencodedcorr2 =  ' '.join([format(bbcencoded2[i],'#010b')[2:] for i in range(int(COD_LEN/8)-1,-1,-1)])
-bbcencodedcorr =  ' '.join([format(bbcencoded[i],'#010b')[2:] for i in range(int(COD_LEN/8)-1,-1,-1)])
-print("Codeword1 is: " + str(bbcencodedcorr1))
-print("Codeword2 is: " + str(bbcencodedcorr2))
-print("Codeword0 is: " + str(bbcencodedcorr))
+bbcencodedcorr  =  ' '.join([format(bbcencoded[i], '#010b')[2:] for i in range(int(COD_LEN/8)-1,-1,-1)])
+#print("Codeword1 is: " + str(bbcencodedcorr1))
+#print("Codeword2 is: " + str(bbcencodedcorr2))
+#print("Codeword0 is: " + str(bbcencodedcorr))
 
 #Decode
 bbcdecoded = mycodec.bbc_decode(bbcencoded)
