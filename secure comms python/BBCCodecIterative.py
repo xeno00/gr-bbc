@@ -101,6 +101,7 @@ class Decoder:
                 if self.n == (self.MSG_LEN + self.CHK_LEN - 1):
                     print(message)
                     self.message_list.append(bytes(memoryview(message)[0:self.MSG_LEN - 1 - self.num_checksum]))
+                    bit = 0
                     #TODO: Flow control statement?
                     
                 # message is incomplete, continue assuming next bit is 0
@@ -115,7 +116,7 @@ class Decoder:
 
             # If the mark is not present... backtrace
             # Settle on an earlier 0 to change it to a 1 and pursue that tree
-            else:
+            if bit!=1:
                 # delete checksum bits
                 while self.n >= self.MSG_LEN: 
                     gw.del_bit(0, self.shift_register)
