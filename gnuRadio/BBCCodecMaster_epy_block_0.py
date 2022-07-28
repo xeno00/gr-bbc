@@ -1,7 +1,7 @@
 """
 D E C O D E R
 """
-
+import sys
 import numpy as np
 from gnuradio import gr
 DEFAULT_CHECKSUM = 0
@@ -11,15 +11,16 @@ first = True
 
 class blk(gr.sync_block):
 
-    def __init__(self, msg_len=2**3, cod_len=2**12):
+    def __init__(self, msg_len=2**7, cod_len=2**17):
         gr.sync_block.__init__(
             self,
             name='BBC Decoder',   # will show up in GRC
             in_sig=[(np.byte, cod_len)],
             out_sig=[(np.byte, msg_len)]
         )
-        # Convert from bits to Bytes
+        # Convert from Bytes to bits
         self.myDecoder = Decoder(msg_len*8, cod_len*8)
+        sys.setrecursionlimit((msg_len+1)*8)
 
     # Use BBC to decode the incoming codeword vectors
     def work(self, input_items, output_items):
@@ -81,6 +82,7 @@ class Decoder:
                 memoryview(message)[int((index-index%8)/8)] |= (1<<index%8)
                 try:
                     self._decode_BBC_recursive(message, codeword, index+1)
+                    memoryview(message)[int((index-index%8)/8)] &= (0xff ^ (1<<index%8)) #set one bit low
                 except:
                     print("Line 79. Recursion max length reached. current message: ", message, "Length at error = ", index) #DEBUG
             del_bit(1, self.shift_register)
