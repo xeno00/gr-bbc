@@ -1,17 +1,21 @@
 """
 E N C O D E R
 """
+#import sys
 import numpy as np
 from gnuradio import gr
 from gnuradio import grc
 import inspect
 DEFAULT_CHECKSUM = 0
 
+
+
+
 class blk(gr.sync_block):
     
-    def __init__(self, msg_len=2**7, cod_len=2**17):
-        msg_len = get_top_variable("MESSAGE_LENGTH", default=msg_len)
-        cod_len = get_top_variable("CODEWORD_LENGTH", default=cod_len)
+    def __init__(self):
+        msg_len = get_top_variable("MESSAGE_LENGTH", default=2**7)
+        cod_len = get_top_variable("CODEWORD_LENGTH", default=2**17)
         
         gr.sync_block.__init__(self,
             name='BBC Encoder',
@@ -21,9 +25,11 @@ class blk(gr.sync_block):
         # Convert from Bytes to bits
         self.myEncoder = Encoder(msg_len*8, cod_len*8)
     
+    
     # Use BBC to encode the incoming message vectors
     def work(self, input_items, output_items):
         result = self.myEncoder.encode(input_items[0][:][:])
+        
         try:
             output_items[0][:][:] = result
             return len(output_items[0])
@@ -91,30 +97,24 @@ def init(s):
         h=add_bit(h&1, s)
     n = 0    
 ###############################################################################
-    
 
 def get_top_variable(variable_name="", default=None):
     '''
     Returns the value of a variable from the flow graph.
     '''
-
-    # Let's go!
+    ## Run Condition: GNURadio is starting the flowgraph, resulting output comes from here when working
+    top = inspect.currentframe().f_back.f_back.f_locals
     try:
-        ## Run Condition: GNURadio is starting the flowgraph
-        top = inspect.currentframe().f_back.f_back.f_locals
-
         # Check if top has the variable name we're looking for
         if top.__contains__(variable_name):
-
-            # Let the user know we found the variable
-            print(f"[Block Debug] While starting, I found top variable \'{variable_name}\': type={type(top[variable_name])}, value={top[variable_name]}")
-
-            # Return the value of the variable name
+            #print(f"[Block Debug 1] While starting, I found top variable \'{variable_name}\': type={type(top[variable_name])}, value={top[variable_name]}")
             return top[variable_name]
+    finally:
+        del top
 
-        ## Run Condition: Saving the flowgraph
-        top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals
-
+    ## Run Condition: Saving the flowgraph, necessary when default case isnt correct
+    top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals
+    try:
         # Make sure top has 'self'
         if top.__contains__("self") and \
                 (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph)) and \
@@ -125,21 +125,14 @@ def get_top_variable(variable_name="", default=None):
 
             # Find the index to the variable we need
             block_index = block_names.index(variable_name)
-
-            # Store the result
+            
+            # Return result
             result = top['self'].blocks[block_index].params['value'].value
-
-            # Let the user know we found the variable
-            print(f"[Block Debug] While modifying the flowgraph, I found top variable \'{variable_name}\': type={type(result)}, value={result}")
-
-            # Return the value of the variable we found
+            print(f"[Block Debug 2] While modifying the flowgraph, I found top variable \'{variable_name}\': type={type(result)}, value={result}")
             return result
 
-    # Something went wrong
-    except Exception as e:
-        print("[Block Debug]: Threw an exception", e)
-    except:
-        print("[Block Debug]: Threw an unknown exception.")
+    finally:
+        del top
 
-    # Return the default result
+    print("returining default vaule")
     return default

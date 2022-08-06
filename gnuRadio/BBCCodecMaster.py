@@ -83,8 +83,8 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, (-1))
-        self.epy_block_2 = epy_block_2.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
-        self.epy_block_0 = epy_block_0.blk(msg_len=MESSAGE_LENGTH, cod_len=CODEWORD_LENGTH)
+        self.epy_block_2 = epy_block_2.blk()
+        self.epy_block_0 = epy_block_0.blk()
         self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in message], False, 1, [])
