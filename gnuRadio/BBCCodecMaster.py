@@ -77,7 +77,7 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         ##################################################
         self.message = message = "HELLO WORLD! Welcome to BBC in GNURadio. This is a jam-resistant codec, and we are sending messages, encoding them, and then try"
         self.MESSAGE_LENGTH = MESSAGE_LENGTH = 128
-        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 512
+        self.CODEWORD_LENGTH = CODEWORD_LENGTH = 131072
 
         ##################################################
         # Blocks
