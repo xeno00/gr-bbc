@@ -1,9 +1,10 @@
 from msilib.schema import BBControl
 import BBCCodecIterative as bbc
 import sys
+COD_LEN = 2**10
 class Harness:
-    MSG_LEN = 2*8   #2**10
-    COD_LEN = 2**10 #2**20
+    MSG_LEN = 2*8     #2**10
+    COD_LEN = COD_LEN #2**20
     CHK_LEN = 0
     mycodec = bbc.Codec(MSG_LEN, COD_LEN, CHK_LEN)
     s1 = "AB"
