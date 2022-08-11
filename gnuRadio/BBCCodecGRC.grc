@@ -232,12 +232,13 @@ blocks:
       \        )\n        # Convert from Bytes to bits\n        self.myDecoder = Decoder(msg_len*8,\
       \ cod_len*8, DEFAULT_CHECKSUM) # Bytes to bits\n        #sys.setrecursionlimit((msg_len+1)*8)\n\
       \n    # Use BBC to decode the incoming codeword vectors\n    def work(self,\
-      \ input_items, output_items):\n        result = self.myDecoder.decode(input_items[0][:][:][0])[0]\n\
+      \ input_items, output_items):\n        result = self.myDecoder.decode(input_items[0][:][:][0])\n\
       \        #TODO: add function to iteratively push results out\n        try:\n\
-      \            output_items[0][:][:] = bytearray(result)\n            return len(output_items[0])\n\
-      \        except:\n            print(\"DEBUG decoder line 33: output typing failed.\\\
-      n\")\n            print(\"Type of decoder result: \", type(bytearray(result)))\n\
-      \            print(\"Type of stream: \", type(self.out_sig))\n\n###############################################################################\n\
+      \            for x in result:\n                output_items[0][:][:] = bytearray(x)\n\
+      \            return len(output_items[0])\n        except:\n            print(\"\
+      DEBUG decoder line 33: output typing failed.\\n\")\n            print(\"Type\
+      \ of decoder result: \", type(bytearray(result)))\n            print(\"Type\
+      \ of stream: \", type(self.out_sig))\n\n###############################################################################\n\
       class Decoder:\n    def __init__(self, MSG_LEN, COD_LEN, CHK_LEN = 0):\n   \
       \     self.message_list = []\n        self.num_checksum = DEFAULT_CHECKSUM\n\
       \        self.shift_register = self.init_shift_register()\n        self.MSG_LEN\

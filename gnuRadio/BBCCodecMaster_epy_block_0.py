@@ -29,10 +29,11 @@ class blk(gr.sync_block):
 
     # Use BBC to decode the incoming codeword vectors
     def work(self, input_items, output_items):
-        result = self.myDecoder.decode(input_items[0][:][:][0])[0]
+        result = self.myDecoder.decode(input_items[0][:][:][0])
         #TODO: add function to iteratively push results out
         try:
-            output_items[0][:][:] = bytearray(result)
+            for x in result:
+                output_items[0][:][:] = bytearray(x)
             return len(output_items[0])
         except:
             print("DEBUG decoder line 33: output typing failed.\n")
@@ -104,7 +105,7 @@ class Decoder:
                     self.n -= 1
                         
                 if self.n < 0: #Packet is fully decoded
-                    print("Packet is fully decoded")
+                    print("Packet is fully decoded. Still need to mplement multiple messages in GRC (decoder)")
                     break #proceed with next packet
 
                 else: # Move over to the 1 branch of current search
