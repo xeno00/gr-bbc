@@ -34,6 +34,7 @@ from gnuradio import eng_notation
 from gnuradio import zeromq
 import BBCCodecMaster_epy_block_0 as epy_block_0  # embedded python block
 import BBCCodecMaster_epy_block_2 as epy_block_2  # embedded python block
+import BBCCodecMaster_epy_block_2_0 as epy_block_2_0  # embedded python block
 
 
 
@@ -75,7 +76,8 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.message = message = "HELLO WORLD! Welcome to BBC in GNURadio. This is a jam-resistant codec, and we are sending messages, encoding them, and then try"
+        self.message2 = message2 = "ZELLO ZORLD! Zelcome zo ZBC zn ZNURadio. Zhis zs z zam-zesistant zodec, znd ze zre zending zessages, zncoding zhem, znd zhen zry"
+        self.message1 = message1 = "HELLO WORLD! Welcome to BBC in GNURadio. This is a jam-resistant codec, and we are sending messages, encoding them, and then try"
         self.MESSAGE_LENGTH = MESSAGE_LENGTH = 128
         self.CODEWORD_LENGTH = CODEWORD_LENGTH = 131072
 
@@ -83,30 +85,45 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, (-1))
+        self.epy_block_2_0 = epy_block_2_0.blk()
         self.epy_block_2 = epy_block_2.blk()
         self.epy_block_0 = epy_block_0.blk()
+        self.blocks_vector_to_stream_1_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_vector_to_stream_1_0 = blocks.vector_to_stream(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_vector_to_stream_1 = blocks.vector_to_stream(gr.sizeof_char*1, CODEWORD_LENGTH)
-        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in message], False, 1, [])
+        self.blocks_vector_source_x_0_0_0 = blocks.vector_source_b([ord(i) for i in message2], False, 1, [])
+        self.blocks_vector_source_x_0_0 = blocks.vector_source_b([ord(i) for i in message1], False, 1, [])
+        self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_char*1, 32000,True)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, 32000,True)
+        self.blocks_tag_debug_0_0 = blocks.tag_debug(gr.sizeof_char*1, '', "")
+        self.blocks_tag_debug_0_0.set_display(True)
         self.blocks_tag_debug_0 = blocks.tag_debug(gr.sizeof_char*1, '', "")
         self.blocks_tag_debug_0.set_display(True)
+        self.blocks_stream_to_vector_0_1 = blocks.stream_to_vector(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_char*1, MESSAGE_LENGTH)
+        self.blocks_or_xx_0 = blocks.or_bb()
 
 
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.blocks_or_xx_0, 0), (self.blocks_stream_to_vector_0_0, 0))
         self.connect((self.blocks_stream_to_vector_0, 0), (self.epy_block_2, 0))
         self.connect((self.blocks_stream_to_vector_0_0, 0), (self.epy_block_0, 0))
+        self.connect((self.blocks_stream_to_vector_0_1, 0), (self.epy_block_2_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_vector_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_tag_debug_0, 0))
+        self.connect((self.blocks_throttle_0_0, 0), (self.blocks_stream_to_vector_0_1, 0))
+        self.connect((self.blocks_throttle_0_0, 0), (self.blocks_tag_debug_0_0, 0))
         self.connect((self.blocks_vector_source_x_0_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_vector_to_stream_1, 0), (self.blocks_stream_to_vector_0_0, 0))
+        self.connect((self.blocks_vector_source_x_0_0_0, 0), (self.blocks_throttle_0_0, 0))
+        self.connect((self.blocks_vector_to_stream_1, 0), (self.blocks_or_xx_0, 1))
         self.connect((self.blocks_vector_to_stream_1_0, 0), (self.zeromq_push_sink_0, 0))
+        self.connect((self.blocks_vector_to_stream_1_1, 0), (self.blocks_or_xx_0, 0))
         self.connect((self.epy_block_0, 0), (self.blocks_vector_to_stream_1_0, 0))
         self.connect((self.epy_block_2, 0), (self.blocks_vector_to_stream_1, 0))
+        self.connect((self.epy_block_2_0, 0), (self.blocks_vector_to_stream_1_1, 0))
 
 
     def closeEvent(self, event):
@@ -117,12 +134,19 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
 
         event.accept()
 
-    def get_message(self):
-        return self.message
+    def get_message2(self):
+        return self.message2
 
-    def set_message(self, message):
-        self.message = message
-        self.blocks_vector_source_x_0_0.set_data([ord(i) for i in self.message], [])
+    def set_message2(self, message2):
+        self.message2 = message2
+        self.blocks_vector_source_x_0_0_0.set_data([ord(i) for i in self.message2], [])
+
+    def get_message1(self):
+        return self.message1
+
+    def set_message1(self, message1):
+        self.message1 = message1
+        self.blocks_vector_source_x_0_0.set_data([ord(i) for i in self.message1], [])
 
     def get_MESSAGE_LENGTH(self):
         return self.MESSAGE_LENGTH

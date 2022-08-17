@@ -73,7 +73,7 @@ blocks:
     coordinate: [360, 12.0]
     rotation: 0
     state: true
-- name: message
+- name: message1
   id: variable
   parameters:
     comment: ''
@@ -83,9 +83,39 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 204.0]
+    coordinate: [8, 276.0]
     rotation: 0
     state: enabled
+- name: message2
+  id: variable
+  parameters:
+    comment: ''
+    value: '"ZELLO ZORLD! Zelcome zo ZBC zn ZNURadio. Zhis zs z zam-zesistant zodec,
+      znd ze zre zending zessages, zncoding zhem, znd zhen zry"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 132.0]
+    rotation: 0
+    state: enabled
+- name: blocks_or_xx_0
+  id: blocks_or_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [936, 256.0]
+    rotation: 0
+    state: true
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
   parameters:
@@ -101,9 +131,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 280.0]
+    coordinate: [416, 352.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_stream_to_vector_0_0
   id: blocks_stream_to_vector
   parameters:
@@ -119,7 +149,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 408.0]
+    coordinate: [416, 480.0]
+    rotation: 0
+    state: true
+- name: blocks_stream_to_vector_0_1
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: MESSAGE_LENGTH
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 208.0]
     rotation: 0
     state: true
 - name: blocks_tag_debug_0
@@ -138,7 +186,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 204.0]
+    coordinate: [416, 276.0]
+    rotation: 0
+    state: enabled
+- name: blocks_tag_debug_0_0
+  id: blocks_tag_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    display: 'True'
+    filter: '""'
+    name: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 140.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -157,7 +224,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 276.0]
+    coordinate: [216, 348.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: '32000'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 204.0]
     rotation: 0
     state: true
 - name: blocks_vector_source_x_0_0
@@ -171,13 +257,33 @@ blocks:
     repeat: 'False'
     tags: '[]'
     type: byte
-    vector: '[ord(i) for i in message]'
+    vector: '[ord(i) for i in message1]'
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 260.0]
+    coordinate: [8, 332.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0_0_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'False'
+    tags: '[]'
+    type: byte
+    vector: '[ord(i) for i in message2]'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 188.0]
     rotation: 0
     state: true
 - name: blocks_vector_to_stream_1
@@ -195,7 +301,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 280.0]
+    coordinate: [760, 352.0]
     rotation: 0
     state: true
 - name: blocks_vector_to_stream_1_0
@@ -213,7 +319,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 408.0]
+    coordinate: [824, 480.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_to_stream_1_1
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: CODEWORD_LENGTH
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 208.0]
     rotation: 0
     state: true
 - name: epy_block_0
@@ -285,8 +409,8 @@ blocks:
       \ with next packet\n\n                else: # Move over to the 1 branch of current\
       \ search\n                    del_bit(0, self.shift_register)\n            \
       \        memoryview(message)[int((self.n - self.n%8)/8)] |= (1<<self.n%8)\n\
-      \        first = False\n        print(self.message_list)\n        return self.message_list\n\
-      \n###############################################################################\n\
+      \        first = False\n        for x in self.message_list:\n            print(x)\n\
+      \        return self.message_list\n\n###############################################################################\n\
       MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
       \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
       \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
@@ -331,9 +455,70 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 408.0]
+    coordinate: [616, 480.0]
     rotation: 0
     state: true
+- name: epy_block_1
+  id: epy_block
+  parameters:
+    _source_code: "'''\nOR CODEWORD BLOCK\n'''\nimport numpy as np\nfrom gnuradio\
+      \ import gr\nfrom gnuradio import grc\nimport inspect\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self):  # only default arguments here\n        cod_len =\
+      \ get_top_variable(\"CODEWORD_LENGTH\", default=2**17)\n        \n        gr.sync_block.__init__(self,\n\
+      \            name='OR Codeword',\n            in_sig=[(np.ubyte,  cod_len if\
+      \ isinstance(cod_len, int) else int(cod_len)), \n                    (np.ubyte,\
+      \  cod_len if isinstance(cod_len, int) else int(cod_len))],    #[np.complex64],\n\
+      \            out_sig=[(np.ubyte, cod_len if isinstance(cod_len, int) else int(cod_len))]\n\
+      \        )\n\n\n    def work(self, input_items, output_items):\n        #print(input_items[0][0])\
+      \ gives list without extra binder\n        #print(input_items[1])  gives list\
+      \ with extra binder\n        result = self.combine_codewords([input_items[1][0],\
+      \ input_items[0][0]]) #output defaults to first argument, here.\n        #print(result)\n\
+      \        print(\"Assigning result\")\n        print(result[37])\n        #output_items[0][:]\
+      \ = input_items[0]    WORKS. Same error if input_items[0][0]\n        output_items[0][:]\
+      \ = list(result)\n        print(\"final step\")\n        #return len(output_items[0])\
+      \            WORKS\n        return len(output_items[0])\n\n    def combine_codewords(self,\
+      \ words):\n        result = 0\n        #print(type(words[0][0][0]))\n      \
+      \  print(\"decoding 0\")\n        cw1 = int.from_bytes(words[0],\"little\")\n\
+      \        print(\"decoding 1\")\n        cw2 = int.from_bytes(words[1],\"little\"\
+      )\n        #for x in words:\n        #    result |= int.from_bytes(x,\"little\"\
+      )\n        print(\"combining...\")\n        result = cw1 |cw2\n        print(\"\
+      encoding...\")\n        result = cw1.to_bytes(len(words[0]),\"little\")#result.to_bytes(len(words[0]),\"\
+      little\")\n        print(\"returning...\")\n        return result\n\n\n###############################################################################\n\
+      \ndef get_top_variable(variable_name=\"\", default=None):\n    '''\n    Returns\
+      \ the value of a variable from the flow graph.\n    '''\n    ## Run Condition:\
+      \ GNURadio is starting the flowgraph, resulting output comes from here when\
+      \ working\n    top = inspect.currentframe().f_back.f_back.f_locals\n    try:\n\
+      \        # Check if top has the variable name we're looking for\n        if\
+      \ top.__contains__(variable_name):\n            #print(f\"[Block Debug 1] While\
+      \ starting, I found top variable \\'{variable_name}\\': type={type(top[variable_name])},\
+      \ value={top[variable_name]}\")\n            return top[variable_name]\n   \
+      \ finally:\n        del top\n\n    ## Run Condition: Saving the flowgraph, necessary\
+      \ when default case isnt correct\n    top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals\n\
+      \    try:\n        # Make sure top has 'self'\n        if top.__contains__(\"\
+      self\") and \\\n                (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph))\
+      \ and \\\n                (hasattr(top['self'], 'blocks')):\n\n            #\
+      \ Get a list of all blocks\n            block_names = [block.name for block\
+      \ in top['self'].blocks]\n\n            # Find the index to the variable we\
+      \ need\n            block_index = block_names.index(variable_name)\n       \
+      \     \n            # Return result\n            result = top['self'].blocks[block_index].params['value'].value\n\
+      \            print(f\"[Block Debug 2] While modifying the flowgraph, I found\
+      \ top variable \\'{variable_name}\\': type={type(result)}, value={result}\"\
+      )\n            return result\n\n    finally:\n        del top\n\n    print(\"\
+      returining default vaule\")\n    return default"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('OR Codeword', 'blk', [], [('0', 'byte', 131072), ('1', 'byte', 131072)],
+      [('0', 'byte', 131072)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 8.0]
+    rotation: 0
+    state: disabled
 - name: epy_block_2
   id: epy_block
   parameters:
@@ -411,7 +596,87 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 280.0]
+    coordinate: [616, 352.0]
+    rotation: 0
+    state: enabled
+- name: epy_block_2_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nE N C O D E R\n\"\"\"\n#import sys\nimport numpy as np\n\
+      from gnuradio import gr\nfrom gnuradio import grc\nimport inspect\nDEFAULT_CHECKSUM\
+      \ = 0\n\n\n\n\nclass blk(gr.sync_block):\n    \n    def __init__(self):\n  \
+      \      msg_len = get_top_variable(\"MESSAGE_LENGTH\", default=2**7)\n      \
+      \  cod_len = get_top_variable(\"CODEWORD_LENGTH\", default=2**17)\n        \n\
+      \        gr.sync_block.__init__(self,\n            name='BBC Encoder',\n   \
+      \         in_sig=[(np.byte,  msg_len if isinstance(msg_len, int) else int(msg_len))],\
+      \    \n            out_sig=[(np.byte, cod_len if isinstance(cod_len, int) else\
+      \ int(cod_len))]\n        )\n        # Convert from Bytes to bits\n        self.myEncoder\
+      \ = Encoder(msg_len*8, cod_len*8)\n    \n    \n    # Use BBC to encode the incoming\
+      \ message vectors\n    def work(self, input_items, output_items):\n        result\
+      \ = self.myEncoder.encode(input_items[0][:][:])\n        \n        try:\n  \
+      \          output_items[0][:][:] = result\n            return len(output_items[0])\n\
+      \        except:\n            print(\"DEBUG encoder line 31: output typing failed.\\\
+      n\")\n            print(\"Type of encoder result: \", type(result))\n      \
+      \      print(\"Type of stream: \", type(self.out_sig))\n    \n###############################################################################\n\
+      class Encoder:\n    def __init__(self, msg_len, cod_len):\n        self.shift_register\
+      \ = self.init_shift_register()\n        self.msg_len = msg_len\n        self.cod_len\
+      \ = cod_len\n\n    def init_shift_register(self):\n        shift_register =\
+      \ [0 for i in range(32)]\n        init(shift_register)\n        return (shift_register)\n\
+      \n    def parse_input(self, my_input):\n        message = bytearray(my_input.tobytes())\n\
+      \        #TODO: add error exception for wrong sized input vector\n        return\
+      \ message\n\n    def encode(self, input):\n        message = self.parse_input(input)\n\
+      \        codeword = bytearray(int(self.cod_len/8))\n        \n        for i\
+      \ in range(self.msg_len):\n            element = memoryview(message)[int((i-i%8)/8)]\n\
+      \            bit = ((element) >> (i%8)) & 0b1\n            mark_loc = add_bit(bit,\
+      \ self.shift_register) % self.cod_len\n            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)]\
+      \ |= (1<<(mark_loc%8))\n            # TODO: add + vs | change to python library\n\
+      \        return(codeword)\n        \n ##############################################################################\n\
+      MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
+      \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
+      \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
+      \ on left shift     \n    t = (t ^ (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)) & MAX_VAL\n\
+      \    n += 1                           \n    s[n % 32] ^= (t&MAX_VAL)  #s[(n)\
+      \ % 32] ^= t, modified to reflect n change\n    return s[n % 32]        #return\
+      \ s[(n) % 32], modified to reflect n change                      \n\ndef del_bit(b,\
+      \ s):\n    global n\n    n -= 1\n    add_bit(b,s), \n    n -= 1\n    return\
+      \ s[n % 32]\n    \ndef init(s):\n    global n\n    n = 0\n    h = 1\n    for\
+      \ i in range(32):\n        s[i]=0\n    for i in range(4096):\n        h=add_bit(h&1,\
+      \ s)\n    n = 0    \n###############################################################################\n\
+      \ndef get_top_variable(variable_name=\"\", default=None):\n    '''\n    Returns\
+      \ the value of a variable from the flow graph.\n    '''\n    ## Run Condition:\
+      \ GNURadio is starting the flowgraph, resulting output comes from here when\
+      \ working\n    top = inspect.currentframe().f_back.f_back.f_locals\n    try:\n\
+      \        # Check if top has the variable name we're looking for\n        if\
+      \ top.__contains__(variable_name):\n            #print(f\"[Block Debug 1] While\
+      \ starting, I found top variable \\'{variable_name}\\': type={type(top[variable_name])},\
+      \ value={top[variable_name]}\")\n            return top[variable_name]\n   \
+      \ finally:\n        del top\n\n    ## Run Condition: Saving the flowgraph, necessary\
+      \ when default case isnt correct\n    top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals\n\
+      \    try:\n        # Make sure top has 'self'\n        if top.__contains__(\"\
+      self\") and \\\n                (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph))\
+      \ and \\\n                (hasattr(top['self'], 'blocks')):\n\n            #\
+      \ Get a list of all blocks\n            block_names = [block.name for block\
+      \ in top['self'].blocks]\n\n            # Find the index to the variable we\
+      \ need\n            block_index = block_names.index(variable_name)\n       \
+      \     \n            # Return result\n            result = top['self'].blocks[block_index].params['value'].value\n\
+      \            print(f\"[Block Debug 2] While modifying the flowgraph, I found\
+      \ top variable \\'{variable_name}\\': type={type(result)}, value={result}\"\
+      )\n            return result\n\n    finally:\n        del top\n\n    print(\"\
+      returining default vaule\")\n    return default"
+    affinity: ''
+    alias: ''
+    comment: 'BBC Requires vectors
+
+      for operation'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('BBC Encoder', 'blk', [], [('0', 'byte', 128)], [('0', 'byte', 131072)],
+      '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 208.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -437,7 +702,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 276.0]
+    coordinate: [1032, 348.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -450,7 +715,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 404.0]
+    coordinate: [8, 476.0]
     rotation: 0
     state: true
 - name: zeromq_push_sink_0
@@ -469,20 +734,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 388.0]
+    coordinate: [1032, 460.0]
     rotation: 0
     state: enabled
 
 connections:
+- [blocks_or_xx_0, '0', virtual_sink_1, '0']
 - [blocks_stream_to_vector_0, '0', epy_block_2, '0']
 - [blocks_stream_to_vector_0_0, '0', epy_block_0, '0']
+- [blocks_stream_to_vector_0_1, '0', epy_block_2_0, '0']
 - [blocks_throttle_0, '0', blocks_stream_to_vector_0, '0']
 - [blocks_throttle_0, '0', blocks_tag_debug_0, '0']
+- [blocks_throttle_0_0, '0', blocks_stream_to_vector_0_1, '0']
+- [blocks_throttle_0_0, '0', blocks_tag_debug_0_0, '0']
 - [blocks_vector_source_x_0_0, '0', blocks_throttle_0, '0']
-- [blocks_vector_to_stream_1, '0', virtual_sink_1, '0']
+- [blocks_vector_source_x_0_0_0, '0', blocks_throttle_0_0, '0']
+- [blocks_vector_to_stream_1, '0', blocks_or_xx_0, '1']
 - [blocks_vector_to_stream_1_0, '0', zeromq_push_sink_0, '0']
+- [blocks_vector_to_stream_1_1, '0', blocks_or_xx_0, '0']
 - [epy_block_0, '0', blocks_vector_to_stream_1_0, '0']
 - [epy_block_2, '0', blocks_vector_to_stream_1, '0']
+- [epy_block_2_0, '0', blocks_vector_to_stream_1_1, '0']
 - [virtual_source_0, '0', blocks_stream_to_vector_0_0, '0']
 
 metadata:

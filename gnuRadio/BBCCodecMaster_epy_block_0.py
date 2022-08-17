@@ -112,7 +112,8 @@ class Decoder:
                     del_bit(0, self.shift_register)
                     memoryview(message)[int((self.n - self.n%8)/8)] |= (1<<self.n%8)
         first = False
-        print(self.message_list)
+        for x in self.message_list:
+            print(x)
         return self.message_list
 
 ###############################################################################
