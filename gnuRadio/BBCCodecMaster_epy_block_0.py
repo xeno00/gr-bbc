@@ -7,6 +7,8 @@ from gnuradio import gr
 from gnuradio import grc
 from math import ceil
 import inspect
+import pmt
+
 DEFAULT_CHECKSUM = 0
 #TODO: REMOVE FIRST HANDLING TO MAKE VERSATILE
 global first
@@ -17,13 +19,16 @@ class blk(gr.sync_block):
     def __init__(self): #If there is an error, change default here:
         msg_len = get_top_variable("MESSAGE_LENGTH", default=2**7)
         cod_len = get_top_variable("CODEWORD_LENGTH", default=2**17)
-        
+
         gr.sync_block.__init__(self,
             name='BBC Decoder',
             in_sig=[(np.byte,  cod_len if isinstance(cod_len, int) else int(cod_len))],
             out_sig=[(np.byte, msg_len if isinstance(msg_len, int) else int(msg_len))]
+            #out_sig=[np.byte]
         )
         # Convert from Bytes to bits
+        self.portName = "msgOutput"
+        self.message_port_register_out(pmt.intern(self.portName))
         self.myDecoder = Decoder(msg_len*8, cod_len*8, DEFAULT_CHECKSUM) # Bytes to bits
         #sys.setrecursionlimit((msg_len+1)*8)
 
@@ -32,12 +37,22 @@ class blk(gr.sync_block):
         result = self.myDecoder.decode(input_items[0][:][:][0])
         #TODO: add function to iteratively push results out
         try:
+            xtemp = b''
             for x in result:
-                output_items[0][:][:] = bytearray(x)
+                #print(x) # works
+                xtemp = xtemp + b' ' + bytearray(x)
+                output_items[0][:] = bytearray(x)
+                PMT_msg = pmt.intern(x.decode('utf-8' + "\n")) # works
+                self.message_port_pub(pmt.intern(self.portName),PMT_msg) # works
+            #print(xtemp)
+            #output_items[0][:] = xtemp # doesn't work for some reason, maybe size?
+            #print(len(output_items[0]))
+            #print(output_items[0][:].decode())
+            #output_items[0][:] = input_items[0]
             return len(output_items[0])
         except:
             print("DEBUG decoder line 33: output typing failed.\n")
-            print("Type of decoder result: ", type(bytearray(result)))
+            #print("Type of decoder result: ", type(bytearray(result)))
             print("Type of stream: ", type(self.out_sig))
 
 ###############################################################################
@@ -112,8 +127,9 @@ class Decoder:
                     del_bit(0, self.shift_register)
                     memoryview(message)[int((self.n - self.n%8)/8)] |= (1<<self.n%8)
         first = False
-        for x in self.message_list:
-            print(x)
+        #for x in self.message_list:
+            #print(x)
+        #print(self.message_list)
         return self.message_list
 
 ###############################################################################

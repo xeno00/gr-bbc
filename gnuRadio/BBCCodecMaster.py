@@ -84,7 +84,8 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5557", 100, False, (-1))
+        self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_char, 1, "tcp://127.0.0.1:5555", 100, False, (-1))
+        self.zeromq_push_msg_sink_0 = zeromq.push_msg_sink("tcp://127.0.0.1:5557", 100, True)
         self.epy_block_2_0 = epy_block_2_0.blk()
         self.epy_block_2 = epy_block_2.blk()
         self.epy_block_0 = epy_block_0.blk()
@@ -103,11 +104,14 @@ class BBCCodecMaster(gr.top_block, Qt.QWidget):
         self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_char*1, CODEWORD_LENGTH)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_char*1, MESSAGE_LENGTH)
         self.blocks_or_xx_0 = blocks.or_bb()
+        self.blocks_message_debug_0 = blocks.message_debug(True)
 
 
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.epy_block_0, 'msgOutput'), (self.blocks_message_debug_0, 'print'))
+        self.msg_connect((self.epy_block_0, 'msgOutput'), (self.zeromq_push_msg_sink_0, 'in'))
         self.connect((self.blocks_or_xx_0, 0), (self.blocks_stream_to_vector_0_0, 0))
         self.connect((self.blocks_stream_to_vector_0, 0), (self.epy_block_2, 0))
         self.connect((self.blocks_stream_to_vector_0_0, 0), (self.epy_block_0, 0))
