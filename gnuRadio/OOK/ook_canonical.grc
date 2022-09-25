@@ -1,0 +1,1043 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: ook_transmit
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 5]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: bits_per_pack
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 77]
+    rotation: 0
+    state: enabled
+- name: carrier_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 433.937e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 77]
+    rotation: 0
+    state: enabled
+- name: message1
+  id: variable
+  parameters:
+    comment: ''
+    value: '"HELLO WORLD! Welcome to BBC in GNURadio. This is a jam-resistant codec,
+      and we are sending messages, encoding them, and...</msg>"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 296.0]
+    rotation: 0
+    state: enabled
+- name: packet
+  id: variable
+  parameters:
+    comment: ''
+    value: '"ZZ</msg>"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 220]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: 128e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 149]
+    rotation: 0
+    state: enabled
+- name: symbol_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: int (500)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [120, 149]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: carrier_freq
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 272.0]
+    rotation: 0
+    state: true
+- name: band_pass_filter_0
+  id: band_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    decim: '1'
+    gain: '1'
+    high_cutoff_freq: 50e3
+    interp: '1'
+    low_cutoff_freq: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccc
+    width: 20e3
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 504.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 568.0]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 184.0]
+    rotation: 0
+    state: enabled
+- name: blocks_head_0
+  id: blocks_head
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: int(len(message1)*5)
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 48.0]
+    rotation: 0
+    state: true
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    en_uvec: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1248, 640.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1120, 216.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, 560.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 776.0]
+    rotation: 0
+    state: true
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 776.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: int(samp_rate / symbol_rate)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 176.0]
+    rotation: 0
+    state: true
+- name: blocks_threshold_ff_0
+  id: blocks_threshold_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    high: 1e-3
+    init: '0'
+    low: 1e-3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 544.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 768.0]
+    rotation: 0
+    state: true
+- name: blocks_uchar_to_float_0
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 176]
+    rotation: 0
+    state: enabled
+- name: blocks_unpack_k_bits_bb_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: bits_per_pack
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 40.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: byte
+    vector: '[ ord (x) for x in message1 ]'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 28]
+    rotation: 0
+    state: enabled
+- name: epy_block_1_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport pmt\n\nclass blk(gr.sync_block):  # other base\
+      \ classes are basic_block, decim_block, interp_block\n    \"\"\"Embedded Python\
+      \ Block example - a simple multiply const\"\"\"\n\n    def __init__(self, sps=768,\
+      \ dbug=0, sep=\"</msg>\"):  # only default arguments here\n        \"\"\"arguments\
+      \ to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='OOK Decoder',   # will show up in GRC\n\
+      \            in_sig=[np.float32],\n            out_sig=[np.float32]\n      \
+      \  )\n        # if an attribute with the same name as a parameter is found,\n\
+      \        # a callback is registered (properties work, too).\n        self.sps\
+      \ = sps\n        self.dbug = dbug\n        self.zcount = 0\n        self.ocount\
+      \ = 0\n        self.prev_samp =  0\n        self.current_byte = '' # will be\
+      \  string representing bits received\n        self.output_bytes = '' # will\
+      \ be the output string\n        self.spstol = (np.ceil(0.75*self.sps))\n   \
+      \     self.sep = sep\n        self.msgportname = \"Message\"\n        self.message_port_register_out(pmt.intern(self.msgportname))\n\
+      \        \n    def work(self, input_items, output_items):\n        data = input_items[0]\n\
+      \        i = 0 # loop counter\n        \n         #main loop\n        for samp\
+      \ in data:\n            i+=1\n            if samp != self.prev_samp: # if the\
+      \ sample value has changed\n                if (self.ocount >= self.spstol)\
+      \ or (self.zcount >= self.spstol):\n                    ##import pdb\n     \
+      \               #pdb.set_trace()\n                    if self.prev_samp == 1:\
+      \ # look for ones bits\n                        [obits,omod] = np.divmod(self.ocount,self.sps)\
+      \ # the floor \n                        if omod >= self.spstol: # if the modulus\
+      \ is more than required for a bit, add another bit\n                       \
+      \     obits +=1\n                        otemp = '1'*int(obits)\n          \
+      \              self.current_byte = self.current_byte + otemp\n             \
+      \       elif self.prev_samp == 0:\n                        [zbits,zmod] = np.divmod(self.zcount,self.sps)\n\
+      \                        if zmod >= self.spstol:\n                         \
+      \   zbits +=1\n                        ztemp = '0'*int(zbits)\n            \
+      \            self.current_byte = self.current_byte + ztemp\n               \
+      \     self.ocount = 0 # reset the counters\n                    self.zcount\
+      \ = 0\n    \n            if samp == 1:\n                self.ocount +=1\n  \
+      \          elif samp == 0:\n                self.zcount +=1\n            else:\n\
+      \                print(\"incorrect value for sample on index \" + str(i))\n\
+      \    \n            self.prev_samp = samp # store the previous sample\n    \n\
+      \            while len(self.current_byte) >= 8:\n                if self.dbug\
+      \ == 1:\n                    print('got a byte')\n                    print(self.current_byte[0:8])\
+      \ # only get the first 8 bits\n                self.output_bytes = self.output_bytes\
+      \ + chr(int(self.current_byte[0:8],2))\n                self.current_byte =\
+      \ self.current_byte[8:]\n        \n        # check to see if the \n        a\
+      \ = self.output_bytes.find(self.sep)\n        if a != -1:\n            #print(\"\
+      Message found is \" + self.output_bytes[len(self.sep)-1:a])\n            self.message_port_pub(pmt.intern(self.msgportname),pmt.intern(self.output_bytes[0:a]))\n\
+      \            if a == len(self.output_bytes)-1:\n                self.output_bytes\
+      \ = \"\"\n            else:\n                self.output_bytes = self.output_bytes[a+len(self.sep):]\n\
+      \            \n            \n        if self.dbug == 1:\n             print(\"\
+      Bytes found are: \" + self.output_bytes)\n#            print(\"Current byte\
+      \ is: \" + self.current_byte)\n#            print(\"Leftover Ocount is: \" +\
+      \ str(self.ocount))\n#            print(\"Leftover Zcount is: \" + str(self.zcount))\n\
+      \    \n        \n        # just output what we got in\n        output_items[0][:]\
+      \ = input_items[0]\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    dbug: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sep: '"</msg>"'
+    sps: int(samp_rate / symbol_rate)
+  states:
+    _io_cache: ('OOK Decoder', 'blk', [('sps', '768'), ('dbug', '0'), ('sep', "'</msg>'")],
+      [('0', 'float', 1)], [('0', 'float', 1), ('Message', 'message', 1)], 'Embedded
+      Python Block example - a simple multiply const', ['dbug', 'sep', 'sps'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 584.0]
+    rotation: 0
+    state: enabled
+- name: ook_demod_block
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach this file is saved, GRC\
+      \ will instantiate the first class it finds to get\nports and parameters of\
+      \ your block. The arguments to __init__  will be the\nparameters. All of them\
+      \ are required to have default values!\n\"\"\"\nimport time\nimport numpy as\
+      \ np\nfrom gnuradio import gr\n\nclass blk (gr.sync_block):\n    \"\"\"\n  \
+      \  Block to decode the data on an already squared signal, comprised of 0's and\
+      \ 1's.\n    \"\"\"\n\n    def __init__ (self\n                , symbol_rate\
+      \ = 600\n\t\t, sample_rate = 1e6\n\t\t, manchester_decoding = False\n      \
+      \          , sink_file = None):  # only default arguments here\n        \"\"\
+      \"\n        Constructor.\n\n        Args:\n            symbol_rate -> Rate of\
+      \ symbols\n\n            sample_rate -> Number of samples per second\n\n\t \
+      \   manchester_decoding -> Enable/disable manchester decoding\n\n          \
+      \  sink_file -> File to dump the packets. If it's 'None', prints them on STDOUT\n\
+      \        \"\"\"\n        gr.sync_block.__init__(\n            self,\n      \
+      \      name = 'OOK demod',\n            in_sig = [np.float32],\n           \
+      \ out_sig = []\n        )\n\n\t\t\tself.manchester_decoding = manchester_decoding\n\
+      \n\tself.sink_file = None\n\tif(sink_file != None):\n          self.sink_file\
+      \ = open(sink_file, \"a\")\n\n\t# amount of samples per symbol\n\tself.threshold\
+      \ = sample_rate / symbol_rate\n\t# amount of samples that can be wrong when\
+      \ counting the 1's and 0's\n\tself.error_threshold = self.threshold / 4\n\n\t\
+      self.packet = ''\n        self.count_1 = 0 # Counts consecutive 1's\n\tself.count_0\
+      \ = 0 # Counts consecutive 0's\n\tself.sample_1_complete = False\n\tself.sample_0_complete\
+      \ = False\n\n\n    def packet_found(self):\n\tself.packet += '0' # Last 0 of\
+      \ packet is never detected due to the bounded 0 count (in process_sample_0),\
+      \ so add manually\n\n\tif(self.manchester_decoding):\n\t  self.packet = self.manchester_decoder(self.packet)\n\
+      \n\tself.output_packet(self.packet)\n\tself.packet = ''\n\n   \n    def output_packet(self,\
+      \ output):\n\tif(self.sink_file):\n\t  self.sink_file.write(output + '\\n')\n\
+      \telse:\n\t  print(output)\n\n\n    def count_samples(self, sample1, sample2):\n\
+      \tif(sample1 == 1):\n\t  self.count_1 += 1\n\t  if(sample2 == 0):\n\t    self.sample_1_complete\
+      \ = True \n\telif(sample1 == 0):\n\t  self.count_0 += 1\n\t  if(sample2 == 1):\n\
+      \t    self.sample_0_complete = True \n\n\n    def process_sample_0(self):\n\t\
+      if(self.count_0 > self.threshold - self.error_threshold and self.count_0 < self.threshold\
+      \ + self.error_threshold):\n\t  self.packet += '0'\n\telif(self.count_0 > (self.threshold\
+      \ - self.error_threshold) * 2 and self.count_0 < (self.threshold + self.error_threshold)\
+      \ * 2):\n\t  self.packet += '00'\n\tself.count_0 = 0\n\tself.sample_0_complete\
+      \ = False\n\n\n    def process_sample_1(self):\n\tif(self.count_1 > self.threshold\
+      \ - self.error_threshold and self.count_1 < self.threshold + self.error_threshold):\n\
+      \t  self.packet += '1'\n\telif(self.count_1 > (self.threshold - self.error_threshold)\
+      \ * 2 and self.count_1 < (self.threshold + self.error_threshold) * 2):\n\t \
+      \ self.packet += '11'\n\tself.count_1 = 0\n\tself.sample_1_complete = False\n\
+      \n\n    def manchester_decoder(self, packet):\n\tdecode = ''\n\n        for\
+      \ i in range(0, len(packet) - 1, 2):\n\t  bits = packet[i] + packet[i + 1]\n\
+      \t  if(bits == '10'):\n\t    decode += '0'\n\t  elif(bits == '01'):\n\t    decode\
+      \ += '1'\n\t  else:\n\t    i -= 1\n\n\treturn decode\n\n\n\n    def work (self,\
+      \ input_items, *args, **kwargs):\n        samples = input_items[0]\n\t\n   \
+      \     signal_detected = np.where(samples == 1)[0]\n\n\tif(len(signal_detected)\
+      \ > 0):\n\t  for i in range(0, len(samples) - 1):\n\t    self.count_samples(samples[i],\
+      \ samples[i + 1])\n\t    if(self.sample_1_complete):\n\t      self.process_sample_1()\n\
+      \t    elif(self.sample_0_complete):\n\t      self.process_sample_0()\n\telif(len(samples)\
+      \ > 0 and len(self.packet) > 0):\n\t   self.packet_found()\n\n        return\
+      \ len(samples)\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ''
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 656.0]
+    rotation: 0
+    state: disabled
+- name: osmosdr_sink_0
+  id: osmosdr_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    ant0: ''
+    ant1: ''
+    ant10: ''
+    ant11: ''
+    ant12: ''
+    ant13: ''
+    ant14: ''
+    ant15: ''
+    ant16: ''
+    ant17: ''
+    ant18: ''
+    ant19: ''
+    ant2: ''
+    ant20: ''
+    ant21: ''
+    ant22: ''
+    ant23: ''
+    ant24: ''
+    ant25: ''
+    ant26: ''
+    ant27: ''
+    ant28: ''
+    ant29: ''
+    ant3: ''
+    ant30: ''
+    ant31: ''
+    ant4: ''
+    ant5: ''
+    ant6: ''
+    ant7: ''
+    ant8: ''
+    ant9: ''
+    args: ''
+    bb_gain0: '20'
+    bb_gain1: '20'
+    bb_gain10: '20'
+    bb_gain11: '20'
+    bb_gain12: '20'
+    bb_gain13: '20'
+    bb_gain14: '20'
+    bb_gain15: '20'
+    bb_gain16: '20'
+    bb_gain17: '20'
+    bb_gain18: '20'
+    bb_gain19: '20'
+    bb_gain2: '20'
+    bb_gain20: '20'
+    bb_gain21: '20'
+    bb_gain22: '20'
+    bb_gain23: '20'
+    bb_gain24: '20'
+    bb_gain25: '20'
+    bb_gain26: '20'
+    bb_gain27: '20'
+    bb_gain28: '20'
+    bb_gain29: '20'
+    bb_gain3: '20'
+    bb_gain30: '20'
+    bb_gain31: '20'
+    bb_gain4: '20'
+    bb_gain5: '20'
+    bb_gain6: '20'
+    bb_gain7: '20'
+    bb_gain8: '20'
+    bb_gain9: '20'
+    bw0: '0'
+    bw1: '0'
+    bw10: '0'
+    bw11: '0'
+    bw12: '0'
+    bw13: '0'
+    bw14: '0'
+    bw15: '0'
+    bw16: '0'
+    bw17: '0'
+    bw18: '0'
+    bw19: '0'
+    bw2: '0'
+    bw20: '0'
+    bw21: '0'
+    bw22: '0'
+    bw23: '0'
+    bw24: '0'
+    bw25: '0'
+    bw26: '0'
+    bw27: '0'
+    bw28: '0'
+    bw29: '0'
+    bw3: '0'
+    bw30: '0'
+    bw31: '0'
+    bw4: '0'
+    bw5: '0'
+    bw6: '0'
+    bw7: '0'
+    bw8: '0'
+    bw9: '0'
+    clock_source0: ''
+    clock_source1: ''
+    clock_source2: ''
+    clock_source3: ''
+    clock_source4: ''
+    clock_source5: ''
+    clock_source6: ''
+    clock_source7: ''
+    comment: ''
+    corr0: '0'
+    corr1: '0'
+    corr10: '0'
+    corr11: '0'
+    corr12: '0'
+    corr13: '0'
+    corr14: '0'
+    corr15: '0'
+    corr16: '0'
+    corr17: '0'
+    corr18: '0'
+    corr19: '0'
+    corr2: '0'
+    corr20: '0'
+    corr21: '0'
+    corr22: '0'
+    corr23: '0'
+    corr24: '0'
+    corr25: '0'
+    corr26: '0'
+    corr27: '0'
+    corr28: '0'
+    corr29: '0'
+    corr3: '0'
+    corr30: '0'
+    corr31: '0'
+    corr4: '0'
+    corr5: '0'
+    corr6: '0'
+    corr7: '0'
+    corr8: '0'
+    corr9: '0'
+    freq0: carrier_freq
+    freq1: 100e6
+    freq10: 100e6
+    freq11: 100e6
+    freq12: 100e6
+    freq13: 100e6
+    freq14: 100e6
+    freq15: 100e6
+    freq16: 100e6
+    freq17: 100e6
+    freq18: 100e6
+    freq19: 100e6
+    freq2: 100e6
+    freq20: 100e6
+    freq21: 100e6
+    freq22: 100e6
+    freq23: 100e6
+    freq24: 100e6
+    freq25: 100e6
+    freq26: 100e6
+    freq27: 100e6
+    freq28: 100e6
+    freq29: 100e6
+    freq3: 100e6
+    freq30: 100e6
+    freq31: 100e6
+    freq4: 100e6
+    freq5: 100e6
+    freq6: 100e6
+    freq7: 100e6
+    freq8: 100e6
+    freq9: 100e6
+    gain0: '10'
+    gain1: '10'
+    gain10: '10'
+    gain11: '10'
+    gain12: '10'
+    gain13: '10'
+    gain14: '10'
+    gain15: '10'
+    gain16: '10'
+    gain17: '10'
+    gain18: '10'
+    gain19: '10'
+    gain2: '10'
+    gain20: '10'
+    gain21: '10'
+    gain22: '10'
+    gain23: '10'
+    gain24: '10'
+    gain25: '10'
+    gain26: '10'
+    gain27: '10'
+    gain28: '10'
+    gain29: '10'
+    gain3: '10'
+    gain30: '10'
+    gain31: '10'
+    gain4: '10'
+    gain5: '10'
+    gain6: '10'
+    gain7: '10'
+    gain8: '10'
+    gain9: '10'
+    if_gain0: '20'
+    if_gain1: '20'
+    if_gain10: '20'
+    if_gain11: '20'
+    if_gain12: '20'
+    if_gain13: '20'
+    if_gain14: '20'
+    if_gain15: '20'
+    if_gain16: '20'
+    if_gain17: '20'
+    if_gain18: '20'
+    if_gain19: '20'
+    if_gain2: '20'
+    if_gain20: '20'
+    if_gain21: '20'
+    if_gain22: '20'
+    if_gain23: '20'
+    if_gain24: '20'
+    if_gain25: '20'
+    if_gain26: '20'
+    if_gain27: '20'
+    if_gain28: '20'
+    if_gain29: '20'
+    if_gain3: '20'
+    if_gain30: '20'
+    if_gain31: '20'
+    if_gain4: '20'
+    if_gain5: '20'
+    if_gain6: '20'
+    if_gain7: '20'
+    if_gain8: '20'
+    if_gain9: '20'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    num_mboards: '1'
+    sample_rate: samp_rate
+    sync: sync
+    time_source0: ''
+    time_source1: ''
+    time_source2: ''
+    time_source3: ''
+    time_source4: ''
+    time_source5: ''
+    time_source6: ''
+    time_source7: ''
+    type: fc32
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1216, 24.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"OOK TX"'
+    nconnections: '1'
+    size: '1024'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 208.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_time_sink_x_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"Demod"'
+    nconnections: '1'
+    size: '1024'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [944, 448.0]
+    rotation: 0
+    state: disabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: ookTx
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1312, 312.0]
+    rotation: 0
+    state: true
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: ookTx
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [56, 544.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
+- [band_pass_filter_0, '0', blocks_complex_to_mag_squared_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', blocks_threshold_ff_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_float_to_complex_0, '0', osmosdr_sink_0, '0']
+- [blocks_head_0, '0', blocks_unpack_k_bits_bb_0, '0']
+- [blocks_multiply_xx_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_multiply_xx_0, '0', virtual_sink_0, '0']
+- [blocks_null_source_0, '0', blocks_throttle_0, '0']
+- [blocks_repeat_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_threshold_ff_0, '0', epy_block_1_0, '0']
+- [blocks_threshold_ff_0, '0', qtgui_time_sink_x_0_0, '0']
+- [blocks_throttle_0, '0', blocks_null_sink_1, '0']
+- [blocks_uchar_to_float_0, '0', blocks_repeat_0, '0']
+- [blocks_unpack_k_bits_bb_0, '0', blocks_uchar_to_float_0, '0']
+- [blocks_vector_source_x_0, '0', blocks_head_0, '0']
+- [epy_block_1_0, '0', blocks_null_sink_0, '0']
+- [epy_block_1_0, Message, blocks_message_debug_0, print]
+- [virtual_source_0, '0', band_pass_filter_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.3.0

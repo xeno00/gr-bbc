@@ -1,0 +1,1277 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: bbc_ook
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 5]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: CODEWORD_LENGTH
+  id: variable
+  parameters:
+    comment: 'Must write as int
+
+      Subtract 3 from exponent
+
+      since in Bytes
+
+      131072 = 2**17
+
+      512 = 2**9'
+    value: '512'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 96.0]
+    rotation: 0
+    state: true
+- name: MESSAGE_LENGTH
+  id: variable
+  parameters:
+    comment: 'Must write as int
+
+      Subtract 3 from exponent
+
+      since in Bytes
+
+      128 = 2**7
+
+      8 = 2**3'
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 96.0]
+    rotation: 0
+    state: true
+- name: bits_per_pack
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 16.0]
+    rotation: 0
+    state: enabled
+- name: carrier_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 433.937e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 16.0]
+    rotation: 0
+    state: enabled
+- name: message1
+  id: variable
+  parameters:
+    comment: ''
+    value: '"HELLO WORLD! Welcome to BBC in GNURadio. This is a jam-resistant codec,
+      and we are sending messages, encoding them, and then try"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 16.0]
+    rotation: 0
+    state: enabled
+- name: packet
+  id: variable
+  parameters:
+    comment: ''
+    value: '"ZZOMBIES ATTACK!"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 16.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: 128e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 16.0]
+    rotation: 0
+    state: enabled
+- name: symbol_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: int (500)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 16.0]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: carrier_freq
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 368.0]
+    rotation: 180
+    state: true
+- name: band_pass_filter_0
+  id: band_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    decim: '1'
+    gain: '1'
+    high_cutoff_freq: 50e3
+    interp: '1'
+    low_cutoff_freq: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccc
+    width: 20e3
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 600.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 664.0]
+    rotation: 0
+    state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 288.0]
+    rotation: 180
+    state: enabled
+- name: blocks_head_0
+  id: blocks_head
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: int(len(packet)*1)
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 184.0]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    en_uvec: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 776.0]
+    rotation: 180
+    state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 304.0]
+    rotation: 180
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 552.0]
+    rotation: 180
+    state: enabled
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 104.0]
+    rotation: 0
+    state: true
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 104.0]
+    rotation: 0
+    state: true
+- name: blocks_repeat_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: int(samp_rate / symbol_rate)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 280.0]
+    rotation: 180
+    state: true
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: MESSAGE_LENGTH
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 192.0]
+    rotation: 0
+    state: true
+- name: blocks_threshold_ff_0
+  id: blocks_threshold_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    high: 1e-3
+    init: '0'
+    low: 1e-3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 640.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 96.0]
+    rotation: 0
+    state: true
+- name: blocks_uchar_to_float_0
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 288.0]
+    rotation: 180
+    state: enabled
+- name: blocks_unpack_k_bits_bb_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: bits_per_pack
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 280.0]
+    rotation: 180
+    state: enabled
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: byte
+    vector: '[ ord (x) for x in packet ]'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 168.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: CODEWORD_LENGTH
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 192.0]
+    rotation: 0
+    state: true
+- name: channels_channel_model_0
+  id: channels_channel_model
+  parameters:
+    affinity: ''
+    alias: ''
+    block_tags: 'False'
+    comment: ''
+    epsilon: '1.0'
+    freq_offset: '0.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_voltage: '0.'
+    seed: '0'
+    taps: 1.0 + 1.0j
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 416.0]
+    rotation: 180
+    state: true
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport pmt\n\n\nclass blk(gr.sync_block):  # other\
+      \ base classes are basic_block, decim_block, interp_block\n    \"\"\"Embedded\
+      \ Python Block example - a simple multiply const\"\"\"\n\n    def __init__(self,\
+      \ sps=768, clen=2 ** 17, dbug=0):  # only default arguments here\n        \"\
+      \"\"arguments to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='OOK Decoder',  # will show up in GRC\n\
+      \            in_sig=[np.float32],\n            out_sig=[np.float32]#, (np.byte,\
+      \ int(8))] # save bytes output for later\n            #out_sig=None\n      \
+      \  )\n        # if an attribute with the same name as a parameter is found,\n\
+      \        # a callback is registered (properties work, too).\n        self.sps\
+      \ = sps\n        self.dbug = dbug\n        self.clen = clen * 8  # to bits from\
+      \ bytes, if using the string method\n        self.zcount = 0\n        self.ocount\
+      \ = 0\n        self.prev_samp = 0\n        self.current_byte = ''  # will be\
+      \  string representing bits received\n        self.output_bytes = bytearray()\
+      \  # will be the output bytes\n        self.output_bytes_string = ''\n     \
+      \   self.spstol = (np.ceil(0.75 * self.sps))\n        self.msgportname = \"\
+      Message\"\n        self.message_port_register_out(pmt.intern(self.msgportname))\n\
+      \        self.cwb = 0\n\n    def work(self, input_items, output_items):\n  \
+      \      data = input_items[0]\n        if self.dbug == 1:\n            print(\"\
+      Received Data of size \" + str(len(data)))\n        i = 0  # loop counter\n\
+      \        # main loop\n        for samp in data:\n            i += 1\n      \
+      \      if samp != self.prev_samp:  # if the sample value has changed\n     \
+      \           if (self.ocount >= self.spstol) or (self.zcount >= self.spstol):\n\
+      \                    self.declarebit(int(self.prev_samp))  # will update self.current_byte\n\
+      \                    self.ocount = 0  # reset the counters\n               \
+      \     self.zcount = 0\n\n            if samp == 1:\n                self.ocount\
+      \ += 1\n            elif samp == 0:\n                self.zcount += 1\n    \
+      \        else:\n                print(\"incorrect value for sample on index\
+      \ \" + str(i))\n\n            self.prev_samp = samp  # store the previous sample\n\
+      \n            while len(self.current_byte) >= 8:\n                self.cwb +=\
+      \ 1\n                ## for some reason, this one doesn't work...\n        \
+      \        # self.output_bytes = self.output_bytes + bytearray(chr(int(self.current_byte[0:8],2)),'utf-8')\
+      \ # output_bytes are bytes\n                self.output_bytes_string = self.output_bytes_string\
+      \ + self.current_byte[0:8]  # output_bytes is a string\n                self.current_byte\
+      \ = self.current_byte[8:]\n                # self.message_port_pub(pmt.intern(self.msgportname),\
+      \ pmt.intern(self.current_byte[0:8])) # debugging\n                if self.dbug\
+      \ == 1:\n                    print(\"Found \" + str(self.cwb) + \" bytes so\
+      \ far.\")\n                    # print(self.current_byte[0:8]) # only get the\
+      \ first 8 bits\n                    print(\"len of output_bytes is \" + str(len(self.output_bytes_string)))\n\
+      \n        ## if we're at the end and have bits in current_byte, then, add them\
+      \ to output_byte_string\n        if (self.ocount >= self.spstol) and (len(self.current_byte)\
+      \ == 7) and (len(self.output_bytes_string) <= self.clen):\n            # this\
+      \ might just be a dirty hack for now, need to figure out a better way to check\
+      \ if there's a partial\n            ## byte and ocount is high enough\n    \
+      \        self.declarebit(int(1)) # will update self.current_byte\n         \
+      \   self.output_bytes_string = self.output_bytes_string + self.current_byte[0:8]\
+      \  # output_bytes is a string\n            self.current_byte = ''\n        \
+      \    self.ocount = 0\n\n        # now we can see if we have a codeword to output\n\
+      \        if len(self.output_bytes_string) >= self.clen:\n            if self.dbug\
+      \ == 1:\n                print(\"Found a codeword\")\n                print(\"\
+      current_byte is \" + str(self.current_byte))\n                print(\"Bytes\
+      \ found are: \" + str(self.output_bytes_string))\n            # import pdb\n\
+      \            # pdb.set_trace()\n            # output the codeword\n        \
+      \    # need to break up the codeword into byte-sized chunks and transmit them\n\
+      \            #for k in range(1,int((self.clen/8) + 1)):\n            for k in\
+      \ range(0, int((self.clen / 8) )):\n                bytes_to_send = self.output_bytes_string[self.clen-(k*8):self.clen-((k-1)*8)]\n\
+      \                bytes_to_send = self.output_bytes_string[k*8:(k+1)*8]\n   \
+      \             self.message_port_pub(pmt.intern(self.msgportname), pmt.intern(bytes_to_send))\n\
+      \n            ## what a one-liner, converts to bytearray: https://stackoverflow.com/questions/32675679/convert-binary-string-to-bytearray-in-python-3\n\
+      \            ## save the bytes output for later\n            #self.output_bytes\
+      \ = bytearray(int(self.output_bytes_string[:int(self.clen/8)], 2).to_bytes(int((self.clen/8)\
+      \ + 7) // 8, 'big'))\n            #output_items[1][:] =  bytearray(self.output_bytes[:int(self.clen/8)])\
+      \ # only output 1 codeword at a time\n            #self.message_port_pub(pmt.intern(self.msgportname),\
+      \ pmt.intern(str(self.output_bytes[:int(self.clen / 8)]))) #send bytearray as\
+      \ pmt\n            #self.message_port_pub(pmt.intern(self.msgportname), pmt.intern(self.output_bytes_string[:int(self.clen)]))\
+      \ # send the bytes as a s\n            self.output_bytes_string = self.output_bytes_string[self.clen:]\
+      \  # pare the string\n        else:\n            if self.dbug == 1:\n      \
+      \          print(\"No codeword yet\")\n        if self.dbug == 1:\n        \
+      \    print(\"Current byte is: \" + self.current_byte)\n            print(\"\
+      Leftover Ocount is: \" + str(self.ocount))\n            print(\"Leftover Zcount\
+      \ is: \" + str(self.zcount))\n\n        ## just output what we got in\n    \
+      \    output_items[0][:] = input_items[0]\n        return len(output_items[0])\n\
+      \n    def declarebit(self, bitval: int):\n        if bitval == 1:\n        \
+      \    cnt = self.ocount\n        else:\n            cnt = self.zcount\n     \
+      \   [bits, bmod] = np.divmod(cnt, self.sps)  # the floor\n        if bmod >=\
+      \ self.spstol:  # if the modulus is more than required for a bit, add another\
+      \ bit\n            bits += 1  # see if we have enough samples left over to declare\
+      \ a bit\n        self.current_byte = self.current_byte + (str(bitval) * int(bits))\
+      \  # JAMES\n"
+    affinity: ''
+    alias: ''
+    clen: CODEWORD_LENGTH
+    comment: ''
+    dbug: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sps: int(samp_rate / symbol_rate)
+  states:
+    _io_cache: ('OOK Decoder', 'blk', [('sps', '768'), ('clen', '131072'), ('dbug',
+      '0')], [('0', 'float', 1)], [('0', 'float', 1), ('Message', 'message', 1)],
+      'Embedded Python Block example - a simple multiply const', ['clen', 'dbug',
+      'sps'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [848, 640.0]
+    rotation: 0
+    state: enabled
+- name: epy_block_0_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nD E C O D E R\n\"\"\"\n#import sys    #sys.setrecursionlimit((msg_len+1)*8)\
+      \    after gr.sync_block.__init__()\nimport numpy as np\nfrom gnuradio import\
+      \ gr\nfrom gnuradio import grc\nfrom math import ceil\nimport inspect\nimport\
+      \ pmt\n#import pytictoc\n\nDEFAULT_CHECKSUM = 0\n#TODO: REMOVE FIRST HANDLING\
+      \ TO MAKE VERSATILE\nglobal first\nfirst = True\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, dbug=0, msg_len=2**7,cod_len=2**17): #If there is an\
+      \ error, change default here:\n        #msg_len = get_top_variable(\"MESSAGE_LENGTH\"\
+      , default=2**0)\n        #cod_len = get_top_variable(\"CODEWORD_LENGTH\", default=2**3)\n\
+      \n        gr.sync_block.__init__(self,\n            name='BBC Decoder',\n  \
+      \          #in_sig=[(np.byte,  cod_len if isinstance(cod_len, int) else int(cod_len))],\n\
+      \            #out_sig=[(np.byte, msg_len if isinstance(msg_len, int) else int(msg_len))]\n\
+      \            in_sig=None,\n            out_sig=None\n        )\n        # Convert\
+      \ from Bytes to bits\n        # self.tr = TicToc()\n        # self.td = TicToc()\n\
+      \        self.msg_len = msg_len  # bytes\n        self.cod_len = cod_len # bytes\n\
+      \        self.dbug = dbug\n        self.portNameOut = \"msgOutput\"\n      \
+      \  self.portNameIn = \"msgInput\"\n        self.message_port_register_in(pmt.intern(self.portNameIn))\n\
+      \        self.set_msg_handler(pmt.intern(self.portNameIn),self.handle_msg)\n\
+      \        self.message_port_register_out(pmt.intern(self.portNameOut))\n    \
+      \    self.myDecoder = Decoder(msg_len*8, cod_len*8, DEFAULT_CHECKSUM) # Bytes\
+      \ to bits\n        self.codeword = b''\n        #sys.setrecursionlimit((msg_len+1)*8)\n\
+      \n    # Use BBC to decode the incoming codeword vectors\n    def work(self,\
+      \ input_items, output_items):\n        pass\n\n    def handle_msg(self,msg):\n\
+      \n        # len(self.codeword) < self.cod_len:\n        msg = pmt.symbol_to_string(msg)\
+      \ # convert to a string\n        if self.dbug == 1:\n            print(\"Received\
+      \ Message: \" + msg)\n        self.codeword = self.codeword + bytearray(int(msg,\
+      \ 2).to_bytes(1, 'big'))\n        if self.dbug == 1:\n            print(\"Codeword\
+      \ so far is \" + str(self.codeword))\n        if len(self.codeword) == self.cod_len:\n\
+      \            #self.td.tic()\n            self.decode_and_output()\n        \
+      \    #self.td.toc(\"Decode\")\n        # else:\n        #     self.decode_and_output()\
+      \ # don't think we'll ever get here\n            # import pdb\n            #\
+      \ pdb.set_trace()\n\n    def decode_and_output(self):\n        #result = self.myDecoder.decode(input_items[0][:][:][0])\n\
+      \        result = self.myDecoder.decode(self.codeword)\n        try:\n     \
+      \       xtemp = [b'']\n            #i=0\n            for x in result:\n    \
+      \            #print(x) # works\n                #xtemp[0] = xtemp[0] + b'\\\
+      n' + bytearray(x) # works\n                PMT_msg = pmt.intern(x.decode('utf-8'\
+      \ + \"\\n\")) # works\n                self.message_port_pub(pmt.intern(self.portNameOut),PMT_msg)\
+      \ # works\n            #output_items[0][:] = xtemp[0]  # works\n           \
+      \ if self.dbug == 1:\n                print(\"Messages found\")\n          \
+      \      #print(output_items[0][:].decode())\n            #output_items[0] = input_items[0]\
+      \ # for pass through\n            #return len(output_items[0]) # GR probably\
+      \ needs this\n        except:\n            print(\"Error in parsing output message,\
+      \ probably a hallucination.\")\n            #print(\"DEBUG decoder line 33:\
+      \ output typing failed.\\n\")\n            #print(\"Type of decoder result:\
+      \ \", type(bytearray(result)))\n            #print(\"Type of stream: \", type(self.out_sig))\n\
+      \n###############################################################################\n\
+      class Decoder:\n    def __init__(self, MSG_LEN, COD_LEN, CHK_LEN = 0):\n   \
+      \     self.message_list = []\n        self.num_checksum = DEFAULT_CHECKSUM\n\
+      \        self.shift_register = self.init_shift_register()\n        self.MSG_LEN\
+      \ = MSG_LEN\n        self.COD_LEN = COD_LEN\n        self.CHK_LEN = CHK_LEN\
+      \ #Is added to MSG_LEN, not subtracted from\n        self.n = 0\n\n    def init_shift_register(self):\n\
+      \        shift_register = [0 for i in range(32)]\n        init(shift_register)\n\
+      \        return (shift_register)\n\n    #DECODE ITERATIVELY\n    #Note that\
+      \   D[n]   is the same as    memoryview(message)[int((self.n - self.n%8)/8)]\n\
+      \    def decode(self, packet):\n        # Initialize variables\n        self.message_list\
+      \ = []\n        message = bytearray(ceil((self.MSG_LEN + self.CHK_LEN)/8)) \
+      \     #Bits to Bytes\n        #memoryview(message)[int((self.n - self.n%8)/8)]\
+      \ = 1         # TODO: debug initialization for D[n]\n        \n        global\
+      \ first\n        while first and True:\n            # Check for mark corresponding\
+      \ to encoding D[n], beginning with a 0\n            prop_bit = (memoryview(message)[int((self.n\
+      \ - self.n%8)/8)]>>(self.n%8)) & 0b1      # Find the proposed bit from previous\
+      \ execution, aka D[n]\n            val = (add_bit(prop_bit, self.shift_register)\
+      \ % (self.COD_LEN))                  # Mark location from glowworm\n       \
+      \     bit = (memoryview(packet)[int((val-val%8)/8)]>>(val%8)) & 0b1        \
+      \               # Logical AND to determine if present in packet/codeword\n\n\
+      \            # If the mark is present... explore\n            if bit==1:\n \
+      \               # message is complete, write to buffer\n                if self.n\
+      \ == (self.MSG_LEN + self.CHK_LEN - 1):\n                    #print(message)\n\
+      \                    self.message_list.append(bytes(memoryview(message)[0:self.MSG_LEN\
+      \ - 1 - self.num_checksum]))\n                    bit = 0\n                \
+      \    #TODO: Flow control statement?\n                    \n                #\
+      \ message is incomplete, continue assuming next bit is 0\n                elif\
+      \ self.n < (self.MSG_LEN + self.CHK_LEN - 1):\n                    self.n +=\
+      \ 1\n                    memoryview(message)[int((self.n - self.n%8)/8)] &=\
+      \ (0xff ^ (1<<self.n%8))\n                    continue\n                # In\
+      \ case something bad happens\n                else:\n                    raise\
+      \ Exception(\"107: Message completion led to over-indexing\")\n\n\n        \
+      \    # If the mark is not present... backtrace\n            # Settle on an earlier\
+      \ 0 to change it to a 1 and pursue that tree\n            if bit!=1:\n     \
+      \           # delete checksum bits\n                while self.n >= self.MSG_LEN:\
+      \ \n                    del_bit(0, self.shift_register)\n                  \
+      \  self.n -= 1\n                    \n                # delete 1's until a 0\
+      \ is encountered\n                while self.n >=0 and (((memoryview(message)[int((self.n\
+      \ - self.n%8)/8)]>>(self.n%8)) & 0b1 )==1):\n                    del_bit(1,\
+      \ self.shift_register)\n                    memoryview(message)[int((self.n\
+      \ - self.n%8)/8)] &= (0xff ^ (1<<self.n%8))\n                    self.n -= 1\n\
+      \                        \n                if self.n < 0: #Packet is fully decoded\n\
+      \                    print(\"Packet is fully decoded. Still need to mplement\
+      \ multiple messages in GRC (decoder)\")\n                    break #proceed\
+      \ with next packet\n\n                else: # Move over to the 1 branch of current\
+      \ search\n                    del_bit(0, self.shift_register)\n            \
+      \        memoryview(message)[int((self.n - self.n%8)/8)] |= (1<<self.n%8)\n\
+      \        first = False\n        #for x in self.message_list:\n            #print(x)\n\
+      \        #print(self.message_list)\n        return self.message_list\n\n###############################################################################\n\
+      MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
+      \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
+      \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
+      \ on left shift     \n    t = (t ^ (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)) & MAX_VAL\n\
+      \    n += 1                           \n    s[n % 32] ^= (t&MAX_VAL)  #s[(n)\
+      \ % 32] ^= t, modified to reflect n change\n    return s[n % 32]    #return\
+      \ s[(n) % 32], modified to reflect n change                      \n\ndef del_bit(b,\
+      \ s):\n    global n\n    n -= 1\n    add_bit(b,s), \n    n -= 1\n    return\
+      \ s[n % 32]\n    \ndef init(s):\n    global n\n    n = 0\n    h = 1\n    for\
+      \ i in range(32):\n        s[i]=0\n    for i in range(4096):\n        h=add_bit(h&1,\
+      \ s)\n    n = 0    \n\n##############################################################################\n\
+      \ndef get_top_variable(variable_name=\"\", default=None):\n    '''\n    Returns\
+      \ the value of a variable from the flow graph.\n    '''\n    ## Run Condition:\
+      \ GNURadio is starting the flowgraph, resulting output comes from here when\
+      \ working\n    top = inspect.currentframe().f_back.f_back.f_locals\n    try:\n\
+      \        # Check if top has the variable name we're looking for\n        if\
+      \ top.__contains__(variable_name):\n            #print(f\"[Block Debug 1] While\
+      \ starting, I found top variable \\'{variable_name}\\': type={type(top[variable_name])},\
+      \ value={top[variable_name]}\")\n            return top[variable_name]\n   \
+      \ finally:\n        del top\n\n    ## Run Condition: Saving the flowgraph, necessary\
+      \ when default case isnt correct. Removed return to fix error\n    top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals\n\
+      \    try:\n        # Make sure top has 'self'\n        if top.__contains__(\"\
+      self\") and \\\n                (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph))\
+      \ and \\\n                (hasattr(top['self'], 'blocks')):\n\n            #\
+      \ Get a list of all blocks\n            block_names = [block.name for block\
+      \ in top['self'].blocks]\n\n            # Find the index to the variable we\
+      \ need\n            block_index = block_names.index(variable_name)\n\n     \
+      \       # Return result\n            result = top[\"self\"].blocks[block_index].params['value'].value\n\
+      \            print(result)\n            #print(f\"[Block Debug 2] While modifying\
+      \ the flowgraph, I found top variable \\'{variable_name}\\': type={type(result)},\
+      \ value={result}\")\n            #return result\n\n    finally:\n        del\
+      \ top\n\n    print(\"returining default vaule\")\n    return default"
+    affinity: ''
+    alias: ''
+    cod_len: CODEWORD_LENGTH
+    comment: ''
+    dbug: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg_len: MESSAGE_LENGTH
+  states:
+    _io_cache: ('BBC Decoder', 'blk', [('dbug', '0'), ('msg_len', '128'), ('cod_len',
+      '131072')], [('msgInput', 'message', 1)], [('msgOutput', 'message', 1)], '',
+      ['cod_len', 'dbug', 'msg_len'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 792.0]
+    rotation: 180
+    state: enabled
+- name: epy_block_2_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nE N C O D E R\n\"\"\"\n#import sys\nimport numpy as np\n\
+      from gnuradio import gr\nfrom gnuradio import grc\nimport inspect\nDEFAULT_CHECKSUM\
+      \ = 0\n\n\n\n\nclass blk(gr.sync_block):\n    \n    def __init__(self, dbug=0):\n\
+      \        msg_len = get_top_variable(\"MESSAGE_LENGTH\", default=2**7)\n    \
+      \    cod_len = get_top_variable(\"CODEWORD_LENGTH\", default=2**17)\n      \
+      \  \n        gr.sync_block.__init__(self,\n            name='BBC Encoder',\n\
+      \            in_sig=[(np.byte,  msg_len if isinstance(msg_len, int) else int(msg_len))],\
+      \    \n            out_sig=[(np.byte, cod_len if isinstance(cod_len, int) else\
+      \ int(cod_len))]\n        )\n        # Convert from Bytes to bits\n        self.myEncoder\
+      \ = Encoder(msg_len*8, cod_len*8)\n        self.dbug = dbug\n    \n    # Use\
+      \ BBC to encode the incoming message vectors\n    def work(self, input_items,\
+      \ output_items):\n        result = self.myEncoder.encode(input_items[0][:][:])\n\
+      \        result[-1] = result[-1] | 1 # make the last bit 1, for the ook decoder...\n\
+      \        try:\n            if self.dbug == 1:\n                cw = format(int.from_bytes(result,byteorder=\"\
+      little\"),'08b')\n                zpad = '0'*(8-(len(cw)%8))\n             \
+      \   cw = zpad + cw\n                print(\"Codeword is: \" + str(result))\n\
+      \                print(\"Codeword in binary is: \")\n                while len(cw)\
+      \ >=8:\n                    print(cw[len(cw)-8:len(cw)])\n                 \
+      \   cw = cw[0:len(cw)-8]\n            output_items[0][:][:] = result\n     \
+      \       return len(output_items[0])\n        except:\n            #print(\"\
+      DEBUG encoder line 31: output typing failed.\\n\")\n            #print(\"Type\
+      \ of encoder result: \", type(result))\n            #print(\"Type of stream:\
+      \ \", type(self.out_sig))\n            print(\"Error while encoding\")\n###############################################################################\n\
+      class Encoder:\n    def __init__(self, msg_len, cod_len):\n        self.shift_register\
+      \ = self.init_shift_register()\n        self.msg_len = msg_len\n        self.cod_len\
+      \ = cod_len\n\n    def init_shift_register(self):\n        shift_register =\
+      \ [0 for i in range(32)]\n        init(shift_register)\n        return (shift_register)\n\
+      \n    def parse_input(self, my_input):\n        message = bytearray(my_input.tobytes())\n\
+      \        #TODO: add error exception for wrong sized input vector\n        return\
+      \ message\n\n    def encode(self, input):\n        message = self.parse_input(input)\n\
+      \        codeword = bytearray(int(self.cod_len/8))\n        \n        for i\
+      \ in range(self.msg_len):\n            element = memoryview(message)[int((i-i%8)/8)]\n\
+      \            bit = ((element) >> (i%8)) & 0b1\n            mark_loc = add_bit(bit,\
+      \ self.shift_register) % self.cod_len\n            memoryview(codeword)[int((mark_loc-mark_loc%8)/8)]\
+      \ |= (1<<(mark_loc%8))\n            # TODO: add + vs | change to python library\n\
+      \        return(codeword)\n        \n ##############################################################################\n\
+      MAX_VAL = 0xffffffffffffffff\nglobal n\nn = 0       \ndef add_bit(b, s):\n \
+      \   global n\n    t = (s[n % 32]^(0xffffffff if b else 0)) &MAX_VAL\n    t =\
+      \ ((t|(t>>1)) ^ ((t<<1)&MAX_VAL))&MAX_VAL     # Have to enforce 64 bit condition\
+      \ on left shift     \n    t = (t ^ (t>>4) ^ (t>>8) ^ (t>>16) ^ (t>>32)) & MAX_VAL\n\
+      \    n += 1                           \n    s[n % 32] ^= (t&MAX_VAL)  #s[(n)\
+      \ % 32] ^= t, modified to reflect n change\n    return s[n % 32]        #return\
+      \ s[(n) % 32], modified to reflect n change                      \n\ndef del_bit(b,\
+      \ s):\n    global n\n    n -= 1\n    add_bit(b,s), \n    n -= 1\n    return\
+      \ s[n % 32]\n    \ndef init(s):\n    global n\n    n = 0\n    h = 1\n    for\
+      \ i in range(32):\n        s[i]=0\n    for i in range(4096):\n        h=add_bit(h&1,\
+      \ s)\n    n = 0    \n###############################################################################\n\
+      \ndef get_top_variable(variable_name=\"\", default=None):\n    '''\n    Returns\
+      \ the value of a variable from the flow graph.\n    '''\n    ## Run Condition:\
+      \ GNURadio is starting the flowgraph, resulting output comes from here when\
+      \ working\n    top = inspect.currentframe().f_back.f_back.f_locals\n    try:\n\
+      \        # Check if top has the variable name we're looking for\n        if\
+      \ top.__contains__(variable_name):\n            #print(f\"[Block Debug 1] While\
+      \ starting, I found top variable \\'{variable_name}\\': type={type(top[variable_name])},\
+      \ value={top[variable_name]}\")\n            return top[variable_name]\n   \
+      \ finally:\n        del top\n\n    ## Run Condition: Saving the flowgraph, necessary\
+      \ when default case isnt correct\n    top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals\n\
+      \    try:\n        # Make sure top has 'self'\n        if top.__contains__(\"\
+      self\") and \\\n                (isinstance(top['self'], grc.gui.canvas.flowgraph.FlowGraph))\
+      \ and \\\n                (hasattr(top['self'], 'blocks')):\n\n            #\
+      \ Get a list of all blocks\n            block_names = [block.name for block\
+      \ in top['self'].blocks]\n\n            # Find the index to the variable we\
+      \ need\n            block_index = block_names.index(variable_name)\n       \
+      \     \n            # Return result\n            result = top['self'].blocks[block_index].params['value'].value\n\
+      \            print(f\"[Block Debug 2] While modifying the flowgraph, I found\
+      \ top variable \\'{variable_name}\\': type={type(result)}, value={result}\"\
+      )\n            return result\n\n    finally:\n        del top\n\n    print(\"\
+      returining default vaule\")\n    return default"
+    affinity: ''
+    alias: ''
+    comment: 'BBC Requires vectors
+
+      for operation'
+    dbug: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('BBC Encoder', 'blk', [('dbug', '0')], [('0', 'byte', 16)], [('0',
+      'byte', 512)], '', ['dbug'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 184.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import pytictoc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 104.0]
+    rotation: 0
+    state: disabled
+- name: osmosdr_sink_0
+  id: osmosdr_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    ant0: ''
+    ant1: ''
+    ant10: ''
+    ant11: ''
+    ant12: ''
+    ant13: ''
+    ant14: ''
+    ant15: ''
+    ant16: ''
+    ant17: ''
+    ant18: ''
+    ant19: ''
+    ant2: ''
+    ant20: ''
+    ant21: ''
+    ant22: ''
+    ant23: ''
+    ant24: ''
+    ant25: ''
+    ant26: ''
+    ant27: ''
+    ant28: ''
+    ant29: ''
+    ant3: ''
+    ant30: ''
+    ant31: ''
+    ant4: ''
+    ant5: ''
+    ant6: ''
+    ant7: ''
+    ant8: ''
+    ant9: ''
+    args: ''
+    bb_gain0: '20'
+    bb_gain1: '20'
+    bb_gain10: '20'
+    bb_gain11: '20'
+    bb_gain12: '20'
+    bb_gain13: '20'
+    bb_gain14: '20'
+    bb_gain15: '20'
+    bb_gain16: '20'
+    bb_gain17: '20'
+    bb_gain18: '20'
+    bb_gain19: '20'
+    bb_gain2: '20'
+    bb_gain20: '20'
+    bb_gain21: '20'
+    bb_gain22: '20'
+    bb_gain23: '20'
+    bb_gain24: '20'
+    bb_gain25: '20'
+    bb_gain26: '20'
+    bb_gain27: '20'
+    bb_gain28: '20'
+    bb_gain29: '20'
+    bb_gain3: '20'
+    bb_gain30: '20'
+    bb_gain31: '20'
+    bb_gain4: '20'
+    bb_gain5: '20'
+    bb_gain6: '20'
+    bb_gain7: '20'
+    bb_gain8: '20'
+    bb_gain9: '20'
+    bw0: '0'
+    bw1: '0'
+    bw10: '0'
+    bw11: '0'
+    bw12: '0'
+    bw13: '0'
+    bw14: '0'
+    bw15: '0'
+    bw16: '0'
+    bw17: '0'
+    bw18: '0'
+    bw19: '0'
+    bw2: '0'
+    bw20: '0'
+    bw21: '0'
+    bw22: '0'
+    bw23: '0'
+    bw24: '0'
+    bw25: '0'
+    bw26: '0'
+    bw27: '0'
+    bw28: '0'
+    bw29: '0'
+    bw3: '0'
+    bw30: '0'
+    bw31: '0'
+    bw4: '0'
+    bw5: '0'
+    bw6: '0'
+    bw7: '0'
+    bw8: '0'
+    bw9: '0'
+    clock_source0: ''
+    clock_source1: ''
+    clock_source2: ''
+    clock_source3: ''
+    clock_source4: ''
+    clock_source5: ''
+    clock_source6: ''
+    clock_source7: ''
+    comment: ''
+    corr0: '0'
+    corr1: '0'
+    corr10: '0'
+    corr11: '0'
+    corr12: '0'
+    corr13: '0'
+    corr14: '0'
+    corr15: '0'
+    corr16: '0'
+    corr17: '0'
+    corr18: '0'
+    corr19: '0'
+    corr2: '0'
+    corr20: '0'
+    corr21: '0'
+    corr22: '0'
+    corr23: '0'
+    corr24: '0'
+    corr25: '0'
+    corr26: '0'
+    corr27: '0'
+    corr28: '0'
+    corr29: '0'
+    corr3: '0'
+    corr30: '0'
+    corr31: '0'
+    corr4: '0'
+    corr5: '0'
+    corr6: '0'
+    corr7: '0'
+    corr8: '0'
+    corr9: '0'
+    freq0: carrier_freq
+    freq1: 100e6
+    freq10: 100e6
+    freq11: 100e6
+    freq12: 100e6
+    freq13: 100e6
+    freq14: 100e6
+    freq15: 100e6
+    freq16: 100e6
+    freq17: 100e6
+    freq18: 100e6
+    freq19: 100e6
+    freq2: 100e6
+    freq20: 100e6
+    freq21: 100e6
+    freq22: 100e6
+    freq23: 100e6
+    freq24: 100e6
+    freq25: 100e6
+    freq26: 100e6
+    freq27: 100e6
+    freq28: 100e6
+    freq29: 100e6
+    freq3: 100e6
+    freq30: 100e6
+    freq31: 100e6
+    freq4: 100e6
+    freq5: 100e6
+    freq6: 100e6
+    freq7: 100e6
+    freq8: 100e6
+    freq9: 100e6
+    gain0: '10'
+    gain1: '10'
+    gain10: '10'
+    gain11: '10'
+    gain12: '10'
+    gain13: '10'
+    gain14: '10'
+    gain15: '10'
+    gain16: '10'
+    gain17: '10'
+    gain18: '10'
+    gain19: '10'
+    gain2: '10'
+    gain20: '10'
+    gain21: '10'
+    gain22: '10'
+    gain23: '10'
+    gain24: '10'
+    gain25: '10'
+    gain26: '10'
+    gain27: '10'
+    gain28: '10'
+    gain29: '10'
+    gain3: '10'
+    gain30: '10'
+    gain31: '10'
+    gain4: '10'
+    gain5: '10'
+    gain6: '10'
+    gain7: '10'
+    gain8: '10'
+    gain9: '10'
+    if_gain0: '20'
+    if_gain1: '20'
+    if_gain10: '20'
+    if_gain11: '20'
+    if_gain12: '20'
+    if_gain13: '20'
+    if_gain14: '20'
+    if_gain15: '20'
+    if_gain16: '20'
+    if_gain17: '20'
+    if_gain18: '20'
+    if_gain19: '20'
+    if_gain2: '20'
+    if_gain20: '20'
+    if_gain21: '20'
+    if_gain22: '20'
+    if_gain23: '20'
+    if_gain24: '20'
+    if_gain25: '20'
+    if_gain26: '20'
+    if_gain27: '20'
+    if_gain28: '20'
+    if_gain29: '20'
+    if_gain3: '20'
+    if_gain30: '20'
+    if_gain31: '20'
+    if_gain4: '20'
+    if_gain5: '20'
+    if_gain6: '20'
+    if_gain7: '20'
+    if_gain8: '20'
+    if_gain9: '20'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    num_mboards: '1'
+    sample_rate: samp_rate
+    sync: sync
+    time_source0: ''
+    time_source1: ''
+    time_source2: ''
+    time_source3: ''
+    time_source4: ''
+    time_source5: ''
+    time_source6: ''
+    time_source7: ''
+    type: fc32
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1360, 24.0]
+    rotation: 0
+    state: disabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"OOK TX"'
+    nconnections: '1'
+    size: '1024'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 208.0]
+    rotation: 0
+    state: disabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: ookTx
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 312.0]
+    rotation: 180
+    state: true
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: ookTx
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 656.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_push_sink_0
+  id: zeromq_push_sink
+  parameters:
+    address: '"tcp://127.0.0.1:5557"'
+    affinity: ''
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: CODEWORD_LENGTH
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1288, 544.0]
+    rotation: 0
+    state: disabled
+
+connections:
+- [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
+- [band_pass_filter_0, '0', blocks_complex_to_mag_squared_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', blocks_threshold_ff_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_float_to_complex_0, '0', osmosdr_sink_0, '0']
+- [blocks_head_0, '0', blocks_stream_to_vector_0, '0']
+- [blocks_multiply_xx_0, '0', channels_channel_model_0, '0']
+- [blocks_multiply_xx_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_null_source_0, '0', blocks_throttle_0, '0']
+- [blocks_repeat_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_stream_to_vector_0, '0', epy_block_2_0, '0']
+- [blocks_threshold_ff_0, '0', epy_block_0, '0']
+- [blocks_throttle_0, '0', blocks_null_sink_1, '0']
+- [blocks_uchar_to_float_0, '0', blocks_repeat_0, '0']
+- [blocks_unpack_k_bits_bb_0, '0', blocks_uchar_to_float_0, '0']
+- [blocks_vector_source_x_0, '0', blocks_head_0, '0']
+- [blocks_vector_to_stream_0, '0', blocks_unpack_k_bits_bb_0, '0']
+- [channels_channel_model_0, '0', virtual_sink_0, '0']
+- [epy_block_0, '0', blocks_null_sink_0, '0']
+- [epy_block_0, Message, epy_block_0_0, msgInput]
+- [epy_block_0_0, msgOutput, blocks_message_debug_0, print]
+- [epy_block_2_0, '0', blocks_vector_to_stream_0, '0']
+- [virtual_source_0, '0', band_pass_filter_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.3.0
