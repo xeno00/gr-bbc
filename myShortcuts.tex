@@ -1,0 +1,813 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\db}{\text{ dB }}
+\newcommand{\dbw}{\text{ dBW }}
+\newcommand{\dbsm}{\text{ dBsm }}
+\newcommand{\dbm}{\text{ dBm }}
+\newcommand{\dbmeter}{\text{ dB (meter) }}
+\newcommand{\dbhz}{\text{ dB (Hz)}}
+\newcommand{\dbi}{\text{ dBi }}
+\newcommand{\mylog}[1]{\ensuremath{\text{log}_{10}\lp#1\rp}}
+\newcommand{\equals}{=}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}} % Quick align environment
+\newcommand{\eqn}[1]{\begin{align}#1\end{align}} % Quick align environment
+\newcommand{\feq}[1]{\begin{flalign*}#1\end{flalign*}} % Quick align environment
+\newcommand{\feqn}[1]{\begin{flalign}#1\end{flalign}} % Quick align environment
+\newcommand{\en}[2][1)]{\begin{enumerate}[#1]#2\end{enumerate}} % quick enumerate environment
+\newcommand{\itm}[1]{\begin{itemize}#1\end{itemize}} % quick enumerate environment
+\newcommand{\tb}[3]{\begin{textblock}{#1}(#2)#3\end{textblock}} % quick enumerate environment
+\newcommand{\lp}{\left(}  % resized parentheses
+\newcommand{\rp}{\right)}
+\newcommand{\lb}{\left[}  % resized brackets
+\newcommand{\rb}{\right]}
+\newcommand{\lbr}{\left\lbrace}  % resized brackets
+\newcommand{\rbr}{\right\rbrace}
+\newcommand{\nn}{\nonumber}  %skip numbering on line space in equation array
+\newcommand{\suml}[2]{\ensuremath{\sum\limits_{#1}^{#2}}}
+\newcommand{\mybox}[2]{\begin{center}\fbox{\begin{minipage}{{#1}\linewidth}\vspace{-4mm}\begin{center}{#2}\end{center}\vspace{-4pt}\end{minipage}}\end{center}} % put a box around just about anything
+\newcommand{\boxeqn}[1]{\begin{empheq}[box=\fbox]{align}#1\end{empheq}} % the better box
+\newcommand{\boxeq}[1]{\begin{empheq}[box=\fbox]{align*}#1\end{empheq}} % the better box
+\newcommand*\wfbox[1]{\fbox{\hspace{10pt#1\hspace{12pt}}}}
+\newcommand*\cfbox[1]{\fbox{\hspace{10pt#1\hspace{18pt}}}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}} 
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+%\newcommand{\sgn}[1]{\ensuremath{\text{sgn}\lp{#1}\rp}}
+\newcommand{\hp}[1]{\hphantom{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% math symbol shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\gauss[2]{%
+	1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))
+		}
+		
+\newcommand{\clight}{\ensuremath{3\ee{8}\text{m/s}}}
+\newcommand{\partd}[2]{\dfrac{\partial{#1}}{\partial{#2}}}
+\newcommand{\deriv}[2]{\dfrac{\text{d}#1}{\text{d}#2}}
+\newcommand{\ee}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\inv}[1]{{#1}^{\text{\scriptsize{-$1$}}}}
+%\newcommand{\degrees}{\ensuremath{^\circ}}
+\newcommand{\mydeg}{\ensuremath{^\circ}}
+\newcommand{\mycdot}{\lower0.25ex\hbox{\text{\LARGE{${\cdot}$}}}}
+\newcommand{\matlab}{\ensuremath{\mbox{MATLAB}^{\mbox{\tiny\textregistered}}\hspace{2pt} }}
+%\newcommand{\dydx}{\ensuremath{\frac{dy}{dx}}}
+\newcommand{\sr}{\ensuremath{S\left(\vec{r}\right)}}
+\newcommand{\curl}{\ensuremath{\nabla \times}}
+%\newcommand{\tcurl}{\ensuremath{\nabla_{t} \times}}
+\newcommand{\dive}{\ensuremath{\nabla \cdot}}
+%\newcommand{\bE}{\mathbf{E}}
+%\newcommand{\bH}{\mathbf{H}}
+\newcommand{\expj}[1]{\ensuremath{e^{-jk_0{#1}}}}
+%\newcommand{\sme}{\ensuremath{\sqrt{\mu_0\epsilon_0}}}
+\newcommand{\e}[1]{e^{#1}}
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
+%\newcommand{\tlap}{\ensuremath{\nabla^2_t}}
+%\newcommand{\tgm}{\ensuremath{\tau_{gm}}}
+%\newcommand{\tge}{\ensuremath{\tau_{ge}}}
+%\newcommand{\et}{\ensuremath{\varepsilon_t}}
+%\newcommand{\ez}{\ensuremath{\varepsilon_z}}
+%\newcommand{\eg}{\ensuremath{\varepsilon_g}}
+%\newcommand{\vrho}{\ensuremath{\vec{\rho}}}
+\newcommand{\jvec}{\ensuremath{\vec{J}}}
+\newcommand{\evec}{\ensuremath{\vec{E}}}
+\newcommand{\hvec}{\ensuremath{\vec{H}}}
+%\newcommand{\ve}{\varepsilon}
+%\newcommand{\etez}{\ensuremath{\frac{\varepsilon_t}{\varepsilon_z}}}
+%\newcommand{\ezet}{\ensuremath{\frac{\varepsilon_z}{\varepsilon_t}}}
+%\newcommand{\mtmz}{\ensuremath{\frac{\mu_t}{\mu_z}}}
+%\newcommand{\mzmt}{\ensuremath{\frac{\mu_z}{\mu_t}}}
+\newcommand{\zhat}{\ensuremath{\mathbf{\hat{z}}}}
+\newcommand{\yhat}{\ensuremath{\mathbf{\hat{y}}}}
+\newcommand{\xhat}{\ensuremath{\mathbf{\hat{x}}}}
+%\newcommand{\lamr}{\ensuremath{\lambda_{\rho}}}
+%\newcommand{\vlamr}{\ensuremath{\vec{\lambda}_{\rho}}}
+%\newcommand{\vlam}{\ensuremath{\vec{\lambda}}}
+%\newcommand{\lamy}{\ensuremath{{\lambda}_{y}}}
+%\newcommand{\lamx}{\ensuremath{\lambda_{x}}}
+%\newcommand{\lamz}{\ensuremath{\lambda_z}}
+%\newcommand{\lamzpsi}{\ensuremath{\lambda_{z\psi_{g}}}}
+%\newcommand{\lamzth}{\ensuremath{\lambda_{z\theta_{g}}}}
+%\newcommand{\lamzpsiu}{\ensuremath{\lambda_{z\psi}}}
+%\newcommand{\lamzthu}{\ensuremath{\lambda_{z\theta}}}
+%\newcommand{\lamylth}{\ensuremath{\lambda_{y_{l\theta}}}}
+%\newcommand{\lamylpsi}{\ensuremath{\lambda_{y_{l\psi}}}}
+%\newcommand{\tgetgm}{\ensuremath{\lp \tge + \tgm \rp}}
+%\newcommand{\kxm}{\ensuremath{k_{xm}}}
+%\newcommand{\kxn}{\ensuremath{k_{xn}}}
+%\newcommand{\kym}{\ensuremath{k_{ym}}}
+%\newcommand{\kyn}{\ensuremath{k_{yn}}}
+%\newcommand{\kya}{\ensuremath{k_{y\alpha}}}
+
+% Resistors/Voltages
+\newcommand{\resn}[1]{\ensuremath{\text{R}_{\text{#1}}}}
+\newcommand{\myr}[1]{\ensuremath{\text{R}_{\text{#1}}}}
+\newcommand{\vn}[1]{\ensuremath{\text{V}_{\text{#1}}}}
+\newcommand{\myv}[1]{\ensuremath{\text{V}_{\text{#1}}}}
+\newcommand{\myi}[1]{\ensuremath{\text{I}_{\text{#1}}}}
+\newcommand{\myp}[1]{\ensuremath{\text{P}_{\text{#1}}}}
+\newcommand{\myz}[1]{\ensuremath{\text{Z}_{\text{#1}}}}
+\newcommand{\myg}[1]{\ensuremath{\text{G}_{\text{#1}}}}
+\newcommand{\myl}[1]{\ensuremath{\text{L}_{\text{#1}}}}
+\newcommand{\myc}[1]{\ensuremath{\text{C}_{\text{#1}}}}
+\newcommand{\ohms}{\ensuremath{\Omega} }
+\newcommand{\mohms}{\ensuremath{\text{m}\Omega} }
+\newcommand{\kohms}{\ensuremath{\text{k}\Omega} }
+\newcommand{\volts}{\text{V }}
+\newcommand{\vrms}{\ensuremath{\text{V}_{\text{RMS }}}}
+\newcommand{\kvrms}{\ensuremath{\text{V}_{\text{RMS }}}}
+\newcommand{\kvolts}{\text{kV }}
+\newcommand{\mvolts}{\text{mV }}
+\newcommand{\amps}{\text{A }}
+\newcommand{\kamps}{\text{kA }}
+\newcommand{\arms}{\ensuremath{\text{A}_{\text{RMS }}}}
+\newcommand{\mamps}{\text{mA }}
+\newcommand{\watts}{\text{W }}
+\newcommand{\mwatts}{\text{mW }}
+\newcommand{\kwatts}{\text{kW }}
+\newcommand{\speedc}{\ensuremath{3\ee{8}\text{ m/s}}}
+%\renewcommand{\k}{\text{k}}
+\newcommand{\m}{\text{m}}
+\newcommand{\km}{\text{km}}
+\newcommand{\rms}{\text{RMS}}
+\newcommand{\hz}{\text{Hz}}
+\newcommand{\hertz}{\text{Hz}}
+
+% dyads
+%\newcommand{\dyad}[1]{\skew2\overline{\skew2\overline{#1}}}
+\newcommand{\dyad}[1]{\raisebox{0pt}{\ensuremath{\smash{\stackrel{\hspace*{1pt}\text{\tiny$\leftrightarrow$}}{#1}}}}}
+\newcommand{\dmu}{\raisebox{-1pt}{\ensuremath{\dyad{\mu}}}}
+%\newcommand{\dmu}{\ensuremath{\dyad{\mu}}}
+\newcommand{\idmu}{\inv{\dmu}}
+\newcommand{\dep}{\ensuremath{\dyad{\varepsilon}}}
+\newcommand{\idep}{\inv{\dep}}
+%\newcommand{\we}{\raisebox{0pt}{\ensuremath{\stackrel{\hspace*{-4.5pt}\text{\tiny$\leftrightarrow$}}{\mathsf{w}_e}}}}
+%\newcommand{\weth}{\we^{\raisebox{-3pt}{\hspace{-4pt}\tiny$ \theta $}}}
+%\newcommand{\wepsi}{\we^{\raisebox{-3pt}{\hspace{-4pt}\tiny$ \psi $}}}
+%\newcommand{\iwe}{\we \hspace*{-3pt}\vphantom{w_e}^{\text{\scriptsize{-$1$}}}}
+%\newcommand{\wh}{\raisebox{0pt}{\ensuremath{\stackrel{\hspace*{-4.5pt}\text{\tiny$\leftrightarrow$}}{\mathsf{w}_h}}}}
+%\newcommand{\iwh}{\wh \hspace*{-3pt}\vphantom{w_h}^{\text{\scriptsize{-$1$}}}}
+%%\newcommand{\dlam}{\ensuremath{\raisebox{1pt}{\ensuremath{\dyad{\lambda}}}}}
+%\newcommand{\dlam}{\ensuremath{\raisebox{1pt}{\ensuremath{\stackrel{\raisebox{-3pt}[0pt][2pt]{\tiny$\leftrightarrow$}}{\lambda}}}}}
+%\newcommand{\id}{\ensuremath{\raisebox{1pt}{\ensuremath{\stackrel{\raisebox{-2.5pt}[0pt][2pt]{\hspace*{1pt}\tiny$\leftrightarrow$}}{I}}}}}
+%\newcommand{\kd}{\ensuremath{\raisebox{1pt}{\ensuremath{\stackrel{\raisebox{-3pt}[0pt][2pt]{\tiny$\leftrightarrow$}}{k}}}}}
+%\newcommand{\dlampsi}[1]{\dlam_{\psi}^{\raisebox{-3pt}{\hspace{2pt}\scriptsize$ #1 $}}}
+%\newcommand{\dlamth}[1]{\dlam_{\theta}^{\raisebox{-3pt}{\hspace{2pt}\scriptsize$ #1 $}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% spatial domain functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\gfpe}{\ensuremath{\vec{G}_{\psi_{e}}}}
+%\newcommand{\gfthe}{\ensuremath{\vec{G}_{\theta_{e}}}}
+%\newcommand{\gfpsim}{\ensuremath{\vec{G}_{\psi_{h}}}}
+%\newcommand{\gfthm}{\ensuremath{\vec{G}_{\theta_h}}}
+%\newcommand{\aoone}{A_{o_{1}}}
+%\newcommand{\aotwo}{A_{o_{2}}}
+%\newcommand{\aoonep}{A_{o_{1}}^{\scalemath{0.60}{+}}}
+%\newcommand{\aoonem}{A_{o_{1}}^{\scalemath{0.60}{-}}}
+%\newcommand{\aotwop}{A_{o_{2}}^{\scalemath{0.60}{+}}}
+%\newcommand{\aotwom}{A_{o_{2}}^{\scalemath{0.60}{-}}}
+%\newcommand{\vpsip}{V_{\psi}^{\scalemath{0.60}{+}}}
+%\newcommand{\vpsim}{V_{\psi}^{\scalemath{0.60}{-}}}
+%\newcommand{\vthp}{V_{\theta}^{\scalemath{0.60}{+}}}
+%\newcommand{\vthm}{V_{\theta}^{\scalemath{0.60}{-}}}
+%\newcommand{\vpsiep}{V_{\psi_{e}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vpsimp}{V_{\psi_{h}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vthep}{V_{\theta_{e}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vthmp}{V_{\theta_{h}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vpsiem}{V_{\psi_{e}}^{\scalemath{0.60}{-}}}
+%\newcommand{\vpsimm}{V_{\psi_{h}}^{\scalemath{0.60}{-}}}
+%\newcommand{\vthem}{V_{\theta_{e}}^{\scalemath{0.60}{-}}}
+%\newcommand{\vthmm}{V_{\theta_{h}}^{\scalemath{0.60}{-}}}
+%
+%\newcommand{\vpsiemp}{V_{\psi_{(e,h)}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vpsiemm}{V_{\psi_{(e,h)}}^{\scalemath{0.60}{-}}}
+%\newcommand{\vthemp}{V_{\theta_{(e,h)}}^{\scalemath{0.60}{+}}}
+%\newcommand{\vthemm}{V_{\theta_{(e,h)}}^{\scalemath{0.60}{-}}}
+%
+%
+%
+%\newcommand{\rpsi}{R_{\psi}}
+%\newcommand{\rth}{R_{\theta}}
+%\newcommand{\rpsibar}{\overline{R}_{\psi}}
+%\newcommand{\rthbar}{\overline{R}_{\theta}}
+%
+%% exponentials
+%\newcommand{\ej}[1]{e^{j{#1}}}
+%\newcommand{\ejp}[1]{e^{j{#1}}}
+%\newcommand{\ejm}[1]{e^{-j{#1}}}
+%\newcommand{\ejplzoned}{\ejp{\lamzpone d}}
+%\newcommand{\ejmlzoned}{\ejm{\lamzpone d}}
+%\newcommand{\ejplztwod}{\ejp{\lamzptwo d}}
+%\newcommand{\ejmlztwod}{\ejm{\lamzptwo d}}
+%\newcommand{\dpsi}{D_{\psi}}
+%
+%% isotropic potentials
+%\newcommand{\fa}{F_{\alpha}}
+%\newcommand{\lamzz}{\lambda_{z0}}
+%\newcommand{\ftfa}{\widetilde{F}_{\alpha}}
+%\newcommand{\ftfx}{\widetilde{F}_{x}}
+%\newcommand{\ftfy}{\widetilde{F}_{y}}
+%\newcommand{\ftfz}{\widetilde{F}_{z}}
+%\newcommand{\dftfa}{\widetilde{\widetilde{F}}_{\alpha}}
+%\newcommand{\ftw}{\widetilde{w}_{\alpha}}
+%\newcommand{\ra}{R_{\alpha}}
+%\newcommand{\rabar}{\overline{R}_{\alpha}}
+%\newcommand{\va}{v_{\alpha}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fourier transform functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% theta
+%\newcommand{\fttheta}{\ensuremath{\widetilde{\theta}}}
+%
+%% psi
+%\newcommand{\ftpsi}{\ensuremath{\widetilde{\psi}}}
+%
+%% J
+%\newcommand{\ftvj}{\ensuremath{\vec{\widetilde{J}}}}
+%\newcommand{\dftj}{\ensuremath{\widetilde{\widetilde{J}}}}
+%\newcommand{\ftj}{\ensuremath{\widetilde{J}}}
+%\newcommand{\ftjv}{\ensuremath{\vec{\widetilde{J}}}}
+%\newcommand{\ftjvec}{\ensuremath{\vec{\widetilde{J}}}}
+%
+%% GF's - PB
+%% % custom 
+%%\newcommand{\ftgf}{\stackrel{\raisebox{0.5pt}[0pt][0pt]{$ \vec{}$}} {\stackrel{\raisebox{5.5pt}[0pt][0pt]{\scriptsize$ \hspace*{2pt}\sim $}}{\smash{G}}}}
+%% % system
+%\newcommand{\ftgfv}{\vec{\skew2\widetilde{G}}}
+%\newcommand{\ftgf}{\widetilde{G}}
+%\newcommand{\ftgfpsie}{\ftgfv_{\psi_{e}}}
+%\newcommand{\ftgfpsiet}{\ftgfv_{\psi_{et}}}
+%\newcommand{\ftgfpsiez}{\ftgfv_{\psi_{ez}}}
+%\newcommand{\ftgfthe}{\ftgfv_{\theta_{e}}}
+%\newcommand{\ftgfthet}{\ftgfv_{\theta_{et}}}
+%\newcommand{\ftgfthez}{\ftgfv_{\theta_{ez}}}
+%\newcommand{\ftgfpie}{\ftgfv_{\Pi_{e}}}
+%\newcommand{\ftgfpiet}{\ftgfv_{\Pi_{et}}}
+%\newcommand{\ftgfpiez}{\ftgfv_{\Pi_{ez}}}
+%\newcommand{\ftgfphie}{\ftgfv_{\Phi_{e}}}
+%\newcommand{\ftgfphiet}{\ftgfv_{\Phi_{et}}}
+%\newcommand{\ftgfphiez}{\ftgfv_{\Phi_{ez}}}
+%
+%\newcommand{\ftgfpsim}{\ftgfv_{\psi_{h}}}
+%\newcommand{\ftgfpsimt}{\ftgfv_{\psi_{ht}}}
+%\newcommand{\ftgfpsimz}{\ftgfv_{\psi_{hz}}}
+%\newcommand{\ftgfthm}{\ftgfv_{\theta_{h}}}
+%\newcommand{\ftgfthmt}{\ftgfv_{\theta_{ht}}}
+%\newcommand{\ftgfthmz}{\ftgfv_{\theta_{hz}}}
+%\newcommand{\ftgfpim}{\ftgfv_{\Pi_{h}}}
+%\newcommand{\ftgfpimt}{\ftgfv_{\Pi_{ht}}}
+%\newcommand{\ftgfpimz}{\ftgfv_{\Pi_{hz}}}
+%\newcommand{\ftgfphim}{\ftgfv_{\Phi_{h}}}
+%\newcommand{\ftgfphimt}{\ftgfv_{\Phi_{ht}}}
+%\newcommand{\ftgfphimz}{\ftgfv_{\Phi_{hz}}}
+%
+%%GF dyad
+%% % custom ones
+%%\newcommand{\ftgfd}{\vphantom{\vec{\stackrel{\sim}{G}}}\stackrel{\raisebox{5.75pt}[0pt][0pt]{\hspace*{2.5pt}\tiny$ \leftrightarrow$}}{\stackrel{\raisebox{5.5pt}[0pt][0pt]{\scriptsize$ \hspace*{2pt}\sim $}}{\smash{G}}}}
+%%\newcommand{\ftgfp}{\stackrel{\raisebox{0.5pt}[0pt][0pt]{$ \vec{} $}}{\stackrel{\raisebox{5.5pt}[0pt][0pt]{\scriptsize$ \hspace*{2pt}\sim $}}{\smash{G}}}^{\raisebox{-6pt}{\hspace{0pt}\tiny$ p $}}}
+%
+%% system ones
+%\newcommand{\ftgfd}{\stackrel{\raisebox{-2pt}{\tiny$\hspace*{3pt}\leftrightarrow $}}{\widetilde{G}}}
+%\newcommand{\ftgfdp}{\stackrel{\raisebox{-2pt}{\tiny$\hspace*{3pt}\leftrightarrow $}}{\widetilde{G}}^{\raisebox{-4pt}{\scriptsize$ p $}}}
+%\newcommand{\ftgfp}{\ftgf^{\raisebox{2pt}{\scriptsize$ p $}}}
+%
+%
+%
+%%GF theta-theta and psi-psi vectors for FB
+%\newcommand{\ftgfthth}{\ftgf^{\raisebox{2pt}{\tiny$ \theta,\theta $}}}
+%\newcommand{\ftgfth}{\ftgfd^{\raisebox{-6pt}{\tiny$ \theta $}}}
+%\newcommand{\ftgfpsipsi}{\ftgf^{\raisebox{-1pt}{\tiny$ \psi,\psi $}}}
+%\newcommand{\ftgfpsi}{\ftgfd^{\raisebox{-5pt}{\tiny$ \psi$}}}
+%\newcommand{\ftgfteztez}{\ftgf^{\raisebox{1pt}{\tiny TE,TE}}}
+%\newcommand{\ftgftez}{\ftgf^{\raisebox{1pt}{\tiny TE}}}
+%\newcommand{\ftgfdtez}{\ftgfd^{\raisebox{-8pt}{\tiny TE}}}
+%\newcommand{\ftgftmztmz}{\ftgf^{\raisebox{1pt}{\tiny TM,TM}}}
+%\newcommand{\ftgftmz}{\ftgf^{\raisebox{1pt}{\tiny TM}}}
+%\newcommand{\ftgfdtmz}{\ftgfd^{\raisebox{-8pt}{\tiny TM}}}
+%
+%% little gf's - PB
+%\newcommand{\ftlgfpsie}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{e}}}}
+%\newcommand{\ftlgfpsiet}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{et}}}}
+%\newcommand{\ftlgfpsiez}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{ez}}}}
+%\newcommand{\ftlgfpsim}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{h}}}}
+%\newcommand{\ftlgfpsimt}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{ht}}}}
+%\newcommand{\ftlgfpsimz}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{hz}}}}
+%\newcommand{\ftlgfthe}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{e}}}}
+%\newcommand{\ftlgfthet}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{et}}}}
+%\newcommand{\ftlgfthez}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{ez}}}}
+%\newcommand{\ftlgfthm}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{h}}}}
+%\newcommand{\ftlgfthmt}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{ht}}}}
+%\newcommand{\ftlgfthmz}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{hz}}}}
+%\newcommand{\ftlgfpsiem}{\ensuremath{\vec{\skew2\widetilde{g}}_{\psi_{\text{\tiny{(e,h)}}}}}}
+%\newcommand{\ftlgfthem}{\ensuremath{\vec{\skew2\widetilde{g}}_{\theta_{\text{\tiny{(e,h)}}}}}}
+%
+%
+%% gf's - generalized
+%% % custom ones
+%%\newcommand{\ftlgfd}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}}
+%%\newcommand{\ftlgfptheed}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}_{\hspace*{-2pt}\tiny\text{$ ee $}}^{\raisebox{-4pt}{\tiny$ p\theta $}}}
+%%\newcommand{\ftlgfpthehd}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}_{\hspace*{-2pt}\tiny\text{$ eh $}}^{\raisebox{-4pt}{\tiny$ p\theta $}}}
+%%\newcommand{\ftlgfppsieed}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}_{\hspace*{-2pt}\tiny\text{$ ee $}}^{\raisebox{-4pt}{\tiny$ p\psi $}}}
+%%\newcommand{\ftlgfppsiehd}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}_{\hspace*{-2pt}\tiny\text{$ eh $}}^{\raisebox{-4pt}{\tiny$ p\psi $}}}
+%
+%
+%%% system ones
+%\newcommand{\ftlgfd}{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\widetilde{g}}}
+%\newcommand{\ftlgfptheed}{\ftlgfd^{\raisebox{-4pt}{\tiny$ p\theta $}}_{\hspace*{-2pt} ee}}
+%\newcommand{\ftlgfpthehd}{\ftlgfd^{\raisebox{-4pt}{\tiny$ p\theta $}}_{\hspace*{-2pt} eh}}
+%\newcommand{\ftlgfppsieed}{\ftlgfd^{\raisebox{-4pt}{\tiny$ p\psi $}}_{\hspace*{-2pt} ee}}
+%\newcommand{\ftlgfppsiehd}{\ftlgfd^{\raisebox{-4pt}{\tiny$ p\psi $}}_{\hspace*{-2pt} eh}}
+%
+%% general grand daddy
+%% % custom
+%%\newcommand{\ftlgfpgend}{\stackrel{\stackrel{\raisebox{-1.5pt}{\tiny$ \hspace*{2pt}\leftrightarrow $}}{\raisebox{2.5pt}{\scriptsize$ \hspace*{1pt}\sim $}}}{\smash{g}}_{\hspace*{-2pt}\tiny\text{$ ee,eh $}}^{\raisebox{-4pt}{\tiny$ p\theta,p\psi $}}}
+%
+%% % system
+%\newcommand{\ftlgfpgend}{\ftlgfd^{\raisebox{-4pt}{\tiny$ p\theta,p\psi $}}_{\hspace*{-2pt} ee,eh}}
+%
+%% other ft relations
+%\newcommand{\ftlone}{\ensuremath{\widetilde{L}_1}}
+%\newcommand{\ftltwo}{\ensuremath{\widetilde{L}_2}}
+%\newcommand{\ftlthree}{\ensuremath{\widetilde{L}_3}}
+%\newcommand{\ftlfour}{\ensuremath{\widetilde{L}_4}}
+%\newcommand{\ftsone}{\ensuremath{\widetilde{s}_1}}
+%\newcommand{\ftstwo}{\ensuremath{\widetilde{s}_2}}
+%\newcommand{\ftue}{\ensuremath{\widetilde{u}_e}}
+%\newcommand{\ftum}{\ensuremath{\widetilde{u}_h}}
+%\newcommand{\ftve}{\ensuremath{\widetilde{v}_e}}
+%\newcommand{\ftvm}{\ensuremath{\widetilde{v}_h}}
+%\newcommand{\ftphi}{\ensuremath{\widetilde{\Phi}}}
+%\newcommand{\ftpi}{\ensuremath{\widetilde{\Pi}}}
+%\newcommand{\ftpsioonem}{\ftpsi_{o_{1}}^{\scalemath{0.60}{-}}}
+%\newcommand{\ftpsioonep}{\ftpsi_{o_{1}}^{\scalemath{0.60}{+}}}
+%\newcommand{\ftthoonem}{\fttheta_{o_{1}}^{\scalemath{0.60}{-}}}
+%\newcommand{\ftthoonep}{\fttheta_{o_{1}}^{\scalemath{0.60}{+}}}
+%\newcommand{\ftpsiotwom}{\ftpsi_{o_{2}}^{\scalemath{0.60}{-}}}
+%\newcommand{\ftpsiotwop}{\ftpsi_{o_{2}}^{\scalemath{0.60}{+}}}
+%\newcommand{\ftthotwom}{\fttheta_{o_{2}}^{\scalemath{0.60}{-}}}
+%\newcommand{\ftthotwop}{\fttheta_{o_{2}}^{\scalemath{0.60}{+}}}
+%\newcommand{\ftpsip}{\ftpsi^{+}}
+%\newcommand{\ftpsim}{\ftpsi^{-}}
+%\newcommand{\ftthp}{\fttheta^{+}}
+%\newcommand{\ftthm}{\fttheta^{-}}
+%\newcommand{\ftev}{\vec{\hspace*{2pt}\widetilde{E}}}
+%\newcommand{\ftet}{\vec{\widetilde{E}}_{t}}
+%\newcommand{\fth}{\stackrel{\hspace*{2pt}\sim}{\smash{H}\rule{0pt}{1.3ex}}} 
+%\newcommand{\fthv}{\raisebox{5.5pt}[0pt][0pt]{$\vec{\raisebox{-5.5pt}[0pt][0pt]{\ensuremath{ \stackrel{\hspace*{2pt}\sim}{\smash{H}\rule{0pt}{1.1ex}}}}} $}} 
+%\newcommand{\ftevr}{\ftev^{\raisebox{2pt}{\scriptsize$ r $}}}
+%\newcommand{\fthvr}{\fthv^{\raisebox{2pt}{\scriptsize$ r $}}}
+%
+%% scattered terms
+%\newcommand{\ftevrth}[2]{\ftev^{r\text{\tiny$ \theta#1 $}}_{#2}}
+%\newcommand{\ftevrpsi}[2]{\ftev^{r\text{\tiny$ \psi #1$}}_{#2}}
+%\newcommand{\ftevrthpmo}{\ftevrth{\raisebox{1pt}{\tiny$ \pm $}}{o}}
+%\newcommand{\ftevrpsipmo}{\ftevrpsi{\raisebox{1pt}{\tiny$ \pm $}}{o}}
+%\newcommand{\fterth}[2]{\widetilde{E}^{r\text{\tiny$ \theta#1 $}}_{#2}}
+%\newcommand{\fterpsi}[2]{\widetilde{E}^{r\raisebox{0.75pt}{\tiny$ \psi #1$}}_{#2}}
+%\newcommand{\ftertez}[2]{\widetilde{E}^{\text{\scriptsize$ r $\tiny,TE#1}}_{#2}}
+%\newcommand{\ftertmz}[2]{\widetilde{E}^{\text{\scriptsize$ r $\tiny,TM#1}}_{#2}}
+%\newcommand{\fterthpmo}{\fterth{\raisebox{1pt}{\tiny$ \pm $}}{o}}
+%\newcommand{\fterthpmox}{\fterth{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterthpmoy}{\fterth{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterthpmoz}{\fterth{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterthpox}{\fterth{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterthpoy}{\fterth{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterthpoz}{\fterth{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterthmox}{\fterth{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterthmoy}{\fterth{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterthmoz}{\fterth{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterpsipmo}{\fterpsi{\raisebox{1pt}{\tiny$ \pm $}}{o}}
+%\newcommand{\fterpsipmox}{\fterpsi{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterpsipmoy}{\fterpsi{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterpsipmoz}{\fterpsi{\raisebox{1pt}{\tiny$ \pm $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterpsipox}{\fterpsi{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterpsipoy}{\fterpsi{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterpsipoz}{\fterpsi{\raisebox{1pt}{\tiny$ + $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterpsimox}{\fterpsi{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ ox $}}}
+%\newcommand{\fterpsimoy}{\fterpsi{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ oy $}}}
+%\newcommand{\fterpsimoz}{\fterpsi{\raisebox{1pt}{\tiny$ - $}}{\raisebox{1pt}{\tiny$ oz $}}}
+%\newcommand{\fterthpo}{\fterth{\raisebox{1pt}{\tiny$ + $}}{o}}
+%\newcommand{\fterthmo}{\fterth{\raisebox{1pt}{\tiny$ - $}}{o}}
+%\newcommand{\fterpsipo}{\fterpsi{\raisebox{1pt}{\tiny$ + $}}{o}}
+%\newcommand{\fterpsimo}{\fterpsi{\raisebox{1pt}{\tiny$ - $}}{o}}
+%
+%
+%
+%% Total E-fields
+%\newcommand{\fteth}[2]{\widetilde{E}^{\text{\tiny$ \theta#1 $}}_{#2}}
+%\newcommand{\ftepsi}[2]{\widetilde{E}^{\text{\tiny$ \psi#1 $}}_{#2}}
+%\newcommand{\ftetez}[2]{\widetilde{E}^{\text{\tiny TE#1}}_{#2}}
+%\newcommand{\ftetmz}[2]{\widetilde{E}^{\text{\tiny TM#1}}_{#2}}
+%
+%% V terms - coords
+%\newcommand{\vtheexm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{ee,x}}
+%\newcommand{\vtheexp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{ee,x}}
+%\newcommand{\vtheeym}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{ee,y}}
+%\newcommand{\vtheeyp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{ee,y}}
+%\newcommand{\vpsieexm}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{ee,x}}
+%\newcommand{\vpsieexp}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{ee,x}}
+%\newcommand{\vpsieeym}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{ee,y}}
+%\newcommand{\vpsieeyp}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{ee,y}}
+%\newcommand{\vthehxm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{eh,x}}
+%\newcommand{\vthehxp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{eh,x}}
+%\newcommand{\vthehym}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{eh,y}}
+%\newcommand{\vthehyp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{eh,y}}
+%\newcommand{\vpsiehxm}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{eh,x}}
+%\newcommand{\vpsiehxp}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{eh,x}}
+%\newcommand{\vpsiehym}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{eh,y}}
+%\newcommand{\vpsiehyp}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{eh,y}}
+%
+%% block V terms
+%\newcommand{\bvtwoeethp}{\mathsf{V}_{2,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvtwoeethm}{\mathsf{V}_{2,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ - $}}}
+%\newcommand{\bvtwoeepsip}{\mathsf{V}_{2,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvtwoeepsim}{\mathsf{V}_{2,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ - $}}}
+%
+%\newcommand{\bvoneeethp}{\mathsf{V}_{1,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvoneeethm}{\mathsf{V}_{1,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ - $}}}
+%\newcommand{\bvoneeepsip}{\mathsf{V}_{1,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvoneeepsim}{\mathsf{V}_{1,{\text{\tiny$ ee $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ - $}}}
+%
+%\newcommand{\bvtwoehthp}{\mathsf{V}_{2,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvtwoehthm}{\mathsf{V}_{2,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ - $}}}
+%\newcommand{\bvtwoehpsip}{\mathsf{V}_{2,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvtwoehpsim}{\mathsf{V}_{2,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ - $}}}
+%
+%\newcommand{\bvoneehthp}{\mathsf{V}_{1,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvoneehthm}{\mathsf{V}_{1,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\theta \raisebox{1pt}{\tiny$ - $}}}
+%\newcommand{\bvoneehpsip}{\mathsf{V}_{1,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ + $}}}
+%\newcommand{\bvoneehpsim}{\mathsf{V}_{1,{\text{\tiny$ eh $}}}^{\hspace*{1pt}\psi \raisebox{1pt}{\tiny$ - $}}}
+%
+%%%% V terms - combined
+%%% E^{r\psi} terms
+%\newcommand{\voneeethp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{1,{\text{\tiny$ ee $}}}}
+%\newcommand{\voneeethm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{{1,\text{\tiny$ ee $}}}}
+%\newcommand{\voneehthp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{1,{\text{\tiny$ eh $}}}}
+%\newcommand{\voneehthm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{1,{\text{\tiny$ eh $}}}}
+%\newcommand{\voneeepsip}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{1,{\text{\tiny$ ee $}}}}
+%\newcommand{\voneeepsim}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{1,{\text{\tiny$ ee $}}}}
+%\newcommand{\voneehpsip}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{1,{\text{\tiny$ eh $}}}}
+%\newcommand{\voneehpsim}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{1,{\text{\tiny$ eh $}}}}
+%
+%
+%%% E^{r\theta} terms
+%\newcommand{\vtwoeethp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{2,{\text{\tiny$ ee $}}}}
+%\newcommand{\vtwoeethm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{2,{\text{\tiny$ ee $}}}}
+%\newcommand{\vtwoehthp}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ + $}}_{2,{\text{\tiny$ eh $}}}}
+%\newcommand{\vtwoehthm}{\widetilde{V}^{\theta \raisebox{1pt}{\tiny$ - $}}_{2,{\text{\tiny$ eh $}}}}
+%\newcommand{\vtwoeepsip}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{2,{\text{\tiny$ ee $}}}}
+%\newcommand{\vtwoeepsim}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{2,{\text{\tiny$ ee $}}}}
+%\newcommand{\vtwoehpsip}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ + $}}_{2,{\text{\tiny$ eh $}}}}
+%\newcommand{\vtwoehpsim}{\widetilde{V}^{\psi \raisebox{1pt}{\tiny$ - $}}_{2,{\text{\tiny$ eh $}}}}
+
+%%reflection coefficients
+%\newcommand{\rx}{R_{x}}
+%\newcommand{\rxbar}{\overline{R}_{x}}
+%\newcommand{\ry}{R_{y}}
+%\newcommand{\rybar}{\overline{R}_{y}}
+%\newcommand{\rbar}{\overline{R}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% double fourier transform functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%E and H vectors
+%%\newcommand{\dftev}{\raisebox{1pt}[0pt][0pt]{\ensuremath{\vec{\stackrel{\vphantom{v}\hspace*{2pt}\sim}{\smash{\stackrel{\hspace*{1pt}\sim}{E}}\rule{0pt}{0.9ex}}}}}}
+%%\newcommand{\dfthv}{\raisebox{1pt}[0pt][0pt]{\ensuremath{\vec{\stackrel{\vphantom{v}\hspace*{2pt}\sim}{\smash{\stackrel{\hspace*{1pt}\sim}{H}}\rule{0pt}{0.9ex}}}}}}
+%
+%\newcommand{\dftev}{\vec{\widetilde{\widetilde{E}}}}
+%\newcommand{\dfthv}{\vec{\widetilde{\widetilde{H}}}}
+%
+%\newcommand{\dfttheta}{\ensuremath{\widetilde{\widetilde{\theta}}}}
+%\newcommand{\dftpsi}{\ensuremath{\widetilde{\widetilde{\psi}}}}
+
+%% % the custom ones I made -- will break inside of section commands
+%%\newcommand{\dftgf}{\ensuremath{\stackrel{\hspace*{1pt}\sim}{\smash{\stackrel{\hspace*{1pt}\sim}{G}}\rule{0pt}{0.9ex}}}}
+%%\newcommand{\dftgfv}{\raisebox{1pt}{\ensuremath{\vec{\stackrel{\vphantom{v}\hspace*{1pt}\sim}{\smash{\stackrel{\hspace*{1pt}\sim}{G}}\rule{0pt}{0.9ex}}}}}}
+%%\newcommand{\dftgfv}{\raisebox{1pt}{\ensuremath{\skew4\vec{\stackrel{\vphantom{v}\hspace*{3pt}\sim}{\smash{\stackrel{\hspace*{3pt}\sim}{G}}\rule{0pt}{0.9ex}}}}}}
+%%\newcommand{\dftgfd}{\raisebox{1pt}{\ensuremath{\stackrel{\raisebox{-2pt}[0pt][2pt]{\hspace*{2pt}\tiny$\leftrightarrow$}}{\stackrel{\vphantom{v}\hspace*{1pt}\sim}{\smash{\stackrel{\hspace*{1pt}\sim}{G}}\rule{0pt}{0.9ex}}}}}}
+%%\newcommand{\dftvj}{\raisebox{1pt}{\ensuremath{\skew4\vec{\stackrel{\vphantom{v}\hspace*{4pt}\sim}{\smash{\stackrel{\hspace*{3pt}\sim}{J}}\rule{0pt}{0.9ex}}}}}}
+
+% % these won't break inside of section commands
+%\newcommand{\dftgf}{\widetilde{\widetilde{G}}}
+%\newcommand{\dftgfp}{\widetilde{\widetilde{G}}^{\raisebox{2pt}{\scriptsize$ p $}}}
+%\newcommand{\dftgfv}{\ensuremath{\vec{\skew1\widetilde{\widetilde{G}}}}}
+%\newcommand{\dftgfd}{\stackrel{\raisebox{-2.25pt}[0pt][2pt]{\hspace*{3pt}\tiny$ \leftrightarrow $}}{\widetilde{\widetilde{G}}}}
+%\newcommand{\dftgfdp}{\stackrel{\raisebox{-2.25pt}[0pt][2pt]{\hspace*{3pt}\tiny$ \leftrightarrow $}}{\widetilde{\widetilde{G}}}^{\raisebox{-8pt}{\scriptsize$ p $}}}
+%
+%
+%\newcommand{\dftvj}{\vec{\widetilde{\widetilde{J}}}}
+%
+%
+%\newcommand{\dftgfpsie}{\dftgfv_{\psi_{e}}}
+%\newcommand{\dftgfpsim}{\dftgfv_{\psi_{h}}}
+%\newcommand{\dftgfthe}{\dftgfv_{\theta_{e}}}
+%\newcommand{\dftgfthm}{\dftgfv_{\theta_{h}}}
+%
+%\newcommand{\dftlone}{\ensuremath{\skew1\widetilde{\widetilde{L}}_1}}
+%\newcommand{\dftltwo}{\ensuremath{\widetilde{\widetilde{L}}_2}}
+%\newcommand{\dftlthree}{\ensuremath{\widetilde{\widetilde{L}}_3}}
+%\newcommand{\dftlfour}{\ensuremath{\widetilde{\widetilde{L}}_4}}     
+%\newcommand{\dftsone}{\ensuremath{\widetilde{\widetilde{s}}_1}}
+%\newcommand{\dftstwo}{\ensuremath{\widetilde{\widetilde{s}}_2}}
+%\newcommand{\dftue}{\ensuremath{\widetilde{\widetilde{u}}_e}}
+%\newcommand{\dftum}{\ensuremath{\widetilde{\widetilde{u}}_h}}
+%\newcommand{\dftve}{\ensuremath{\widetilde{\widetilde{v}}_e}}
+%\newcommand{\dftvm}{\ensuremath{\widetilde{\widetilde{v}}_h}}
+%\newcommand{\lamzpone}{\ensuremath{\lambda_{z_{p1}}}}
+%\newcommand{\lamzptwo}{\ensuremath{\lambda_{z_{p2}}}}
+%\newcommand{\lamzpk}{\ensuremath{\lambda_{z_{pk}}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Waveguide theory shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\vetone}{\vec{E}_{t1}}
+%\newcommand{\vettwo}{\vec{E}_{t2}}
+%\newcommand{\ap}{a^{\tiny\text{$ + $}}}
+%\newcommand{\bp}{b^{\tiny\text{$ + $}}}
+%\newcommand{\am}{a^{\scriptsize\text{$ - $}}}
+%\newcommand{\sumq}{\sum\limits_{q=1}^{Q}}
+%\newcommand{\sumn}{\sum\limits_{n=1}^{N}}
+%\newcommand{\vece}{\vec{e}}
+%\newcommand{\vhtone}{\vec{H}_{t1}}
+%\newcommand{\vhttwo}{\vec{H}_{t2}}
+%\newcommand{\vech}{\vec{h}}
+%\newcommand{\pth}{\ensuremath{ p^{\text{th}}}}
+%\newcommand{\rvonem}{\vec{r}_1^{\hspace{2pt}\text{\tiny $ - $}}}
+%\newcommand{\rvonep}{\vec{r}_1^{\hspace{2pt}\text{\tiny $ + $}}}
+%\newcommand{\rvtwom}{\vec{r}_2^{\hspace{2pt}\text{\tiny $ - $}}}
+%\newcommand{\rvtwop}{\vec{r}_2^{\hspace{2pt}\text{\tiny $ + $}}}
+%%\newcommand{\tth}[1]{\ensuremath{#1^{\text{\tiny th}}}}
+%\newcommand{\tth}[1]{\ensuremath{#1^{th}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\przez}{Prze\'zdziecki }
+%\newcommand{\przezs}{Prze\'zdziecki's }
+%% Adds a space between the text and the [T]op \hline
+%\newcommand\T{\rule{0pt}{3.1ex}}
+%\newcommand{\tmz}{\ensuremath{\text{TM}}$ ^z $ }
+%\newcommand{\tez}{\ensuremath{\text{TE}}$ ^z $ }
+%\newcommand{\szzp}{S(z{-}z')}
+%\newcommand{\sdzp}{S(d{-}z')}
+%\newcommand{\szp}{S({-}z')}
+
+
+% Adds a space between the text and the [B]ottom \hline
+\newcommand\B{\rule[-1.7ex]{0pt}{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% updated latex commands to make things a bit easier 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\tan}[1]{\ensuremath{\text{tan}\left({#1}\right)}}
+\renewcommand{\sin}[1]{\ensuremath{\text{sin}\left({#1}\right)}}
+\renewcommand{\cos}[1]{\ensuremath{\text{cos}\left({#1}\right)}}
+\renewcommand{\cot}[1]{\ensuremath{\text{cot}\left({#1}\right)}}
+\renewcommand{\csc}[1]{\ensuremath{\text{csc}\left({#1}\right)}}
+\newcommand{\tanb}[1]{\ensuremath{\text{tan}\left[{#1}\right]}}
+\newcommand{\sinb}[1]{\ensuremath{\text{sin}\left[{#1}\right]}}
+\newcommand{\cosb}[1]{\ensuremath{\text{cos}\left[{#1}\right]}}
+\newcommand{\myref}[1]{(\ref{#1})}
+\newcommand{\widefbox}[2]{\fbox{\hspace{#1}#2\hspace{#1}}}
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% definitions for big denominators
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def \mydftlone {\ensuremath{\lp \lamz-\lamzpsiu \rp \lp \lamz+\lamzpsiu \rp}}
+%\def \mydftltwo {\ensuremath{\lp \lamz-\lamzthu \rp \lp \lamz+\lamzthu \rp }}
+%\def \mydftlonealt {\ensuremath{ \lamz^2-\lamzpsiu^2}}
+%\def \mydftltwoalt {\ensuremath{ \lamz^2-\lamzthu^2}}
+%
+%\def \mydftsone {\ensuremath{-j\lamz\dftue + \etez\dftj_{ez} - j\omega\et\dftvm }}
+%\def \mydftstwo {\ensuremath{j\lamz\dftum - \mtmz\dftj_{hz} - j\omega\mu_t\dftve }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tikz stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};} 
+\tikzset{square arrow/.style={to path={-- ++(0,-.25) -| (\tikztotarget)}}} 
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[circle, text depth=0pt,draw,inner sep=2pt,minimum height=1.4em,font=\scriptsize] (char) {#1};}}
+ 
+\tikzset{
+    position/.style args={#1:#2 from #3}{
+        at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+    }
+}
+
+\tikzset{dspmultiplier/.style={draw, shape=circle,line cap=rect,line join=rect,
+	line width=0.3mm,minimum size=0.5cm}}
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+			    text width=5em, text centered, rounded corners, minimum height=2em, font=\footnotesize]
+			    
+	
+%\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+%            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}} % circled number
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% pgf stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     
+% for pgfplots tables 
+\pgfplotstableset{col sep=comma} % specifies the input format for pgfplotstables
+\pgfkeys{
+    /pgf/number format/.cd,
+    sci generic={mantissa sep=\times,exponent={10^{#1}}}}
+
+% gets the mean value of the file specified in the argument
+\newcommand{\getmeanvalue}[1]{%
+\pgfplotstableread{./#1}{\testdata} %
+\pgfplotstablecreatecol[%
+     create col/assign/.code={%
+         \getthisrow{1}\entry%
+         \ifnum\pgfplotstablerow>0%
+             \pgfmathsetmacro{\entry}{add(\entry,\pgfmathaccuma)}%
+         \fi%
+         \edef\pgfmathaccuma{\entry}%
+\pgfkeyslet{/pgfplots/table/create col/next content}\entry%
+}]{Sum}\testdata%
+%
+\pgfplotstablecreatecol[%
+     create col/assign/.code={%
+         \getthisrow{Sum}\entry%
+         \ifnum\pgfplotstablerow>0%
+	         \pgfmathsetmacro{\entry}{divide(\entry,\pgfplotstablerow+1)}%
+	     \fi%
+\pgfkeyslet{/pgfplots/table/create col/next content}\entry%
+}]{Avg}\testdata%
+%
+{%
+\pgfplotstablegetrowsof{\testdata}%
+\count0=\pgfplotsretval % means: store \pgfplotsretval into artihmetic TeX register
+\advance\count0 by-1 % subtract 1 from that register
+\edef\pgfplotsretval{\the\count0}% store result into \pgfplotsretval (as string)
+\xdef\numrows{\pgfplotsretval}%
+\pgfplotstablegetelem{\numrows}{Avg}\of\testdata %
+\xdef\meanvalue{\pgfplotsretval}%
+\pgfmathprintnumber[fixed, fixed zerofill,precision=4]{\meanvalue}%
+}% this here restores \count0 to its previous value 
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% emoticons!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\smiley}{\tikz[baseline=-0.75ex,black]{
+    \draw circle (2mm);
+\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
+\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
+\draw (-145:1.4mm) arc (-140:-40:1.5mm);
+    }
+}
+
+\newcommand{\frownie}{\tikz[baseline=-0.75ex,black]{
+    \draw circle (2mm);
+\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
+\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
+\draw (-145:1.4mm) arc (140:40:1.5mm);
+    }
+}
+
+\newcommand{\neutranie}{\tikz[baseline=-0.75ex,black]{
+    \draw circle (2mm);
+\node[fill,circle,inner sep=0.5pt] (left eye) at (135:0.8mm) {};
+\node[fill,circle,inner sep=0.5pt] (right eye) at (45:0.8mm) {};
+\draw (-135:0.9mm) -- (-45:0.9mm);
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% misc graphics in tikz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tikzset{
+  annotated cuboid/.pic={
+    \tikzset{%
+      every edge quotes/.append style={midway, auto},
+      /cuboid/.cd,
+      #1
+    }
+    \draw [every edge/.append style={pic actions, densely dashed, opacity=.5}, pic actions]
+    (0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
+    (o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
+    (o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
+    \path [every edge/.append style={pic actions, |-|}]
+    (b) +(0,-5pt) coordinate (b1) edge  (b1 -| c) 
+    (b) +(-5pt,0) coordinate (b2) edge  (b2 |- a)
+    (c) +(3.5pt,-3.5pt) coordinate (c2) edge ([xshift=3.5pt,yshift=-3.5pt]e)
+    ;
+  },
+  /cuboid/.search also={/tikz},
+  /cuboid/.cd,
+  width/.store in=\cubex,
+  height/.store in=\cubey,
+  depth/.store in=\cubez,
+  units/.store in=\cubeunits,
+  scale/.store in=\cubescale,
+  width=10,
+  height=10,
+  depth=10,
+  units=cm,
+  scale=.1,
+}
+
+\newcommand{\rightradarpulse}[3]{
+\begin{tikzpicture}
+		\begin{axis}[
+			xticklabels={,,},
+			yticklabels={,,},
+			axis y line = none,
+			axis x line = none,	
+			clip=false,
+			xmax=3.5,
+			xmin=0,
+			height=#2, 
+			width=#3,
+			]
+			\addplot [domain={0}:{3.5}, samples=200, #1] {sin(360*x*3)};
+
+			\node at (axis cs: 1.75,1.25) {$\rightarrow$};
+	\end{axis}
+\end{tikzpicture}
+}
+
+\newcommand{\leftradarpulse}[3]{
+\begin{tikzpicture}
+		\begin{axis}[
+			xticklabels={,,},
+			yticklabels={,,},
+			axis y line = none,
+			axis x line = none,	
+			clip=false,
+			xmax=3.5,
+			xmin=0,
+			height=#2, 
+			width=#3,
+			]
+			\addplot [domain={0}:{3.5}, samples=200, #1] {sin(360*x*3)};
+
+			\node at (axis cs: 1.75,1.25) {$\leftarrow$};
+	\end{axis}
+\end{tikzpicture}
+}
+
+% new column types
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+%\newcolumntype{C}[1]{>{\minwd c{#1}}c<{\endminwd}}
+%\newcolumntype{mL}[#1]{>{$}l{#1}<{$}} % math-mode version of "l" column type
+%\newcolumntype{mC}[#1]{>{$}c{#1}<{$}} % math-mode version of "c" column type
+
+%%% Colors
+% colors
+\definecolor{myblue}{RGB}{0,119,187}
+\definecolor{myred}{RGB}{187,85,102}
+\definecolor{mycyan}{RGB}{51,187,238}
+\definecolor{myteal}{RGB}{0,153,136}
+\definecolor{myorange}{RGB}{238,119,51}
+\definecolor{mymagenta}{RGB}{238,51,119}
+\definecolor{mygrey}{RGB}{187,187,187}
+\definecolor{lightcyan}{rgb}{0.84,1,1}
+\definecolor{lightgreen}{rgb}{0.64,1,0.71}
+\definecolor{lightred}{rgb}{1,0.7,0.71}
+\def\myred{red!65!black}
+
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+		
