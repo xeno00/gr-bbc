@@ -18,13 +18,13 @@ class blk(gr.sync_block):
 
     def __init__(self): #If there is an error, change default here:
         msg_len = get_top_variable("MESSAGE_LENGTH", default=2**7)
-        cod_len = get_top_variable("CODEWORD_LENGTH", default=2**17)
+        cod_len = get_top_variable("CODEWORD_LENGTH", default=2**10)
 
         gr.sync_block.__init__(self,
             name='BBC Decoder',
             in_sig=[(np.byte,  cod_len if isinstance(cod_len, int) else int(cod_len))],
             out_sig=[(np.byte, msg_len if isinstance(msg_len, int) else int(msg_len))]
-            #out_sig=[np.byte]
+            #out_sig=None
         )
         # Convert from Bytes to bits
         self.portName = "msgOutput"
@@ -37,23 +37,29 @@ class blk(gr.sync_block):
         result = self.myDecoder.decode(input_items[0][:][:][0])
         #TODO: add function to iteratively push results out
         try:
-            xtemp = b''
+            xtemp = [b'']
+            #i=0
             for x in result:
                 #print(x) # works
-                xtemp = xtemp + b' ' + bytearray(x)
-                output_items[0][:] = bytearray(x)
+                xtemp[0] = xtemp[0] + b'\n' + bytearray(x) # works
+                #xtemp[0].append(bytearray(x))
+                #output_items[0] = bytearray(x)
                 PMT_msg = pmt.intern(x.decode('utf-8' + "\n")) # works
                 self.message_port_pub(pmt.intern(self.portName),PMT_msg) # works
-            #print(xtemp)
-            #output_items[0][:] = xtemp # doesn't work for some reason, maybe size?
+                #i+=1
+            #print(xtemp[0].decode())
+            #output_items[0] = xtemp[0].join(' ') # doesn't work for some reason, maybe size?
+            output_items[0] = xtemp[0]
             #print(len(output_items[0]))
-            #print(output_items[0][:].decode())
-            #output_items[0][:] = input_items[0]
+            print("Messages found:")
+            print(output_items[0].decode())
+            #output_items[0] = input_items[0]
             return len(output_items[0])
         except:
-            print("DEBUG decoder line 33: output typing failed.\n")
+            print("Some kind of error in output")
+            #print("DEBUG decoder line 33: output typing failed.\n")
             #print("Type of decoder result: ", type(bytearray(result)))
-            print("Type of stream: ", type(self.out_sig))
+            #print("Type of stream: ", type(self.out_sig))
 
 ###############################################################################
 class Decoder:
@@ -162,8 +168,8 @@ def init(s):
         h=add_bit(h&1, s)
     n = 0    
 
-###############################################################################
-    
+##############################################################################
+
 def get_top_variable(variable_name="", default=None):
     '''
     Returns the value of a variable from the flow graph.
@@ -177,7 +183,7 @@ def get_top_variable(variable_name="", default=None):
             return top[variable_name]
     finally:
         del top
-        
+
     ## Run Condition: Saving the flowgraph, necessary when default case isnt correct. Removed return to fix error
     top = inspect.currentframe().f_back.f_back.f_back.f_back.f_back.f_locals
     try:
@@ -191,13 +197,13 @@ def get_top_variable(variable_name="", default=None):
 
             # Find the index to the variable we need
             block_index = block_names.index(variable_name)
-            
+
             # Return result
             result = top["self"].blocks[block_index].params['value'].value
             print(result)
             #print(f"[Block Debug 2] While modifying the flowgraph, I found top variable \'{variable_name}\': type={type(result)}, value={result}")
             #return result
-        
+
     finally:
         del top
 
