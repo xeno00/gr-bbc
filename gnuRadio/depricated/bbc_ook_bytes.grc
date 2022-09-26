@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: bbc_ook
+    id: bbc_ook_bytes
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -45,7 +45,7 @@ blocks:
       131072 = 2**17
 
       512 = 2**9'
-    value: '256'
+    value: '8'
   states:
     bus_sink: false
     bus_source: false
@@ -65,7 +65,7 @@ blocks:
       128 = 2**7
 
       8 = 2**3'
-    value: '16'
+    value: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -114,7 +114,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '"ZZOMBIES ATTACK!"'
+    value: '"Z"#"ZZOMBIES ATTACK!"'
   states:
     bus_sink: false
     bus_source: false
@@ -254,7 +254,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 776.0]
+    coordinate: [720, 816.0]
     rotation: 180
     state: enabled
 - name: blocks_multiply_xx_0
@@ -505,8 +505,8 @@ blocks:
       \"\"arguments to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
       \            self,\n            name='OOK Decoder',  # will show up in GRC\n\
       \            in_sig=[np.float32],\n            out_sig=[np.float32]#, (np.byte,\
-      \ int(8))] # save bytes output for later\n            #out_sig=None\n      \
-      \  )\n        # if an attribute with the same name as a parameter is found,\n\
+      \ int(64))] # save bytes output for later\n            #out_sig=None\n     \
+      \   )\n        # if an attribute with the same name as a parameter is found,\n\
       \        # a callback is registered (properties work, too).\n        self.sps\
       \ = sps\n        self.dbug = dbug\n        self.clen = clen * 8  # to bits from\
       \ bytes, if using the string method\n        self.zcount = 0\n        self.ocount\
@@ -528,45 +528,54 @@ blocks:
       \        else:\n                print(\"incorrect value for sample on index\
       \ \" + str(i))\n\n            self.prev_samp = samp  # store the previous sample\n\
       \n            while len(self.current_byte) >= 8:\n                self.cwb +=\
-      \ 1\n                ## for some reason, this one doesn't work...\n        \
-      \        # self.output_bytes = self.output_bytes + bytearray(chr(int(self.current_byte[0:8],2)),'utf-8')\
-      \ # output_bytes are bytes\n                self.output_bytes_string = self.output_bytes_string\
-      \ + self.current_byte[0:8]  # output_bytes is a string\n                self.current_byte\
-      \ = self.current_byte[8:]\n                # self.message_port_pub(pmt.intern(self.msgportname),\
-      \ pmt.intern(self.current_byte[0:8])) # debugging\n                if self.dbug\
-      \ == 1:\n                    print(\"Found \" + str(self.cwb) + \" bytes so\
-      \ far.\")\n                    # print(self.current_byte[0:8]) # only get the\
-      \ first 8 bits\n                    print(\"len of output_bytes is \" + str(len(self.output_bytes_string)))\n\
+      \ 1\n                import pdb\n                pdb.set_trace()\n         \
+      \       ## for some reason, this one doesn't work...\n                #self.output_bytes\
+      \ = self.output_bytes + bytearray(chr(int(self.current_byte[0:8],2)),'utf-8')\
+      \ # output_bytes are bytes\n                #self.output_bytes_string = self.output_bytes_string\
+      \ + self.current_byte[0:8]  # output_bytes is a string\n                self.message_port_pub(pmt.intern(self.msgportname),\
+      \ pmt.intern(int(self.current_byte[0:8]))) # debugging\n                self.current_byte\
+      \ = self.current_byte[8:]\n\n                if self.dbug == 1:\n          \
+      \          print(\"Found \" + str(self.cwb) + \" bytes so far.\")\n        \
+      \            # print(self.current_byte[0:8]) # only get the first 8 bits\n \
+      \                   print(\"len of output_bytes is \" + str(len(self.output_bytes_string)))\n\
       \n        ## if we're at the end and have bits in current_byte, then, add them\
-      \ to output_byte_string\n        if (self.ocount >= self.spstol) and (len(self.current_byte)\
+      \ to output_byte_string\n        if (self.ocount >= self.spstol): # (len(self.current_byte)\
       \ == 7) and (len(self.output_bytes_string) <= self.clen):\n            # this\
       \ might just be a dirty hack for now, need to figure out a better way to check\
       \ if there's a partial\n            ## byte and ocount is high enough\n    \
       \        self.declarebit(int(1)) # will update self.current_byte\n         \
-      \   self.output_bytes_string = self.output_bytes_string + self.current_byte[0:8]\
-      \  # output_bytes is a string\n            self.current_byte = ''\n        \
-      \    self.ocount = 0\n\n        # now we can see if we have a codeword to output\n\
-      \        if len(self.output_bytes_string) >= self.clen:\n            if self.dbug\
-      \ == 1:\n                print(\"Found a codeword\")\n                print(\"\
-      current_byte is \" + str(self.current_byte))\n                print(\"Bytes\
-      \ found are: \" + str(self.output_bytes_string))\n            # import pdb\n\
-      \            # pdb.set_trace()\n            # output the codeword\n        \
-      \    # need to break up the codeword into byte-sized chunks and transmit them\n\
-      \            #for k in range(1,int((self.clen/8) + 1)):\n            for k in\
-      \ range(0, int((self.clen / 8) )):\n                bytes_to_send = self.output_bytes_string[self.clen-(k*8):self.clen-((k-1)*8)]\n\
-      \                bytes_to_send = self.output_bytes_string[k*8:(k+1)*8]\n   \
-      \             self.message_port_pub(pmt.intern(self.msgportname), pmt.intern(bytes_to_send))\n\
-      \n            ## what a one-liner, converts to bytearray: https://stackoverflow.com/questions/32675679/convert-binary-string-to-bytearray-in-python-3\n\
+      \   # import pdb\n            # pdb.set_trace()\n            #self.output_bytes\
+      \ = self.output_bytes + bytearray(chr(int(self.current_byte[0:8], 2)),'utf-8')\
+      \  # output_bytes are bytes\n            #self.output_bytes_string = self.output_bytes_string\
+      \ + self.current_byte[0:8]  # output_bytes is a string\n            #self.current_byte\
+      \ = ''\n            #self.ocount = 0\n\n        # # now we can see if we have\
+      \ a codeword to output\n        # if len(self.output_bytes_string) >= self.clen:\n\
+      \        #     if self.dbug == 1:\n        #         print(\"Found a codeword\"\
+      )\n        #         print(\"current_byte is \" + str(self.current_byte))\n\
+      \        #         print(\"output_bytes string are: \" + str(self.output_bytes_string))\n\
+      \        #         print(\"output_bytes are: \" + str(self.output_bytes))\n\n\
+      \            # output the codeword\n            # need to break up the codeword\
+      \ into byte-sized chunks and transmit them\n            # for k in range(0,\
+      \ int((self.clen / 8) )):\n            #     # bytes_to_send = self.output_bytes_string[self.clen-(k*8):self.clen-((k-1)*8)]\n\
+      \            #     # bytes_to_send = self.output_bytes_string[k*8:(k+1)*8]\n\
+      \            #     # self.message_port_pub(pmt.intern(self.msgportname), pmt.intern(bytes_to_send))\n\
+      \            #     import pdb\n            #     pdb.set_trace()\n         \
+      \   #     bytes_to_send = self.output_bytes_string[self.clen - (k * 8):self.clen\
+      \ - ((k - 1) * 8)]\n            #     bytes_to_send = self.output_bytes_string[k\
+      \ * 8:(k + 1) * 8]\n            #     self.message_port_pub(pmt.intern(self.msgportname),\
+      \ pmt.intern(bytes_to_send))\n\n            ## what a one-liner, converts to\
+      \ bytearray: https://stackoverflow.com/questions/32675679/convert-binary-string-to-bytearray-in-python-3\n\
       \            ## save the bytes output for later\n            #self.output_bytes\
       \ = bytearray(int(self.output_bytes_string[:int(self.clen/8)], 2).to_bytes(int((self.clen/8)\
       \ + 7) // 8, 'big'))\n            #output_items[1][:] =  bytearray(self.output_bytes[:int(self.clen/8)])\
       \ # only output 1 codeword at a time\n            #self.message_port_pub(pmt.intern(self.msgportname),\
       \ pmt.intern(str(self.output_bytes[:int(self.clen / 8)]))) #send bytearray as\
       \ pmt\n            #self.message_port_pub(pmt.intern(self.msgportname), pmt.intern(self.output_bytes_string[:int(self.clen)]))\
-      \ # send the bytes as a s\n            self.output_bytes_string = self.output_bytes_string[self.clen:]\
-      \  # pare the string\n        else:\n            if self.dbug == 1:\n      \
-      \          print(\"No codeword yet\")\n        if self.dbug == 1:\n        \
-      \    print(\"Current byte is: \" + self.current_byte)\n            print(\"\
+      \ # send the bytes as a string\n            #self.output_bytes_string = self.output_bytes_string[self.clen:]\
+      \  # pare the string\n            #self.output_bytes = self.output_bytes[self.clen:]\
+      \  # pare the string\n\n        else:\n            if self.dbug == 1:\n    \
+      \            print(\"No codeword yet\")\n        if self.dbug == 1:\n      \
+      \      print(\"Current byte is: \" + self.current_byte)\n            print(\"\
       Leftover Ocount is: \" + str(self.ocount))\n            print(\"Leftover Zcount\
       \ is: \" + str(self.zcount))\n\n        ## just output what we got in\n    \
       \    output_items[0][:] = input_items[0]\n        return len(output_items[0])\n\
@@ -737,9 +746,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 792.0]
+    coordinate: [992, 816.0]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: epy_block_2_0
   id: epy_block
   parameters:
@@ -816,12 +825,12 @@ blocks:
     comment: 'BBC Requires vectors
 
       for operation'
-    dbug: '0'
+    dbug: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('BBC Encoder', 'blk', [('dbug', '0')], [('0', 'byte', 16)], [('0',
-      'byte', 256)], '', ['dbug'])
+    _io_cache: ('BBC Encoder', 'blk', [('dbug', '0')], [('0', 'byte', 1)], [('0',
+      'byte', 8)], '', ['dbug'])
     bus_sink: false
     bus_source: false
     bus_structure: null
@@ -1228,7 +1237,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1288, 544.0]
+    coordinate: [1144, 624.0]
     rotation: 0
     state: disabled
 
@@ -1252,7 +1261,7 @@ connections:
 - [blocks_vector_to_stream_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [channels_channel_model_0, '0', virtual_sink_0, '0']
 - [epy_block_0, '0', blocks_null_sink_0, '0']
-- [epy_block_0, Message, epy_block_0_0, msgInput]
+- [epy_block_0, Message, blocks_message_debug_0, print]
 - [epy_block_0_0, msgOutput, blocks_message_debug_0, print]
 - [epy_block_2_0, '0', blocks_vector_to_stream_0, '0']
 - [virtual_source_0, '0', band_pass_filter_0, '0']
