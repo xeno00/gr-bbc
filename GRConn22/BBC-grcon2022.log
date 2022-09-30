@@ -1,0 +1,1814 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.8.29)  25 SEP 2022 10:03
+entering extended mode
+**./BBC-grcon2022.tex
+(BBC-grcon2022.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-08-27> (IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen138
+\@IEEEtrantmpdimenB=\dimen139
+\@IEEEtrantmpdimenC=\dimen140
+\@IEEEtrantmpcountA=\count182
+\@IEEEtrantmpcountB=\count183
+\@IEEEtrantmpcountC=\count184
+\@IEEEtrantmptoksA=\toks16
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
+03.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ptm
+.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen141
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen142
+\CLASSINFOnormalsizeunitybaselineskip=\dimen143
+\IEEEnormaljot=\dimen144
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen145
+\IEEEquantizedlengthdiff=\dimen146
+\IEEEquantizedtextheightdiff=\dimen147
+\IEEEilabelindentA=\dimen148
+\IEEEilabelindentB=\dimen149
+\IEEEilabelindent=\dimen150
+\IEEEelabelindent=\dimen151
+\IEEEdlabelindent=\dimen152
+\IEEElabelindent=\dimen153
+\IEEEiednormlabelsep=\dimen154
+\IEEEiedmathlabelsep=\dimen155
+\IEEEiedtopsep=\skip47
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\c@IEEEsubequation=\count189
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\c@figure=\count190
+\c@table=\count191
+\@IEEEeqnnumcols=\count192
+\@IEEEeqncolcnt=\count193
+\@IEEEsubeqnnumrollback=\count194
+\@IEEEquantizeheightA=\dimen156
+\@IEEEquantizeheightB=\dimen157
+\@IEEEquantizeheightC=\dimen158
+\@IEEEquantizeprevdepth=\dimen159
+\@IEEEquantizemultiple=\count195
+\@IEEEquantizeboxA=\box50
+\@IEEEtmpitemindent=\dimen160
+\IEEEPARstartletwidth=\dimen161
+\c@IEEEbiography=\count196
+\@IEEEtranrubishbin=\box51
+)
+\@input{myPackages_notes.aux}
+\openout2 = `myPackages_notes.aux'.
+
+(myPackages_notes.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/siunitx\siuni
+tx.sty
+Package: siunitx 2021-08-27 v3.0.28 A comprehensive (SI) units package
+\l__siunitx_angle_tmp_dim=\dimen162
+\l__siunitx_angle_marker_box=\box52
+\l__siunitx_angle_unit_box=\box53
+\l__siunitx_compound_count_int=\count197
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translations\
+translations.sty
+Package: translations 2021/01/17 v1.10a internationalization of LaTeX2e package
+s (CN)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox\etoo
+lbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count198
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pdftexcmds\
+pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/infwarerr\i
+nfwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\iftex
+.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcmds\ltx
+cmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+\l__siunitx_number_exponent_fixed_int=\count199
+\l__siunitx_number_min_decimal_int=\count266
+\l__siunitx_number_min_integer_int=\count267
+\l__siunitx_number_round_precision_int=\count268
+\l__siunitx_number_group_minimum_int=\count269
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amste
+xt.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsge
+n.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen163
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\colo
+r.sty
+Package: color 2020/02/24 v1.2b Standard LaTeX Color (DPC)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\
+color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-def\
+pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\l__siunitx_table_tmp_box=\box54
+\l__siunitx_table_tmp_dim=\dimen164
+\l__siunitx_table_column_width_dim=\dimen165
+\l__siunitx_table_integer_box=\box55
+\l__siunitx_table_decimal_box=\box56
+\l__siunitx_table_before_box=\box57
+\l__siunitx_table_after_box=\box58
+\l__siunitx_table_before_dim=\dimen166
+\l__siunitx_table_carry_dim=\dimen167
+\l__siunitx_unit_tmp_int=\count270
+\l__siunitx_unit_position_int=\count271
+\l__siunitx_unit_total_int=\count272
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/l3
+keys2e\l3keys2e.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3kernel\expl
+3.sty
+Package: expl3 2021-08-27 L3 programming layer (loader) 
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3b
+ackend-pdftex.def
+File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count273
+\l__pdf_internal_box=\box59
+))
+Package: l3keys2e 2021-08-27 LaTeX2e option processing using LaTeX3 keys
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\array.s
+ty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen168
+\ar@mcellbox=\box60
+\extrarowheight=\dimen169
+\NC@list=\toks18
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box61
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fontenc.
+sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
+2.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1ptm.
+fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc
+.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks19
+\inpenc@posthook=\toks20
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\mathpt
+mx.sty
+Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amss
+ymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsf
+onts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup6
+\symAMSb=\mathgroup7
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsma
+th.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbs
+y.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen170
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsop
+n.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count274
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count275
+\leftroot@=\count276
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count277
+\DOTSCASE@=\count278
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box62
+\strutbox@=\box63
+\big@size=\dimen171
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count279
+\c@MaxMatrixCols=\count280
+\dotsspace@=\muskip16
+\c@parentequation=\count281
+\dspbrk@lvl=\count282
+\tag@help=\toks21
+\row@=\count283
+\column@=\count284
+\maxfields@=\count285
+\andhelp@=\toks22
+\eqnshift@=\dimen172
+\alignsep@=\dimen173
+\tagshift@=\dimen174
+\tagwidth@=\dimen175
+\totwidth@=\dimen176
+\lineht@=\dimen177
+\@envbody=\toks23
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/cancel\cancel
+.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/circuitikz\ci
+rcuitikz.sty
+Package: circuitikz 2021/07/26{} The CircuiTikz circuit drawing package version
+ 1.4.2
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/frontendl
+ayer\tikz.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/basiclaye
+r\pgf.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/utilities
+\pgfrcs.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfutil-common.tex
+\pgfutil@everybye=\toks25
+\pgfutil@tempdima=\dimen178
+\pgfutil@tempdimb=\dimen179
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfutil-common-lists.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfutil-latex.def
+\pgfutil@abb=\box64
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfrcs.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf\pgf.rev
+ision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/basiclaye
+r\pgfcore.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\grap
+hicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyv
+al.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks26
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\grap
+hics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\trig
+.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\
+graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/systemlay
+er\pgfsys.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks27
+\pgfkeys@temptoks=\toks28
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks29
+))
+\pgf@x=\dimen182
+\pgf@y=\dimen183
+\pgf@xa=\dimen184
+\pgf@ya=\dimen185
+\pgf@xb=\dimen186
+\pgf@yb=\dimen187
+\pgf@xc=\dimen188
+\pgf@yc=\dimen189
+\pgf@xd=\dimen190
+\pgf@yd=\dimen191
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count286
+\c@pgf@countb=\count287
+\c@pgf@countc=\count288
+\c@pgf@countd=\count289
+\t@pgf@toka=\toks30
+\t@pgf@tokb=\toks31
+\t@pgf@tokc=\toks32
+\pgf@sys@id@count=\count290
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count291
+\pgfsyssoftpath@bigbuffer@items=\count292
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/systeml
+ayer\pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor
+.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\
+color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 709.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmath.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathcalc.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathutil.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathparser.code.tex
+\pgfmath@dimen=\dimen192
+\pgfmath@count=\count293
+\pgfmath@box=\box65
+\pgfmath@toks=\toks33
+\pgfmath@stack@operand=\toks34
+\pgfmath@stack@operation=\toks35
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.basic.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.trigonometric.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.random.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.comparison.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.base.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.round.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.misc.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfunctions.integerarithmetics.code.tex)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count294
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fint.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen193
+\pgf@picmaxx=\dimen194
+\pgf@picminy=\dimen195
+\pgf@picmaxy=\dimen196
+\pgf@pathminx=\dimen197
+\pgf@pathmaxx=\dimen198
+\pgf@pathminy=\dimen199
+\pgf@pathmaxy=\dimen256
+\pgf@xx=\dimen257
+\pgf@xy=\dimen258
+\pgf@yx=\dimen259
+\pgf@yy=\dimen260
+\pgf@zx=\dimen261
+\pgf@zy=\dimen262
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen263
+\pgf@path@lasty=\dimen264
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen265
+\pgf@shorten@start@additional=\dimen266
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box66
+\pgf@hbox=\box67
+\pgf@layerbox@main=\box68
+\pgf@picture@serial@count=\count295
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen267
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen268
+\pgf@pt@y=\dimen269
+\pgf@pt@temp=\dimen270
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen271
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen272
+\pgf@sys@shading@range@num=\count296
+\pgf@shadingcount=\count297
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box69
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/basicla
+yer\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box70
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/compatibi
+lity\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen273
+\pgf@nodesepend=\dimen274
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/compatibi
+lity\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/utilities
+\pgffor.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/utilities
+\pgfkeys.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgfkeys.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgf/math\pgfm
+ath.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmath.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/utiliti
+es\pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/math\pg
+fmath.code.tex)
+\pgffor@iter=\dimen275
+\pgffor@skip=\dimen276
+\pgffor@stack=\toks36
+\pgffor@toks=\toks37
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz\tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count298
+\pgfplotmarksize=\dimen277
+)
+\tikz@lastx=\dimen278
+\tikz@lasty=\dimen279
+\tikz@lastxsaved=\dimen280
+\tikz@lastysaved=\dimen281
+\tikz@lastmovetox=\dimen282
+\tikz@lastmovetoy=\dimen283
+\tikzleveldistance=\dimen284
+\tikzsiblingdistance=\dimen285
+\tikz@figbox=\box71
+\tikz@figbox@bg=\box72
+\tikz@tempbox=\box73
+\tikz@tempbox@bg=\box74
+\tikztreelevel=\count299
+\tikznumberofchildren=\count300
+\tikznumberofcurrentchild=\count301
+\tikz@fig@count=\count302
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count303
+\pgfmatrixcurrentcolumn=\count304
+\pgf@matrix@numberofcolumns=\count305
+)
+\tikz@expandcount=\count306
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowinset=\dimen286
+\pgfarrowlength=\dimen287
+\pgfarrowwidth=\dimen288
+\pgfarrowlinewidth=\dimen289
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarybending.code.tex
+File: tikzlibrarybending.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmodulebending.code.tex
+File: pgfmodulebending.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmodulenonlineartransformations.code.tex
+File: pgfmodulenonlineartransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgftransformnonlinearflatness=\dimen290
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibrarycurvilinear.code.tex
+File: pgflibrarycurvilinear.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@curvilinear@time@a=\dimen291
+\pgf@curvilinear@length@a=\dimen292
+\pgf@curvilinear@length@b=\dimen293
+\pgf@curvilinear@length@c=\dimen294
+\pgf@curvilinear@length@d=\dimen295
+)
+\pgf@arrows@the@rigidity=\dimen296
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryfpu.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibraryfpu.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcirc.defines.tex
+\pgf@circ@count@a=\count307
+\pgf@circ@count@b=\count308
+\pgf@circ@count@c=\count309
+\pgf@circ@res@up=\dimen297
+\pgf@circ@res@down=\dimen298
+\pgf@circ@res@zero=\dimen299
+\pgf@circ@res@left=\dimen300
+\pgf@circ@res@right=\dimen301
+\pgf@circ@res@other=\dimen302
+\pgf@circ@res@step=\dimen303
+\pgf@circ@res@temp=\dimen304
+\pgf@circ@Rlen=\dimen305
+\pgf@circ@scaled@Rlen=\dimen306
+\pgfstartlinewidth=\dimen307
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircutils.tex
+\ctikz@scratchbox=\box75
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircpath.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircshapes.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircmonopoles.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircbipoles.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcirctripoles.tex
+\pgf@circ@res@count=\count310
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircquadpoles.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircmultipoles.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcirclabel.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircvoltage.tex
+\pgfcirc@labelshift=\dimen308
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcirccurrent.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\
+pgfcircflow.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/colortbl\colo
+rtbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks38
+\minrowclearance=\skip55
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/comment\comme
+nt.sty
+\CommentStream=\write4
+ Excluding comment 'comment')
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/endnotes\endn
+otes.sty
+Package: endnotes 2020-01-02 endnotes package
+\c@endnote=\count311
+\endnotesep=\dimen309
+\@enotes=\write5
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyhdr\fanc
+yhdr.sty
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip56
+\f@nch@O@elh=\skip57
+\f@nch@O@erh=\skip58
+\f@nch@O@olh=\skip59
+\f@nch@O@orh=\skip60
+\f@nch@O@elf=\skip61
+\f@nch@O@erf=\skip62
+\f@nch@O@olf=\skip63
+\f@nch@O@orf=\skip64
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hanging\hangi
+ng.sty
+Package: hanging 2009/09/02 v1.2b hanging paragraphs and punctuation
+\h@ngcommawd=\skip65
+\h@ngfstopwd=\skip66
+\h@ngquotewd=\skip67
+\h@ngdquotewd=\skip68
+\h@ngquerywd=\skip69
+\h@ngexclwd=\skip70
+\h@ngcolonwd=\skip71
+\h@ngscolonwd=\skip72
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geom
+etry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifvte
+x.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count312
+\Gm@cntv=\count313
+\c@Gm@tempcnt=\count314
+\Gm@bindingoffset=\dimen310
+\Gm@wd@mp=\dimen311
+\Gm@odd@mp=\dimen312
+\Gm@even@mp=\dimen313
+\Gm@layoutwidth=\dimen314
+\Gm@layoutheight=\dimen315
+\Gm@layouthoffset=\dimen316
+\Gm@layoutvoffset=\dimen317
+\Gm@dimlist=\toks39
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geom
+etry.cfg))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lastpage\last
+page.sty
+Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\math
+rsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup8
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mathtools\mat
+htools.sty
+Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\calc.st
+y
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count315
+\calc@Bcount=\count316
+\calc@Adimen=\dimen318
+\calc@Bdimen=\dimen319
+\calc@Askip=\skip73
+\calc@Bskip=\skip74
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count317
+\calc@Cskip=\skip75
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mathtools\mhs
+etup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
+\g_MT_multlinerow_int=\count318
+\l_MT_multwidth_dim=\dimen320
+\origjot=\skip76
+\l_MT_shortvdotswithinadjustabove_dim=\dimen321
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen322
+\l_MT_above_intertext_sep=\dimen323
+\l_MT_below_intertext_sep=\dimen324
+\l_MT_above_shortintertext_sep=\dimen325
+\l_MT_below_shortintertext_sep=\dimen326
+\xmathstrut@box=\box76
+\xmathstrut@dim=\dimen327
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pbox\pbox.sty
+Package: pbox 2011/12/07 v1.2 Dynamic parboxes
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ifthen.s
+ty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\pb@xlen=\skip77
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pdfp
+ages.sty
+Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eso-pic\eso-p
+ic.sty
+Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\atbegshi
+-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+))
+\AM@pagewidth=\dimen328
+\AM@pageheight=\dimen329
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pppd
+ftex.def
+File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box77
+\AM@global@opts=\toks40
+\AM@pagecnt=\count319
+\AM@toc@title=\toks41
+\c@AM@survey=\count320
+\AM@templatesizebox=\box78
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgfplots\pgfp
+lots.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotscore.code.tex
+\t@pgfplots@toka=\toks42
+\t@pgfplots@tokb=\toks43
+\t@pgfplots@tokc=\toks44
+\pgfplots@tmpa=\dimen330
+\c@pgfplots@coordindex=\count321
+\c@pgfplots@scanlineindex=\count322
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/sy
+s\pgfplotssysgeneric.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+bs\pgfplotslibrary.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ol
+dpgfcompatib\pgfplotsoldpgfsupp_loader.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotsutil.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+ststructure\pgfplotsliststructure.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+ststructure\pgfplotsliststructureext.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+ststructure\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count323
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+ststructure\pgfplotsmatrix.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/nu
+mtable\pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count324
+\t@pgfplotstable@a=\toks45
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+ststructure\pgfplotsdeque.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotsbinary.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotsbinary.data.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotsutil.verb.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+bs\pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count325
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/sy
+s\pgflibrarypgfplots.surfshading.pgfsys-pdftex.def)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotscolormap.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/ut
+il\pgfplotscolor.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotsstackedplots.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotsplothandlers.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotsmeshplothandler.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotsmeshplotimage.code.tex)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.scaling.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotscoordprocessing.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.errorbars.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.markers.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplotsticks.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.paths.code.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarydecorations.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen331
+\pgfdecoratedremainingdistance=\dimen332
+\pgfdecoratedinputsegmentcompleteddistance=\dimen333
+\pgfdecoratedinputsegmentremainingdistance=\dimen334
+\pgf@decorate@distancetomove=\dimen335
+\pgf@decorate@repeatstate=\count326
+\pgfdecorationsegmentamplitude=\dimen336
+\pgfdecorationsegmentlength=\dimen337
+)
+\tikz@lib@dec@box=\box79
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarydecorations.pathmorphing.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/decorations\pgflibrarydecorations.pathmorphing.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/decorations\pgflibrarydecorations.pathreplacing.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/li
+bs\tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count327
+\pgfplots@xmin@reg=\dimen338
+\pgfplots@xmax@reg=\dimen339
+\pgfplots@ymin@reg=\dimen340
+\pgfplots@ymax@reg=\dimen341
+\pgfplots@zmin@reg=\dimen342
+\pgfplots@zmax@reg=\dimen343
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pgfplots\pgfp
+lotstable.sty
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots\pg
+fplots.revision.tex)
+Package: pgfplotstable 2021/05/15 v1.18.1 Table typesetting and Pretty-printing
+ (1.18.1)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/nu
+mtable\pgfplotstable.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgfplots/nu
+mtable\pgfplotstable.coltype.code.tex)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdflscape\pdf
+lscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\lsca
+pe.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/steinmetz\ste
+inmetz.sty
+Package: steinmetz 2009/06/14 v1.0 Steinmetz symbol for electrotechnics
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\pict2e
+.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\pict2e
+.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 112.
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\p2e-pd
+ftex.def
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks46
+\@arclen=\dimen344
+\@arcrad=\dimen345
+\pIIe@tempdima=\dimen346
+\pIIe@tempdimb=\dimen347
+\pIIe@tempdimc=\dimen348
+\pIIe@tempdimd=\dimen349
+\pIIe@tempdime=\dimen350
+\pIIe@tempdimf=\dimen351
+)
+\stm@phasebox=\box80
+\stm@phasedp=\skip78
+\stm@phaseht=\skip79
+\stm@phasetot=\skip80
+\stm@phasewd=\skip81
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\textcomp
+.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/textpos\textp
+os.sty
+Package: textpos 2020/09/26 v1.10
+
+Package: textpos 2020/09/26 1.10, absolute positioning of text on the page
+Package textpos Info: choosing support for LaTeX3 on input line 61.
+\TP@textbox=\box81
+\TP@holdbox=\box82
+\TPHorizModule=\dimen352
+\TPVertModule=\dimen353
+\TP@margin=\dimen354
+\TP@absmargin=\dimen355
+Grid set 16 x 16 = 38.39343pt x 49.68562pt
+\TPboxrulesize=\dimen356
+\TP@ox=\dimen357
+\TP@oy=\dimen358
+\TP@tbargs=\toks47
+TextBlockOrigin set to 0pt x 0pt
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarydecorations.markings.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/decorations\pgflibrarydecorations.markings.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\arrowsize=\dimen359
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.callouts.code.tex
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.callouts.code.tex))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es/shapes\pgflibraryshapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodepartlowerbox=\box83
+\pgfnodeparttwobox=\box84
+\pgfnodepartthreebox=\box85
+\pgfnodepartfourbox=\box86
+\pgfnodeparttwentybox=\box87
+\pgfnodepartnineteenbox=\box88
+\pgfnodeparteighteenbox=\box89
+\pgfnodepartseventeenbox=\box90
+\pgfnodepartsixteenbox=\box91
+\pgfnodepartfifteenbox=\box92
+\pgfnodepartfourteenbox=\box93
+\pgfnodepartthirteenbox=\box94
+\pgfnodeparttwelvebox=\box95
+\pgfnodepartelevenbox=\box96
+\pgfnodeparttenbox=\box97
+\pgfnodepartninebox=\box98
+\pgfnodeparteightbox=\box99
+\pgfnodepartsevenbox=\box100
+\pgfnodepartsixbox=\box101
+\pgfnodepartfivebox=\box102
+)))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarypatterns.code.tex
+File: tikzlibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibrarypatterns.code.tex
+File: pgflibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\variore
+f.sty
+Package: varioref 2020/08/11 v1.6e package for extended references (FMi)
+\c@vrcnt=\count328
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hype
+rref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvsetkeys\k
+vsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvdefinekey
+s\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pdfescape\p
+dfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hycolor\hycol
+or.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/letltxmacro\l
+etltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/auxhook\auxho
+ok.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/kvoptions\kvo
+ptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen360
+\Hy@linkcounter=\count329
+\Hy@pagecounter=\count330
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\pd1e
+nc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hype
+rref-langpatches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/intcalc\int
+calc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/etexcmds\et
+excmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count331
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\puen
+c.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count332
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen361
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bitset\bits
+et.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bigintcalc\
+bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count333
+\Field@Width=\dimen362
+\Fld@charsize=\dimen363
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+\Hy@abspage=\count334
+\c@Item=\count335
+\c@Hfootnote=\count336
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hpdf
+tex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\atveryen
+d-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+\Fld@listcount=\count337
+\c@bookmark@seq@number=\count338
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/rerunfilechec
+k\rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/uniquecount
+er\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip82
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 85.
+)
+\@input{myShortcuts.aux}
+\openout2 = `myShortcuts.aux'.
+
+(myShortcuts.tex)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/scalerel\scal
+erel.sty
+Package: scalerel 2016/12/29 v1.8 Routines for constrained scaling and stretchi
+ng of objects, relative to a reference object or in absolute terms
+\thesrwidth=\skip83
+\thesrheight=\skip84
+\srblobheight=\skip85
+\srblobdepth=\skip86
+\mnxsrwidth=\skip87
+\LMex=\skip88
+\LMpt=\skip89
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/fronten
+dlayer/tikz/libraries\tikzlibrarysvg.path.code.tex
+File: tikzlibrarysvg.path.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/librari
+es\pgflibrarysvg.path.code.tex
+File: pgflibrarysvg.path.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules
+\pgfmoduleparser.code.tex
+File: pgfmoduleparser.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfparserdef@arg@count=\count339
+)
+\pgf@lib@svg@last@x=\dimen364
+\pgf@lib@svg@last@y=\dimen365
+\pgf@lib@svg@last@c@x=\dimen366
+\pgf@lib@svg@last@c@y=\dimen367
+\pgf@lib@svg@count=\count340
+\pgf@lib@svg@max@num=\count341
+))
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\list
+ings.sty
+\lst@mode=\count342
+\lst@gtempboxa=\box103
+\lst@token=\toks48
+\lst@length=\count343
+\lst@currlwidth=\dimen368
+\lst@column=\count344
+\lst@pos=\count345
+\lst@lostspace=\dimen369
+\lst@width=\dimen370
+\lst@newlines=\count346
+\lst@lineno=\count347
+\lst@maxwidth=\dimen371
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstm
+isc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count348
+\lst@skipnumbers=\count349
+\lst@framebox=\box104
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\list
+ings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+Package translations Info: No language package found. I am going to use `englis
+h' as default language. on input line 114.
+ (BBC-grcon2022.aux)
+\openout1 = `BBC-grcon2022.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+
+-- Lines per column: 54 (approximate, difference = 2.43001pt).
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translations/
+dicts\translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `tra
+nslations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' f
+or `english'. on input line 114.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\s
+upp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count350
+\scratchdimen=\dimen372
+\scratchbox=\box105
+\nofMPsegments=\count351
+\nofMParguments=\count352
+\everyMPshowfont=\toks49
+\MPscratchCnt=\count353
+\MPscratchDim=\dimen373
+\MPnumerator=\count354
+\makeMPintoPDFobject=\count355
+\everyMPtoPDFconversion=\toks50
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\
+epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/00miktex\epst
+opdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-30.56761pt
+* \headheight=12.0pt
+* \headsep=18.56761pt
+* \topskip=12.0pt
+* \footskip=40.5821pt
+* \marginparwidth=20.0pt
+* \marginparsep=10.0pt
+* \columnsep=12.0pt
+* \skip\footins=10.79993pt plus 4.79993pt minus 2.39996pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumntrue
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 114.
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
+Package hyperref Info: Link coloring ON on input line 114.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\name
+ref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refc
+ount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/generic/gettitlestr
+ing\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count356
+LaTeX Info: Redefining \Ref on input line 520.
+)
+LaTeX Info: Redefining \ref on input line 114.
+LaTeX Info: Redefining \pageref on input line 114.
+LaTeX Info: Redefining \nameref on input line 114.
+ (BBC-grcon2022.out) (BBC-grcon2022.out)
+\@outlinefile=\write6
+\openout6 = `BBC-grcon2022.out'.
+
+LaTeX Info: Redefining \Ref on input line 114.
+\c@lstlisting=\count357
+
+** WARNING: \IEEEpubid is locked out when in conference mode (line 139).
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 141.
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
+ 141.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ztm
+cm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
+ 141.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omlztm
+cm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
+ 141.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsztm
+cm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
+ 141.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omxztm
+cm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 14
+1.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursf
+s.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+
+LaTeX Warning: Citation `thesis' on page 1 undefined on input line 157.
+
+
+Underfull \hbox (badness 2318) in paragraph at lines 159--160
+\T1/ptm/m/n/10 are still con-tin-gent on sym-met-ric TSKs for jam-
+ []
+
+
+LaTeX Warning: Citation `udsss' on page 1 undefined on input line 163.
+
+
+LaTeX Warning: Citation `ogBBC' on page 1 undefined on input line 167.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{C:/Users/neil.rogers/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+
+
+
+
+
+
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--177
+[]|\T1/ptm/m/n/8 ASCII
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+[]|\T1/ptm/m/n/8 ASCII
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 231.
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--241
+[]|\T1/ptm/m/n/8 Message
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
+[]|\T1/ptm/m/n/8 Codeword af-ter
+ []
+
+
+Overfull \hbox (1.32794pt too wide) in paragraph at lines 259--259
+[]|\T1/ptm/m/n/8 `00110010'| 
+ []
+
+
+LaTeX Warning: Citation `thesis' on page 2 undefined on input line 265.
+
+[2]
+<images/decoder_search_tree.png, id=92, 370.38374pt x 293.59688pt>
+File: images/decoder_search_tree.png Graphic file (type png)
+<use images/decoder_search_tree.png>
+Package pdftex.def Info: images/decoder_search_tree.png  used on input line 271
+.
+(pdftex.def)             Requested size: 218.5245pt x 173.22064pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
+[]|\T1/ptm/m/n/8 ASCII
+ []
+
+
+LaTeX Warning: Citation `glowworm' on page 3 undefined on input line 303.
+
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstl
+ang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 30
+7.
+
+(C:\Users\neil.rogers\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1pcr.
+fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 308.
+
+Overfull \hbox (1.52484pt too wide) in paragraph at lines 332--333
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[3 <./images/decoder_search_tree.png>]
+
+LaTeX Warning: Citation `thesis' on page 4 undefined on input line 365.
+
+
+LaTeX Warning: Citation `grcissue' on page 4 undefined on input line 372.
+
+[4]
+<./figures/GRCCodec_Multiple Messages_V2.jpg, id=151, 931.98187pt x 542.77782pt
+>
+File: ./figures/GRCCodec_Multiple Messages_V2.jpg Graphic file (type jpg)
+<use ./figures/GRCCodec_Multiple Messages_V2.jpg>
+Package pdftex.def Info: ./figures/GRCCodec_Multiple Messages_V2.jpg  used on i
+nput line 384.
+(pdftex.def)             Requested size: 232.99489pt x 135.69412pt.
+
+Overfull \hbox (4.11739pt too wide) in paragraph at lines 384--385
+ [][] 
+ []
+
+<./figures/GRCCodec_Fake marks.jpg, id=152, 779.91376pt x 410.2828pt>
+File: ./figures/GRCCodec_Fake marks.jpg Graphic file (type jpg)
+<use ./figures/GRCCodec_Fake marks.jpg>
+Package pdftex.def Info: ./figures/GRCCodec_Fake marks.jpg  used on input line 
+391.
+(pdftex.def)             Requested size: 194.97797pt x 102.57045pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `thesis' on page 5 undefined on input line 397.
+
+<./figures/bbc_ook_1.jpg, id=155, 956.07187pt x 410.2828pt>
+File: ./figures/bbc_ook_1.jpg Graphic file (type jpg)
+<use ./figures/bbc_ook_1.jpg>
+Package pdftex.def Info: ./figures/bbc_ook_1.jpg  used on input line 408.
+(pdftex.def)             Requested size: 239.01738pt x 102.57045pt.
+
+Overfull \hbox (10.13988pt too wide) in paragraph at lines 408--409
+ [][] 
+ []
+
+<./figures/bbc_ook_2.jpg, id=156, 829.59938pt x 287.57437pt>
+File: ./figures/bbc_ook_2.jpg Graphic file (type jpg)
+<use ./figures/bbc_ook_2.jpg>
+Package pdftex.def Info: ./figures/bbc_ook_2.jpg  used on input line 416.
+(pdftex.def)             Requested size: 207.39934pt x 71.89342pt.
+[5 <./figures/GRCCodec_Multiple Messages_V2.jpg> <./figures/GRCCodec_Fake marks
+.jpg> <./figures/bbc_ook_1.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 424--427
+
+ []
+
+No file BBC-grcon2022.bbl.
+[6
+
+ <./figures/bbc_ook_2.jpg>] [7
+
+] [8]
+<images/BBC grc.png, id=305, 751.30687pt x 244.66406pt>
+File: images/BBC grc.png Graphic file (type png)
+<use images/BBC grc.png>
+Package pdftex.def Info: images/BBC grc.png  used on input line 597.
+(pdftex.def)             Requested size: 450.7876pt x 146.79956pt.
+ [9 <./images/BBC grc.png>]
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+
+AED: lastpage setting LastPage
+[10] (BBC-grcon2022.aux)
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `BBC-grcon2022.out' has not changed.
+(rerunfilecheck)             Checksum: 4C0C04F9827F6AE4A36AD59E25B05F02;2546.
+ ) 
+Here is how much of TeX's memory you used:
+ 56664 strings out of 478927
+ 1439253 string characters out of 2847761
+ 2386750 words of memory out of 4950575
+ 73434 multiletter control sequences out of 15000+600000
+ 536225 words of font info for 192 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 124i,15n,127p,1156b,1426s stack positions out of 5000i,500n,10000p,200000b,80000s
+{C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/
+8r.enc}<C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb><C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/neil.rogers/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/neil.rogers/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/n
+eil.rogers/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrro8a.pf
+b><C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/symbo
+l/usyr.pfb><C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+urw/times/utmb8a.pfb><C:/Users/neil.rogers/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/urw/times/utmbi8a.pfb><C:/Users/neil.rogers/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/neil.rogers/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on BBC-grcon2022.pdf (10 pages, 1426534 bytes).
+PDF statistics:
+ 496 PDF objects out of 1000 (max. 8388607)
+ 276 named destinations out of 1000 (max. 500000)
+ 163 words of extra memory for PDF output out of 10000 (max. 10000000)
+

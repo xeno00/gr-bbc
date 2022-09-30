@@ -1,0 +1,84 @@
+# Author: James C Morrison
+# Date: 1/1//2022
+# Project: ECE-499 Secure Communications
+# 
+# Description:
+# Implementation of the BBC codec with arrays rather than binary numbers.
+# Slow but easier to understand.
+
+# TODO: answer decoding questions
+# TODO: write glowworm.py
+# TODO: change n to n+1 for encode loop?
+
+from glowworm import GW_hash
+# Here, GW_hash must return a list of indicies to place ones and must handle complete arrays, and must have its own memory (i.e. no delBit)
+from math import log
+
+
+def encode_BBC(message:list):
+    """
+    encode_BBC uses the BBC algorithm to place marks in a codeword.
+
+    :param message:  message to be encoded, as a list of ones and zeros
+    :return:  the encoded message AKA codeword, as a list of ones and zeros
+    """
+    # add checksum bits and calculate the message length
+    message.extend(0,0)
+    length = len(message)
+    # initialize the codeword to all 0's
+    mark_array = [0 for m in range(2 ** (length))]
+    # place marks (1's) at each subset hash location
+    for i in range(length):
+        mark_array[GW_hash(message[0:i])] = 1
+    # return the codeword
+    return mark_array
+
+
+def decode_BBC(codeword:list):
+    """
+    decode_BBC uses the BBC algorithm to decode a list of marks (codewords).
+
+        :param codeword:  list of marks to be decoded
+        :param hash:  hash function to determine mark positions
+        :return:  list of identified messages (without checksum bits)
+    """
+    # initialize the current assumed message and array of valid messages
+    message = []
+    messages = []
+    # make the first recursive call to decode
+    _decode_BBC_recursive(codeword, message, messages)
+    return messages
+
+# - is this depth first recusion? yes
+# - is the L term from the paper the same as the message length or the
+#   codeword length? It is the message length since it is the terminating condition
+# - would best practice have these parameters named differently than the
+#   caller function?
+# - would it be faster to store the length instead of using a logarithm? Yes, but program for mechanics not speed right now.
+# - does python evaluate a result of 1 as true for a mathematical expression or do I need
+#   <expression> == 1
+# - typo in paper as marked in .pdf? The following code assumes yes. Dr. Bahn thinks yes.
+# - Prune the recursive tree once to checksum bits
+# - Configure hashing to do one bit at a time
+# - Configure hashing to delete a bit from the hash state
+# - Move from recursive to iterative
+def _decode_BBC_recursive(codeword:list, message, message_list:list):
+    """
+    _decode_BBC_recursive is the recursive functionality to decode a BBC code
+
+        :param codeword:  message to be decoded, as a list of 1s and 0s
+        :param message: current message tree
+        :param message_list:  array of valid messages contained in the codeword
+    """
+    length = log(len(codeword,2))
+    index = len(message)
+    # base case, we've reached the end of the message tree with a valid message, add the message and remove checksum
+    if index == (length-1):
+        message_list.append(message[:-2])
+    # test both possible next message values
+    else:
+        # assuming the next message bit is a 0, check for a mark in the codeword
+        if codeword[hash(message.append(0))]:
+            _decode_BBC_recursive(codeword, length, hash, index+1, message.append(0), message_list)
+        if codeword[hash(message.append(1))]:
+            _decode_BBC_recursive(codeword, length, hash, index+1, message.append(1), message_list)
