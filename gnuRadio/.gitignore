@@ -1,4 +1,0 @@
-*.py
-*.txt
-__pycache__/
-!zmq_receive_bbc.py
