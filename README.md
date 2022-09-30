@@ -3,8 +3,8 @@
 ## Overview
 ##### Project Description
 This project implements Baird, Bahn, and Collins' **BBC codec** in GNURaduio
-See https://events.gnuradio.org/event/18/contributions/278/ for background information and use-case explaination.
-Alternatively, use https://github.com/livethisdream/sturdy-train/blob/main/GRConn22/BBC_GRCon22_Paper.pdf if depricated. Watch the GRCon22 presentation at https://youtu.be/I3QmZwdsavE&t=7h38m45s.
+See the [GRCon22 events page](https://events.gnuradio.org/event/18/contributions/278/) for background information and use-case explaination.
+If you want, watch out GRCon22 presentation, [here](https://youtu.be/I3QmZwdsavE&t=7h38m45s).
 
     
 ##### Manifest
