@@ -1,0 +1,8 @@
+*.log
+*.out
+*.xml
+*.snm
+*.synctex.gz
+*.toc
+*.bcf
+*.nav
