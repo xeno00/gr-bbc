@@ -1,9 +1,7 @@
 # **BBC Anti-Jam Communications**: sturdy-train
 
-## *Note: This OOT module is not yet installable. This functionality will be available by 10/06/22.
-Project Description*
+## *Note: This OOT module is not yet installable. This functionality will be available by 10/06/22.*
 
-## Overview
 ##### Project Description
 This project implements Baird, Bahn, and Collins' **BBC codec** in GNURaduio
 See the [GRCon22 events page](https://events.gnuradio.org/event/18/contributions/278/) for background information and use-case explanation.
