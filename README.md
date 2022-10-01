@@ -1,4 +1,4 @@
-# **BBC Anti-Jam Communications**: sturdy-train
+# **BBC Anti-Jam Communications**: gr-bbc
 
 ## *Note: This OOT module is not yet installable. This functionality will be available by 10/06/22.*
 
