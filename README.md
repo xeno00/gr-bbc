@@ -1,5 +1,8 @@
 # **BBC Anti-Jam Communications**: sturdy-train
 
+## *Note: This OOT module is not yet installable. This functionality will be available by 10/06/22.
+Project Description*
+
 ## Overview
 ##### Project Description
 This project implements Baird, Bahn, and Collins' **BBC codec** in GNURaduio
@@ -9,8 +12,8 @@ If you want, watch our GRCon22 presentation, [here](https://youtu.be/I3QmZwdsavE
     
 ##### Manifest
 
-1. `GRCon22`: Contains resources used for the GRCon 2022 presentation
+1. `blocks`: OOT gnuradio companion blocks for this module
    
-2. `bbc-python`: Contains object oriented implementation of BBC and its supporting glowworm hash function
+2. `examples`: Potential use-cases for BBC, using .grc flowgraphs
 
-3. `gnuRadio`: Contains blocks and examples for using BBC in gnuradio
+3. `python`: Contains object-oriented code for the underlying blocks, as well as a test harness and zmq recieve sink
