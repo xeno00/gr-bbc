@@ -1,6 +1,6 @@
 # **BBC Anti-Jam Communications**: gr-bbc
 
-## *Note: This OOT module is not yet installable. This functionality will be available by 10/06/22.*
+## *Note: This OOT module is not yet installable. This functionality will be available by 10/15/22.*
 
 ##### Project Description
 This project implements Baird, Bahn, and Collins' **BBC codec** in GNURaduio
