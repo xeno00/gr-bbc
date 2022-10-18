@@ -11,6 +11,8 @@ __pycache__/
 !zmq_receive_bbc.py
 .idea
 references/
-
+*
+*/
+!.gitignore
 
 
