@@ -34,4 +34,6 @@ except ImportError:
 # import any pure python here
 from .bbc_encoder import bbc_encoder
 from .bbc_decoder import bbc_decoder
+from .OOKDemodulator import OOKDemodulator
+from .OOKModulator import OOKModulator
 #

@@ -1,0 +1,40 @@
+id: OOKDemodulator
+label: OOK Demodulator
+category: '[GRC Hier Blocks]'
+
+parameters:
+-   id: samp_rate
+    label: samp_rate
+    dtype: raw
+    default: 128e3
+    hide: none
+-   id: symbol_rate
+    label: symbol_rate
+    dtype: raw
+    default: '500'
+    hide: none
+
+inputs:
+-   label: in
+    dtype: complex
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: byte
+    vlen: 1
+
+templates:
+    imports: 'from OOKDemodulator import OOKDemodulator  # grc-generated hier_block'
+    make: "OOKDemodulator(\n    samp_rate=${ samp_rate },\n    symbol_rate=${ symbol_rate\
+        \ },\n)"
+    callbacks:
+    - set_samp_rate(${ samp_rate })
+    - set_symbol_rate(${ symbol_rate })
+
+documentation: 'James Morrison
+
+    /home/james/git/gr-bbc/blocks/OOKDemodulator.py'
+grc_source: /home/james/git/gr-bbc/blocks/OOKDemodulator.grc
+
+file_format: 1

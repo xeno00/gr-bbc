@@ -33,7 +33,9 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     bbc_encoder.py
-    bbc_decoder.py DESTINATION ${GR_PYTHON_DIR}/bbc
+    bbc_decoder.py
+    OOKDemodulator.py
+    OOKModulator.py DESTINATION ${GR_PYTHON_DIR}/bbc
 )
 
 ########################################################################
@@ -43,3 +45,4 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-bbc)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
+

@@ -20,5 +20,7 @@
 
 install(FILES
     bbc_bbc_encoder.block.yml
-    bbc_bbc_decoder.block.yml DESTINATION share/gnuradio/grc/blocks
+    bbc_bbc_decoder.block.yml
+    bbc_OOKDemodulator.block.yml
+    bbc_OOKModulator.block.yml DESTINATION share/gnuradio/grc/blocks
 )

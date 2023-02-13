@@ -125,7 +125,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 388.0]
+    coordinate: [416, 396.0]
     rotation: 0
     state: true
 - name: bbc_bbc_encoder_0
@@ -142,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 180.0]
+    coordinate: [568, 196.0]
     rotation: 0
     state: true
 - name: bbc_bbc_encoder_0_0
@@ -159,7 +159,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 260.0]
+    coordinate: [568, 284.0]
     rotation: 0
     state: true
 - name: blocks_file_sink_0
@@ -169,7 +169,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/james/git/sturdy-train/examples/out.txt
+    file: bbc_gr_base_output.txt
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -177,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 384.0]
+    coordinate: [856, 388.0]
     rotation: 0
     state: true
 - name: blocks_head_0
@@ -195,7 +195,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 208.0]
+    coordinate: [232, 204.0]
     rotation: 0
     state: enabled
 - name: blocks_head_0_0
@@ -213,7 +213,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 296.0]
+    coordinate: [232, 292.0]
     rotation: 0
     state: enabled
 - name: blocks_message_debug_0
@@ -297,7 +297,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 256.0]
+    coordinate: [1016, 240.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_to_vector_0
@@ -315,7 +315,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 304.0]
+    coordinate: [392, 296.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_to_vector_0_0
@@ -333,7 +333,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [248, 400.0]
+    coordinate: [216, 408.0]
     rotation: 0
     state: true
 - name: blocks_stream_to_vector_0_1
@@ -351,7 +351,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 216.0]
+    coordinate: [392, 208.0]
     rotation: 0
     state: true
 - name: blocks_tag_debug_0
@@ -448,7 +448,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 280.0]
+    coordinate: [8, 276.0]
     rotation: 0
     state: enabled
 - name: blocks_vector_source_x_0_0_0
@@ -486,7 +486,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 328.0]
+    coordinate: [792, 296.0]
     rotation: 0
     state: enabled
 - name: blocks_vector_to_stream_1_0
@@ -504,7 +504,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [680, 384.0]
+    coordinate: [640, 408.0]
     rotation: 0
     state: enabled
 - name: blocks_vector_to_stream_1_1
@@ -522,7 +522,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 216.0]
+    coordinate: [792, 208.0]
     rotation: 0
     state: true
 - name: import_0
@@ -548,7 +548,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 264.0]
+    coordinate: [1112, 252.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -561,7 +561,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [24, 392.0]
+    coordinate: [8, 404.0]
     rotation: 0
     state: true
 - name: zeromq_push_sink_0_0
@@ -607,4 +607,3 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0

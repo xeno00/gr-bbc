@@ -1,0 +1,46 @@
+id: OOKModulator
+label: OOK Modulator
+category: '[GRC Hier Blocks]'
+
+parameters:
+-   id: carrier_freq
+    label: carrier_freq
+    dtype: raw
+    default: 433.937e6
+    hide: none
+-   id: samp_rate
+    label: samp_rate
+    dtype: raw
+    default: 128e3
+    hide: none
+-   id: symbol_rate
+    label: symbol_rate
+    dtype: raw
+    default: int (500)
+    hide: none
+
+inputs:
+-   label: in
+    dtype: byte
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: complex
+    vlen: 1
+
+templates:
+    imports: 'from OOKModulator import OOKModulator  # grc-generated hier_block'
+    make: "OOKModulator(\n    carrier_freq=${ carrier_freq },\n    samp_rate=${ samp_rate\
+        \ },\n    symbol_rate=${ symbol_rate },\n)"
+    callbacks:
+    - set_carrier_freq(${ carrier_freq })
+    - set_samp_rate(${ samp_rate })
+    - set_symbol_rate(${ symbol_rate })
+
+documentation: 'James Morrison
+
+    /home/james/git/gr-bbc/blocks/OOKModulator.py'
+grc_source: /home/james/git/gr-bbc/blocks/OOKModulator.grc
+
+file_format: 1

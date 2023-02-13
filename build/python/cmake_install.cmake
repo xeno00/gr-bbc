@@ -1,4 +1,4 @@
-# Install script for directory: /home/james/git/gr-bbc/gr-bbc/python
+# Install script for directory: /home/james/git/gr-bbc/python
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,22 +37,33 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.8/dist-packages/bbc" TYPE FILE FILES
-    "/home/james/git/gr-bbc/gr-bbc/python/__init__.py"
-    "/home/james/git/gr-bbc/gr-bbc/python/bbc_encoder.py"
-    "/home/james/git/gr-bbc/gr-bbc/python/bbc_decoder.py"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.10/dist-packages/bbc" TYPE FILE FILES
+    "/home/james/git/gr-bbc/python/__init__.py"
+    "/home/james/git/gr-bbc/python/bbc_encoder.py"
+    "/home/james/git/gr-bbc/python/bbc_decoder.py"
+    "/home/james/git/gr-bbc/python/OOKDemodulator.py"
+    "/home/james/git/gr-bbc/python/OOKModulator.py"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.8/dist-packages/bbc" TYPE FILE FILES
-    "/home/james/git/gr-bbc/gr-bbc/build/python/__init__.pyc"
-    "/home/james/git/gr-bbc/gr-bbc/build/python/bbc_encoder.pyc"
-    "/home/james/git/gr-bbc/gr-bbc/build/python/bbc_decoder.pyc"
-    "/home/james/git/gr-bbc/gr-bbc/build/python/__init__.pyo"
-    "/home/james/git/gr-bbc/gr-bbc/build/python/bbc_encoder.pyo"
-    "/home/james/git/gr-bbc/gr-bbc/build/python/bbc_decoder.pyo"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.10/dist-packages/bbc" TYPE FILE FILES
+    "/home/james/git/gr-bbc/build/python/__init__.pyc"
+    "/home/james/git/gr-bbc/build/python/bbc_encoder.pyc"
+    "/home/james/git/gr-bbc/build/python/bbc_decoder.pyc"
+    "/home/james/git/gr-bbc/build/python/OOKDemodulator.pyc"
+    "/home/james/git/gr-bbc/build/python/OOKModulator.pyc"
+    "/home/james/git/gr-bbc/build/python/__init__.pyo"
+    "/home/james/git/gr-bbc/build/python/bbc_encoder.pyo"
+    "/home/james/git/gr-bbc/build/python/bbc_decoder.pyo"
+    "/home/james/git/gr-bbc/build/python/OOKDemodulator.pyo"
+    "/home/james/git/gr-bbc/build/python/OOKModulator.pyo"
     )
 endif()
 
