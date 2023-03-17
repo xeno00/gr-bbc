@@ -1,17 +1,35 @@
-title: The BBC OOT Module
-brief: Short description of gr-bbc
-tags: # Tags are arbitrary, but look at CGRAN what other authors are using
-  - sdr
+title: gr-bbc
+brief: The event stream scheduler
+tags:
+  - secure communications
+  - codec
+  - bbc
 author:
-  - Author Name <authors@email.address>
+  - James Morrison <jamescmorrison00@gmail.com>
 copyright_owner:
-  - Copyright Owner 1
-license:
-gr_supported_version: # Put a comma separated list of supported GR versions here
-#repo: # Put the URL of the repository here, or leave blank for default
-#website: <module_website> # If you have a separate project website, put it here
-#icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
+  - James Morrison <jamescmorrison00@gmail.com>
+dependencies:
+  - gnuradio (>= 3.10.0)
+repo: https://github.com/xeno00/gr-bbc
+stable_release: HEAD
 ---
-A longer, multi-line description of gr-bbc.
-You may use some *basic* Markdown here.
-If left empty, it will try to find a README file instead.
+
+
+This project implements Baird, Bahn, and Collins' **BBC codec** in GNURaduio
+See the [GRCon22 events page](https://events.gnuradio.org/event/18/contributions/278/) for background information and use-case explanation.
+If you want, watch our GRCon22 presentation, [here](https://youtu.be/I3QmZwdsavE&t=7h38m45s).
+
+The BBC algorithm assumes an asymmetric Z channel, where a mark (bit with value 1) can be added, but cannot be removed. Naturally, OOK is a straightforward implementation for such a channel. 
+
+These blocks conduct BBC encoding/decoding before physical-layer transmission/reception. 
+
+* bbc_encoder encodes a byte message by hashing substrings and placing marks in a psuedo-random location within the codeword
+* bbc_decoder reverses the process by using an iterative substring reconstruction process
+
+
+Some examples of use-cases for BBC are included,
+    - bbc_gr_base.grc:     demonstrates encoding/decoding to reproduce an encoded message.
+                           The most basic use case.
+    - bbc_gr_ook.grc:      Combines bbc_gr_base.grc with OOK modulation for TX/RX testing
+    - bbc_gr_ook_fhss.grc: Simulates a low-bandwidth BBC-encoded OOK signal that triggers a 
+                           frequency hop for another signal
