@@ -1,17 +1,17 @@
 # gr-bbc  
 ### Use Baird Bahn and Collins' algorithm (BBC) to encode and decode signals
-tags:  
-  - secure communications  
-  - codec  
-  - bbc  
-author:  
-  - James Morrison <jamescmorrison00@gmail.com>
+tags:    
+  - secure communications   
+  - codec   
+  - bbc   
+author:    
+  - James Morrison <jamescmorrison00@gmail.com>  
 copyright_owner:  
-  - James Morrison <jamescmorrison00@gmail.com>
-dependencies:  
-  - gnuradio (>= 3.10.0)
-repo: https://github.com/xeno00/gr-bbc  
-stable_release: HEAD  
+  - James Morrison <jamescmorrison00@gmail.com>  
+dependencies:   
+  - gnuradio (>= 3.10.0)  
+repo: https://github.com/xeno00/gr-bbc   
+stable_release: HEAD    
 ---
 
 
