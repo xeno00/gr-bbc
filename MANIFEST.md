@@ -1,17 +1,17 @@
-title: gr-bbc
-brief: The event stream scheduler
-tags:
-  - secure communications
-  - codec
-  - bbc
-author:
+title: gr-bbc  
+brief: The event stream scheduler  
+tags:  
+  - secure communications  
+  - codec  
+  - bbc  
+author:  
   - James Morrison <jamescmorrison00@gmail.com>
-copyright_owner:
+copyright_owner:  
   - James Morrison <jamescmorrison00@gmail.com>
-dependencies:
+dependencies:  
   - gnuradio (>= 3.10.0)
-repo: https://github.com/xeno00/gr-bbc
-stable_release: HEAD
+repo: https://github.com/xeno00/gr-bbc  
+stable_release: HEAD  
 ---
 
 
