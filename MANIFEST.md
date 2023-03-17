@@ -4,12 +4,16 @@ tags:
   - secure communications   
   - codec   
   - bbc   
+  
 author:    
   - James Morrison <jamescmorrison00@gmail.com>  
+
 copyright_owner:  
   - James Morrison <jamescmorrison00@gmail.com>  
+
 dependencies:   
   - gnuradio (>= 3.10.0)  
+
 repo: https://github.com/xeno00/gr-bbc   
 stable_release: HEAD    
 ---
