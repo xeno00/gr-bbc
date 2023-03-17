@@ -1,5 +1,5 @@
-title: gr-bbc  
-brief: The event stream scheduler  
+# gr-bbc  
+### Use Baird Bahn and Collins' algorithm (BBC) to encode and decode signals
 tags:  
   - secure communications  
   - codec  
