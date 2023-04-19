@@ -38,9 +38,4 @@ templates:
     - set_samp_rate(${ samp_rate })
     - set_symbol_rate(${ symbol_rate })
 
-documentation: 'James Morrison
-
-    /home/james/git/gr-bbc/blocks/OOKModulator.py'
-grc_source: /home/james/git/gr-bbc/blocks/OOKModulator.grc
-
 file_format: 1
