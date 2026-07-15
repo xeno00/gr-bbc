@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GNU Radio
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends \
+            cmake \
+            gnuradio \
+            gnuradio-dev \
+            python3-numpy \
+            python3-yaml
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --parallel 2
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Install
+        run: sudo cmake --install build
+
+      - name: Verify installed module
+        run: python3 -c "from gnuradio import bbc; print(bbc.__file__)"
+
+      - name: Compile base example
+        run: grcc -d build/generated examples/bbc-gr-base.grc

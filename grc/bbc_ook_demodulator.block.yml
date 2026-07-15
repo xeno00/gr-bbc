@@ -1,0 +1,48 @@
+id: bbc_ook_demodulator
+label: OOK Demodulator
+category: '[BBC]'
+
+templates:
+  imports: from gnuradio import bbc
+  make: bbc.OOKDemodulator(${sample_rate}, ${symbol_rate}, ${threshold})
+  callbacks:
+    - set_sample_rate(${sample_rate})
+    - set_symbol_rate(${symbol_rate})
+    - set_threshold(${threshold})
+
+parameters:
+  - id: sample_rate
+    label: Sample rate
+    dtype: real
+    default: 128e3
+  - id: symbol_rate
+    label: Symbol rate
+    dtype: real
+    default: 500.0
+  - id: threshold
+    label: Amplitude threshold
+    dtype: real
+    default: 0.5
+
+inputs:
+  - label: in
+    domain: stream
+    dtype: complex
+
+outputs:
+  - label: out
+    domain: stream
+    dtype: byte
+
+asserts:
+  - ${sample_rate > 0}
+  - ${symbol_rate > 0}
+  - ${threshold > 0}
+  - ${abs(sample_rate / symbol_rate - round(sample_rate / symbol_rate)) < 1e-9}
+
+documentation: |-
+  Noncoherent envelope detector for an ideally timed OOK waveform. This block
+  does not perform symbol synchronization. Sample rate must be an integer
+  multiple of symbol rate.
+
+file_format: 1

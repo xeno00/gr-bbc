@@ -1,51 +1,43 @@
 id: bbc_bbc_decoder
 label: BBC Decoder
-category: '[bbc]'
+category: '[BBC]'
 
 templates:
-  imports: import bbc
-  make: bbc.bbc_decoder(${message_length}, ${codeword_length})
+  imports: from gnuradio import bbc
+  make: bbc.bbc_decoder(${message_length}, ${codeword_length}, ${max_candidates}, ${max_search_nodes})
 
-#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
-#     Keys include:
-#     * id (makes the value accessible as keyname, e.g. in the make entry)
-#     * label (label shown in the GUI)
-#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#     * default
 parameters:
-- id: message_length
-  label: Message Length
-  dtype: int
-  default: int(2**7)
-  
-- id: codeword_length
-  label: Codeword Length
-  dtype: int
-  default: int(2**17)
-#- id: ...
-#  label: ...
-#  dtype: ...
+  - id: message_length
+    label: Message length (bytes)
+    dtype: int
+    default: 128
+  - id: codeword_length
+    label: Codeword length (bytes)
+    dtype: int
+    default: 131072
+  - id: max_candidates
+    label: Maximum candidates
+    dtype: int
+    default: 64
+  - id: max_search_nodes
+    label: Maximum search nodes
+    dtype: int
+    default: 1000000
 
-#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
-#  Keys include:
-#      * label (an identifier for the GUI)
-#      * domain (optional - stream or message. Default is stream)
-#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#      * vlen (optional - data stream vector length. Default is 1)
-#      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: in
-  domain: stream
-  dtype: byte
-  vlen: ${ codeword_length }
+  - label: in
+    domain: stream
+    dtype: byte
+    vlen: ${codeword_length}
 
 outputs:
-- label: out
-  domain: stream
-  dtype: byte
-  vlen: ${ message_length } 
-#  optional: ...
+  - label: out
+    domain: stream
+    dtype: byte
+    vlen: ${message_length}
 
-#  'file_format' specifies the version of the GRC yml format used in the file
-#  and should usually not be changed.
+documentation: |-
+  Searches a BBC mark codeword and emits zero or more candidate message
+  vectors. Search limits protect the scheduler from malformed dense inputs.
+
 file_format: 1

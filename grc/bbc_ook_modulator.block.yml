@@ -1,0 +1,48 @@
+id: bbc_ook_modulator
+label: OOK Modulator
+category: '[BBC]'
+
+templates:
+  imports: from gnuradio import bbc
+  make: bbc.OOKModulator(${carrier_frequency}, ${sample_rate}, ${symbol_rate})
+  callbacks:
+    - set_carrier_frequency(${carrier_frequency})
+    - set_sample_rate(${sample_rate})
+    - set_symbol_rate(${symbol_rate})
+
+parameters:
+  - id: carrier_frequency
+    label: Carrier offset (Hz)
+    dtype: real
+    default: 0.0
+  - id: sample_rate
+    label: Sample rate
+    dtype: real
+    default: 128e3
+  - id: symbol_rate
+    label: Symbol rate
+    dtype: real
+    default: 500.0
+
+inputs:
+  - label: in
+    domain: stream
+    dtype: byte
+
+outputs:
+  - label: out
+    domain: stream
+    dtype: complex
+
+asserts:
+  - ${sample_rate > 0}
+  - ${symbol_rate > 0}
+  - ${abs(carrier_frequency) < sample_rate / 2}
+  - ${abs(sample_rate / symbol_rate - round(sample_rate / symbol_rate)) < 1e-9}
+
+documentation: |-
+  Unpacks bytes MSB-first and produces a complex OOK waveform. Carrier
+  frequency is a digital offset relative to the SDR center frequency, not an
+  RF tuning frequency. Sample rate must be an integer multiple of symbol rate.
+
+file_format: 1
