@@ -5,7 +5,9 @@
 
 from __future__ import annotations
 
-from gnuradio import analog, blocks, gr
+from math import pi
+
+from gnuradio import blocks, gr
 
 
 def _samples_per_symbol(sample_rate: float, symbol_rate: float) -> int:
@@ -51,19 +53,12 @@ class OOKModulator(gr.hier_block2):
         self._to_float = blocks.uchar_to_float()
         self._repeat = blocks.repeat(gr.sizeof_float, interpolation)
         self._to_complex = blocks.float_to_complex(1)
-        self._carrier = analog.sig_source_c(
-            self.sample_rate,
-            analog.GR_COS_WAVE,
-            self.carrier_frequency,
-            1.0,
-            0.0,
+        self._rotator = blocks.rotator_cc(
+            2.0 * pi * self.carrier_frequency / self.sample_rate
         )
-        self._multiply = blocks.multiply_vcc(1)
 
         self.connect(self, self._unpack, self._to_float, self._repeat)
-        self.connect(self._repeat, self._to_complex, (self._multiply, 0))
-        self.connect(self._carrier, (self._multiply, 1))
-        self.connect(self._multiply, self)
+        self.connect(self._repeat, self._to_complex, self._rotator, self)
 
     @staticmethod
     def _validate_carrier(carrier_frequency: float, sample_rate: float) -> None:
@@ -81,7 +76,9 @@ class OOKModulator(gr.hier_block2):
     def set_carrier_frequency(self, carrier_frequency):
         self._validate_carrier(carrier_frequency, self.sample_rate)
         self.carrier_frequency = float(carrier_frequency)
-        self._carrier.set_frequency(self.carrier_frequency)
+        self._rotator.set_phase_inc(
+            2.0 * pi * self.carrier_frequency / self.sample_rate
+        )
 
     def get_sample_rate(self):
         return self.sample_rate
@@ -90,7 +87,9 @@ class OOKModulator(gr.hier_block2):
         self._validate_carrier(self.carrier_frequency, sample_rate)
         interpolation = _samples_per_symbol(sample_rate, self.symbol_rate)
         self.sample_rate = float(sample_rate)
-        self._carrier.set_sampling_freq(self.sample_rate)
+        self._rotator.set_phase_inc(
+            2.0 * pi * self.carrier_frequency / self.sample_rate
+        )
         self._repeat.set_interpolation(interpolation)
 
     def get_symbol_rate(self):

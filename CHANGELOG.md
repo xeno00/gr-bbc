@@ -20,6 +20,8 @@ All notable changes to this project are documented here. The project follows
 - Reimplemented the decoder as a scheduler-correct variable-output block.
 - Clarified OOK carrier-offset semantics and made envelope detection independent
   of a fixed band-pass filter.
+- Replaced the OOK block's infinite carrier source with a synchronous rotator so
+  finite input flowgraphs terminate correctly.
 - Updated GRC block definitions to import `gnuradio.bbc`.
 
 ### Removed
