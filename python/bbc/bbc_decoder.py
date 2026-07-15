@@ -36,9 +36,13 @@ class bbc_decoder(gr.basic_block):
         gr.basic_block.__init__(
             self,
             name="BBC Decoder",
-            in_sig=[(np.uint8, self._decoder.codeword_length)],
-            out_sig=[(np.uint8, self._decoder.message_length)],
+            in_sig=[self._item_type(self._decoder.codeword_length)],
+            out_sig=[self._item_type(self._decoder.message_length)],
         )
+
+    @staticmethod
+    def _item_type(length):
+        return np.uint8 if length == 1 else (np.uint8, length)
 
     def forecast(self, noutput_items, ninputs):
         requirement = 0 if self._pending else 1
@@ -51,9 +55,13 @@ class bbc_decoder(gr.basic_block):
 
         while produced < len(output):
             while self._pending and produced < len(output):
-                output[produced][:] = np.frombuffer(
+                message = np.frombuffer(
                     self._pending.popleft(), dtype=np.uint8
                 )
+                if self._decoder.message_length == 1:
+                    output[produced] = message[0]
+                else:
+                    output[produced][:] = message
                 produced += 1
 
             if produced >= len(output) or consumed >= len(input_items[0]):

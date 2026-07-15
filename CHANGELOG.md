@@ -20,6 +20,7 @@ All notable changes to this project are documented here. The project follows
 - Replaced process-global codec state with per-operation reversible registers.
 - Reimplemented the decoder as a scheduler-correct variable-output block.
 - Uses the GNU Radio Python gateway's returned-list forecast contract.
+- Handles GNU Radio's scalar representation for one-byte vectors.
 - Clarified OOK carrier-offset semantics and made envelope detection independent
   of a fixed band-pass filter.
 - Replaced the OOK block's infinite carrier source with a synchronous rotator so
