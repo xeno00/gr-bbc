@@ -8,6 +8,7 @@ All notable changes to this project are documented here. The project follows
 ### Added
 
 - Automated codec and GNU Radio block tests.
+- Hard timeouts for runtime tests so scheduler regressions cannot wedge CI.
 - GitHub Actions validation on supported Ubuntu and GNU Radio versions.
 - Search limits for malformed or dense BBC codewords.
 - Modern CGRAN `MANIFEST.yml` metadata and installed examples.

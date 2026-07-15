@@ -32,7 +32,19 @@ if(BUILD_TESTING)
             ${CMAKE_COMMAND} -E env
             "PYTHONPATH=${PROJECT_SOURCE_DIR}/python"
             ${Python3_EXECUTABLE} -m unittest discover
-            -s ${PROJECT_SOURCE_DIR}/tests -v
+            -s ${PROJECT_SOURCE_DIR}/tests -p test_codec.py -v
+    )
+    add_test(
+        NAME bbc_gnuradio_blocks
+        COMMAND
+            ${CMAKE_COMMAND} -E env
+            "PYTHONPATH=${PROJECT_SOURCE_DIR}/python"
+            ${Python3_EXECUTABLE} -m unittest discover
+            -s ${PROJECT_SOURCE_DIR}/tests -p test_gnuradio_blocks.py -v
+    )
+    set_tests_properties(
+        bbc_python_core bbc_gnuradio_blocks
+        PROPERTIES TIMEOUT 60
     )
 endif()
 
