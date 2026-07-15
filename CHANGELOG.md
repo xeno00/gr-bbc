@@ -19,6 +19,7 @@ All notable changes to this project are documented here. The project follows
 - Migrated to the GNU Radio 3.10 pure-Python OOT package layout.
 - Replaced process-global codec state with per-operation reversible registers.
 - Reimplemented the decoder as a scheduler-correct variable-output block.
+- Uses the GNU Radio Python gateway's returned-list forecast contract.
 - Clarified OOK carrier-offset semantics and made envelope detection independent
   of a fixed band-pass filter.
 - Replaced the OOK block's infinite carrier source with a synchronous rotator so

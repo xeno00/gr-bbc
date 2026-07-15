@@ -54,7 +54,7 @@ class GNUradioBlockTests(unittest.TestCase):
         flowgraph.connect(source, modulator, demodulator, head, sink)
         self.run_until(flowgraph, lambda: len(sink.data()) >= 1)
 
-        self.assertEqual(sink.data(), (0xA5,))
+        self.assertEqual(list(sink.data()), [0xA5])
 
 
 if __name__ == "__main__":

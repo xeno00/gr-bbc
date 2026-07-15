@@ -40,8 +40,9 @@ class bbc_decoder(gr.basic_block):
             out_sig=[(np.uint8, self._decoder.message_length)],
         )
 
-    def forecast(self, noutput_items, ninput_items_required):
-        ninput_items_required[0] = 0 if self._pending else 1
+    def forecast(self, noutput_items, ninputs):
+        requirement = 0 if self._pending else 1
+        return [requirement] * ninputs
 
     def general_work(self, input_items, output_items):
         output = output_items[0]
