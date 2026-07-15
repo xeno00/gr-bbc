@@ -1,1 +1,8 @@
-build/*
+build/
+cmake-build-*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+compile_commands.json

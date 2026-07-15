@@ -118,7 +118,9 @@ blocks:
     alias: ''
     codeword_length: CODEWORD_LENGTH
     comment: ''
+    max_candidates: '64'
     maxoutbuf: '0'
+    max_search_nodes: '1000000'
     message_length: MESSAGE_LENGTH
     minoutbuf: '0'
   states:

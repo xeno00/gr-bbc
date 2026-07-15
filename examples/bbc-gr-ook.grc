@@ -73,11 +73,11 @@ blocks:
     coordinate: [384, 12.0]
     rotation: 0
     state: true
-- name: carrier_freq
+- name: carrier_offset
   id: variable
   parameters:
-    comment: ''
-    value: 433.937e6
+    comment: Digital offset relative to the SDR center frequency
+    value: 0.0
   states:
     bus_sink: false
     bus_source: false
@@ -136,15 +136,16 @@ blocks:
     rotation: 0
     state: enabled
 - name: OOKDemodulator_0
-  id: OOKDemodulator
+  id: bbc_ook_demodulator
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    samp_rate: 128e3
+    sample_rate: samp_rate
     symbol_rate: '500'
+    threshold: '0.5'
   states:
     bus_sink: false
     bus_source: false
@@ -153,15 +154,15 @@ blocks:
     rotation: 0
     state: true
 - name: OOKModulator_0
-  id: OOKModulator
+  id: bbc_ook_modulator
   parameters:
     affinity: ''
     alias: ''
-    carrier_freq: carrier_freq
+    carrier_frequency: carrier_offset
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    samp_rate: samp_rate
+    sample_rate: samp_rate
     symbol_rate: symbol_rate
   states:
     bus_sink: false

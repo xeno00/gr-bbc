@@ -1,0 +1,22 @@
+title: BBC Anti-Jam Communications
+version: 1.0.0
+brief: Baird, Bahn, and Collins mark-code encoder and decoder for GNU Radio
+tags:
+  - coding
+  - communications
+  - anti-jam
+  - ook
+author:
+  - James Morrison <jamescmorrison00@gmail.com>
+copyright_owner:
+  - James Morrison
+license: GPL-3.0-or-later
+gr_supported_version:
+  - 3.10
+repo: https://github.com/xeno00/gr-bbc
+website: https://github.com/xeno00/gr-bbc
+description: |-
+  A pure-Python GNU Radio out-of-tree module implementing the Baird, Bahn,
+  and Collins mark-code algorithm. The module includes fixed-vector BBC
+  encoder and decoder blocks plus ideal, noncoherent OOK loopback blocks.
+file_format: 1
