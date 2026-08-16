@@ -1,0 +1,210 @@
+options:
+  parameters:
+    author: James Morrison
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Decode BBC codewords arriving over ZeroMQ and push the messages back out.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: no_gui
+    hier_block_src_path: '.:'
+    id: bbc_zmq_bridge
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: run
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: BBC ZeroMQ Bridge
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 8
+    - 8
+    rotation: 0
+    state: enabled
+blocks:
+- name: MESSAGE_LENGTH
+  id: variable
+  parameters:
+    comment: Must match both scripts.
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 160
+    - 12
+    rotation: 0
+    state: enabled
+- name: CODEWORD_LENGTH
+  id: variable
+  parameters:
+    comment: ''
+    value: '8192'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 304
+    - 12
+    rotation: 0
+    state: enabled
+- name: CHECKSUM_BITS
+  id: variable
+  parameters:
+    comment: ''
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 456
+    - 12
+    rotation: 0
+    state: enabled
+- name: codeword_address
+  id: variable
+  parameters:
+    comment: zmq_tx_bbc.py binds here; this flow graph connects.
+    value: '''tcp://127.0.0.1:5555'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 160
+    - 76
+    rotation: 0
+    state: enabled
+- name: message_address
+  id: variable
+  parameters:
+    comment: This flow graph binds here; zmq_receive_bbc.py connects.
+    value: '''tcp://127.0.0.1:5556'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 456
+    - 76
+    rotation: 0
+    state: enabled
+- name: zeromq_pull_source_0
+  id: zeromq_pull_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: One codeword per ZeroMQ message keeps the vectors aligned.
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    address: codeword_address
+    bind: 'False'
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: CODEWORD_LENGTH
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 40
+    - 196
+    rotation: 0
+    state: enabled
+- name: bbc_bbc_decoder_0
+  id: bbc_bbc_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    message_length: MESSAGE_LENGTH
+    codeword_length: CODEWORD_LENGTH
+    checksum_length: CHECKSUM_BITS
+    max_candidates: '256'
+    max_steps: '5000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 344
+    - 180
+    rotation: 0
+    state: enabled
+- name: zeromq_push_sink_0
+  id: zeromq_push_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Decoded messages back out to zmq_receive_bbc.py.
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    address: message_address
+    bind: 'True'
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: MESSAGE_LENGTH
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 616
+    - 236
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Also prints locally.
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    en_uvec: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 616
+    - 156
+    rotation: 0
+    state: enabled
+connections:
+- - zeromq_pull_source_0
+  - '0'
+  - bbc_bbc_decoder_0
+  - '0'
+- - bbc_bbc_decoder_0
+  - '0'
+  - zeromq_push_sink_0
+  - '0'
+- - bbc_bbc_decoder_0
+  - decoded
+  - blocks_message_debug_0
+  - print
+metadata:
+  file_format: 1
+  grc_version: 3.10.9.2
