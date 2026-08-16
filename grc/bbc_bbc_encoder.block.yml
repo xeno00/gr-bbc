@@ -4,49 +4,57 @@ category: '[bbc]'
 
 templates:
   imports: import bbc
-  make: bbc.bbc_encoder(${message_length}, ${codeword_length})
+  make: bbc.bbc_encoder(${message_length}, ${codeword_length}, ${checksum_length})
 
-#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
-#     Keys include:
-#     * id (makes the value accessible as keyname, e.g. in the make entry)
-#     * label (label shown in the GUI)
-#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#     * default
 parameters:
-- id: message_length
-  label: Message Length
-  dtype: int
-  default: int(2**7)
-  
-- id: codeword_length
-  label: Codeword Length
-  dtype: int
-  default: int(2**17)
-#- id: ...
-#  label: ...
-#  dtype: ...
+-   id: message_length
+    label: Message Length (bytes)
+    dtype: int
+    default: '128'
+-   id: codeword_length
+    label: Codeword Length (bytes)
+    dtype: int
+    default: '131072'
+-   id: checksum_length
+    label: Checksum (bits)
+    dtype: int
+    default: '32'
 
-#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
-#  Keys include:
-#      * label (an identifier for the GUI)
-#      * domain (optional - stream or message. Default is stream)
-#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#      * vlen (optional - data stream vector length. Default is 1)
-#      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: in
-  domain: stream
-  dtype: byte
-  vlen: ${ message_length }
-#  optional: ...
+-   label: in
+    domain: stream
+    dtype: byte
+    vlen: ${ message_length }
 
 outputs:
-- label: out
-  domain: stream
-  dtype: byte
-  vlen: ${ codeword_length } 
-#  optional: ...
+-   label: out
+    domain: stream
+    dtype: byte
+    vlen: ${ codeword_length }
 
-#  'file_format' specifies the version of the GRC yml format used in the file
-#  and should usually not be changed.
+asserts:
+- ${ message_length > 0 }
+- ${ codeword_length > message_length }
+- ${ 0 <= checksum_length <= 256 }
+
+documentation: |-
+    Encode a fixed-length message into a long, sparse BBC codeword.
+
+    One mark is placed per message bit, at a pseudo-random location derived
+    from the message prefix so far. The codeword is far longer than the
+    message, so marks stay sparse and the decoder can prune aggressively.
+
+    Because marks are only ever added, several codewords may be OR'd together
+    and all of their messages still decode.
+
+    Message Length / Codeword Length
+        Sizes in bytes, and the vector lengths of the input and output ports.
+        The ratio sets how much jamming the code survives; the 128 B / 128 KiB
+        default is a 1024x expansion.
+
+    Checksum
+        Extra check bits appended to each message. The decoder forces these
+        rather than searching them, so they prune false decodes instead of
+        multiplying them. Must match the decoder. Set 0 to disable.
+
 file_format: 1

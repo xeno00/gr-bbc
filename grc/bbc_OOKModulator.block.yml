@@ -1,46 +1,55 @@
-id: OOKModulator
+id: bbc_OOKModulator
 label: OOK Modulator
-category: '[GRC Hier Blocks]'
+category: '[bbc]'
+
+templates:
+  imports: import bbc
+  make: |-
+      bbc.OOKModulator(
+          carrier_freq=${carrier_freq},
+          samp_rate=${samp_rate},
+          symbol_rate=${symbol_rate},
+      )
+  callbacks:
+  - set_carrier_freq(${ carrier_freq })
+  - set_samp_rate(${ samp_rate })
+  - set_symbol_rate(${ symbol_rate })
 
 parameters:
 -   id: carrier_freq
-    label: carrier_freq
-    dtype: raw
-    default: 433.937e6
-    hide: none
+    label: Carrier Offset (Hz)
+    dtype: real
+    default: 20e3
 -   id: samp_rate
-    label: samp_rate
-    dtype: raw
+    label: Sample Rate
+    dtype: real
     default: 128e3
-    hide: none
 -   id: symbol_rate
-    label: symbol_rate
-    dtype: raw
-    default: int (500)
-    hide: none
+    label: Symbol Rate
+    dtype: real
+    default: '500'
 
 inputs:
 -   label: in
+    domain: stream
     dtype: byte
     vlen: 1
 
 outputs:
 -   label: out
+    domain: stream
     dtype: complex
     vlen: 1
 
-templates:
-    imports: 'from OOKModulator import OOKModulator  # grc-generated hier_block'
-    make: "OOKModulator(\n    carrier_freq=${ carrier_freq },\n    samp_rate=${ samp_rate\
-        \ },\n    symbol_rate=${ symbol_rate },\n)"
-    callbacks:
-    - set_carrier_freq(${ carrier_freq })
-    - set_samp_rate(${ samp_rate })
-    - set_symbol_rate(${ symbol_rate })
+asserts:
+- ${ samp_rate >= symbol_rate }
+- ${ abs(carrier_freq) < samp_rate / 2 }
 
-documentation: 'James Morrison
+documentation: |-
+    Gate a complex carrier with packed bytes, MSB first.
 
-    /home/james/git/gr-bbc/blocks/OOKModulator.py'
-grc_source: /home/james/git/gr-bbc/blocks/OOKModulator.grc
+    Carrier Offset is a baseband offset, not an RF frequency: keep its
+    magnitude below samp_rate / 2 or it aliases to some other offset. Put the
+    real RF frequency on the sink block instead.
 
 file_format: 1

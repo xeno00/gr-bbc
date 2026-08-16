@@ -1,11 +1,25 @@
-This is the bbc-write-a-block package meant as a guide to building
-out-of-tree packages. To use the bbc blocks, the Python namespaces
-is in 'bbc', which is imported as:
+gr-bbc
+======
+
+Baird, Bahn and Collins' concurrent codec for GNU Radio 3.10+.
+
+The Python namespace is "bbc":
 
     import bbc
 
-See the Doxygen documentation for details about the blocks available
-in this package. A quick listing of the details can be found in Python
-after importing by using:
+    encoder = bbc.Encoder(message_length=8, codeword_length=1024)
+    decoder = bbc.Decoder(message_length=8, codeword_length=1024)
+    print(decoder.decode(encoder.encode(b"GRCon26!")))
+
+The blocks are bbc.bbc_encoder, bbc.bbc_decoder, bbc.OOKModulator and
+bbc.OOKDemodulator; each carries its own docstring, and the GRC block
+definitions carry the same text in their documentation tab.
 
     help(bbc)
+
+The module is pure Python, so there is no Doxygen documentation to build.
+bbc.codec and bbc.glowworm import nothing from GNU Radio and can be used
+from a plain script.
+
+See README.md at the top of the source tree for the codec's properties and
+its limitations, and CHANGELOG.md for what changed in the 3.10 port.
