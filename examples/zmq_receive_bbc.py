@@ -1,91 +1,92 @@
-#import sys
-#import time
-import zmq
-import random
-import numpy as np
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Copyright 2022 James Morrison.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+"""Print BBC messages that a flow graph pushes out over ZeroMQ.
+
+The counterpart to `zmq_tx_bbc.py`: that script feeds codewords into a flow
+graph, this one reads whatever the flow graph managed to decode back out. Pair
+it with `bbc_zmq_bridge.grc`, or with any flow graph whose ZMQ PUSH Sink is fed
+by the decoder's stream output.
+
+    ./zmq_receive_bbc.py --message-length 32
+
+This script CONNECTS, because GNU Radio's ZMQ PUSH Sink binds by default.
+Messages arrive as raw bytes, a whole number of decoded messages per part.
+"""
+
+import argparse
 import sys
-import threading
-from multiprocessing import Queue
-import time
 
-#import subprocess
-#import matplotlib.pyplot as plt
+import zmq
+
+DEFAULT_ADDRESS = 'tcp://127.0.0.1:5556'
 
 
-# numpy options
-np.set_printoptions(threshold=sys.maxsize)
+def printable(message):
+    text = message.rstrip(b'\x00')
+    try:
+        return text.decode('utf-8')
+    except UnicodeDecodeError:
+        return repr(text)
 
-thePort = '5555'
-exit_flag = False
-ip = "tcp://127.0.0.1"
-
-
-def consumer(exit_flag):
-    consumer_id = random.randrange(1,10005)
-    print("I am consumer #%s" % (consumer_id))
-    context = zmq.Context()
-    consumer_receiver = context.socket(zmq.PULL)
-    consumer_receiver.connect(ip + ":" + thePort)
-    while True:
-        #time.sleep(1)
-        #subprocess.run([sys.executable, grcFile, "--port", thePort])
-        dataq.put(consumer_receiver.recv())
-        # exit flag?
-        if exit_flag():
-            consumer_receiver.close()
-            time.sleep(0.5)
-            context.term()
-            time.sleep(0.5)
-            break
 
 def main():
-    exit_flag = False
-    #set up  multithreading
-    rxThread = threading.Thread(target=consumer, args=(lambda : exit_flag, ))
-    rxThread.daemon = True
-    rxThread.start() # start the receive thread
-    i = 0
-    wait_counter = 0 
-    while True:
-        try:
-            if (dataq.empty()) and (i>0): # assume we've received all the data
-                if wait_counter < 20: # 20 is an arbitrary number, 20*0.1s = 2s seems like a reasonable length of time to wait
-                    wait_counter +=1
-                    time.sleep(0.1)
-                else: # might need to do some data cleanup here 
-                    print("Data queue is empty and I'm exiting")
-                    exit_flag = True
-                    time.sleep(1)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('-m', '--message-length', type=int, default=32,
+                        help='message size in bytes (default: %(default)s)')
+    parser.add_argument('-a', '--address', default=DEFAULT_ADDRESS,
+                        help='ZeroMQ address to connect (default: %(default)s)')
+    parser.add_argument('-n', '--count', type=int, default=0,
+                        help='exit after this many messages (0 = run forever)')
+    parser.add_argument('-t', '--timeout', type=float, default=0,
+                        help='exit after this many idle seconds (0 = never)')
+    parser.add_argument('-u', '--unique', action='store_true',
+                        help='only print messages not seen before')
+    args = parser.parse_args()
+
+    context = zmq.Context()
+    socket = context.socket(zmq.PULL)
+    socket.connect(args.address)
+    if args.timeout:
+        socket.setsockopt(zmq.RCVTIMEO, int(args.timeout * 1000))
+    print("connected %s, %d byte messages"
+          % (args.address, args.message_length), file=sys.stderr)
+
+    seen = set()
+    count = 0
+    try:
+        while True:
+            try:
+                part = socket.recv()
+            except zmq.Again:
+                print("idle for %gs, exiting" % args.timeout, file=sys.stderr)
+                break
+
+            # A part may carry several messages back to back.
+            for offset in range(0, len(part), args.message_length):
+                message = part[offset:offset + args.message_length]
+                if len(message) < args.message_length:
                     break
-            else:
-                wait_counter = 0 # reset the wait counter in case we've been waiting
-                buff=dataq.get()
-                #print(buff.decode('utf-8') + "\n") # for bytes
-                #data = np.frombuffer(buff, dtype="float32")
-                #print(data)
-                try:
-                    #print(''.join([chr(int(itm)) for itm in data])) # ascii
-                    print(buff)
-                    #print(buff.decode('utf-8') + "\n")  # for bytes
-                except: 
-                    print("Error on decoding, moving on.")
-                #print("Received data, length = " + str(len(data)))
-                #buff = []
-                #print()
-            i+=1
-        except KeyboardInterrupt:
-            #consumer_receiver.close()
-            #context.term()
-            exit_flag = True
-            print("Exiting")
-            #rxThread.join()
-            #print("Closing threads, please wait...")
-            time.sleep(0.5)
-            #sys.exit()
-    #sys.exit()
+                if args.unique:
+                    if message in seen:
+                        continue
+                    seen.add(message)
+                print(printable(message), flush=True)
+                count += 1
+                if args.count and count >= args.count:
+                    return 0
+    except KeyboardInterrupt:
+        pass
+    finally:
+        socket.close(linger=0)
+        context.term()
+        print("received %d messages" % count, file=sys.stderr)
+    return 0
 
 
-if __name__ == "__main__":
-    dataq = Queue()
-    main()
-
+if __name__ == '__main__':
+    sys.exit(main())

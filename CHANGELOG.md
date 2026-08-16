@@ -94,3 +94,10 @@ Two things changed:
   rejects.
 - Added `examples/bbc_decode_file.py` for decoding captures offline, with a
   `--search` mode for unknown parameters.
+- Added a ZeroMQ path so the encoder can live outside GNU Radio and feed a
+  running flow graph: `zmq_tx_bbc.py` encodes and pushes codewords,
+  `bbc_zmq_bridge.grc` decodes them and pushes the messages back out, and
+  `zmq_receive_bbc.py` prints those. The sender binds and the flow graph
+  connects, so the payload can be rotated without restarting the flow graph.
+  `zmq_receive_bbc.py` was rewritten for this: it previously dumped raw
+  buffers, and after the old flow graphs were replaced it paired with nothing.

@@ -92,6 +92,26 @@ print(decoder.decode(codeword))      # [b'GRCon26!']
 | `bbc_concurrent_codes.grc` | Two messages OR'd into one codeword, both recovered |
 | `bbc_ook_jammed.grc` | BBC over OOK, recovered with a jammer at equal power |
 | `bbc_fhss_control.grc` | A jam-resistant control channel commanding a frequency hop |
+| `bbc_zmq_bridge.grc` | Codewords in and messages out over ZeroMQ |
+
+### Driving a flow graph over ZeroMQ
+
+`zmq_tx_bbc.py` encodes messages and pushes the codewords to a running flow
+graph; `zmq_receive_bbc.py` reads whatever came back out. Keeping the encoder
+outside GNU Radio means the payload can be changed, or rotated on a timer,
+without regenerating or restarting the flow graph.
+
+```sh
+python3 bbc_zmq_bridge.py &            # generated from bbc_zmq_bridge.grc
+./zmq_receive_bbc.py -m 32 &
+./zmq_tx_bbc.py "FLAG{...}" -m 32 --repeat --interval 2
+```
+
+The TX script binds and the flow graph connects, so they can start in either
+order and the sender can be restarted underneath a running flow graph. One
+ZeroMQ message carries exactly one codeword, which is what keeps the receiving
+stream aligned to codeword boundaries — see the framing note below. Both
+scripts need `pyzmq`, which GNU Radio already pulls in for `gr-zeromq`.
 
 ## Notes and limitations
 

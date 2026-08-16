@@ -44,3 +44,6 @@ Examples:
 * `bbc_ook_jammed.grc` — BBC over OOK, recovered with a jammer at equal power.
 * `bbc_fhss_control.grc` — a jam-resistant control channel that commands a
   frequency hop for another signal.
+* `bbc_zmq_bridge.grc` with `zmq_tx_bbc.py` and `zmq_receive_bbc.py` — encode
+  outside GNU Radio and feed a running flow graph over ZeroMQ, so the payload
+  can change without restarting it.
