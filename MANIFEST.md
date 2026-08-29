@@ -9,10 +9,9 @@ author:
   - James Morrison <jamescmorrison00@gmail.com>
 copyright_owner:
   - James Morrison <jamescmorrison00@gmail.com>
-dependencies:
-  - gnuradio (>= 3.10.0)
-repo: https://github.com/xeno00/gr-bbc
-stable_release: HEAD
+license: GPL-3.0-or-later
+gr_supported_version: v3.10
+repo: https://github.com/livethisdream/gr-bbc
 ---
 
 This project implements Baird, Bahn and Collins' **BBC codec** in GNU Radio.

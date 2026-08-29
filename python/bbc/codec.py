@@ -30,25 +30,47 @@ import hashlib
 
 from .glowworm import Glowworm
 
-# Default number of checksum bits appended to each message. These are forced
+# Default number of check bits appended to each message. These are forced
 # rather than searched during decode, so they prune false decodes instead of
 # multiplying them. 32 bits costs 32 extra marks and removes essentially all
 # false positives even under heavy jamming; 0 disables the feature.
 DEFAULT_CHECKSUM_BITS = 32
+
+#: Zero-fill: append plain zero bits, as described in the GRCon 2022 paper and
+#: as implemented upstream. This is the interoperable wire format.
+CHECKSUM_ZEROS = 'zeros'
+
+#: SHA-256 derived check bits. A local extension, NOT interoperable with any
+#: published BBC implementation. Measured against zero-fill it prunes exactly
+#: as well and no better -- the pruning comes from the mark locations depending
+#: on the message prefix through the glowworm, not from the check-bit values --
+#: so there is no reason to prefer it. Kept only for existing captures.
+CHECKSUM_SHA256 = 'sha256'
+
+CHECKSUM_MODES = (CHECKSUM_ZEROS, CHECKSUM_SHA256)
+
+DEFAULT_CHECKSUM_MODE = CHECKSUM_ZEROS
 
 
 class BbcError(ValueError):
     """Raised for parameter combinations the codec cannot honour."""
 
 
-def checksum_bits(message, num_bits):
+def checksum_bits(message, num_bits, mode=DEFAULT_CHECKSUM_MODE):
     """Return ``num_bits`` deterministic check bits for ``message``.
 
-    Any function of the message works as long as both ends agree; SHA-256 is
-    used because it is in the standard library and has no tuning knobs.
+    The bits are *forced* during decode rather than searched, so what prunes a
+    false path is that its glowworm state puts the check marks somewhere else
+    -- not the bit values themselves. Plain zeros therefore work as well as any
+    hash, which is what the published algorithm uses.
     """
     if num_bits <= 0:
         return []
+    if mode == CHECKSUM_ZEROS:
+        return [0] * num_bits
+    if mode != CHECKSUM_SHA256:
+        raise BbcError("unknown checksum mode %r; expected one of %r"
+                       % (mode, list(CHECKSUM_MODES)))
     digest = hashlib.sha256(bytes(message)).digest()
     if num_bits > len(digest) * 8:
         raise BbcError(
@@ -60,11 +82,15 @@ def checksum_bits(message, num_bits):
 class _CodecBase(object):
     """Shared parameter validation and glowworm ownership."""
 
-    def __init__(self, message_length, codeword_length, checksum_length):
+    def __init__(self, message_length, codeword_length, checksum_length,
+                 checksum_mode=DEFAULT_CHECKSUM_MODE):
         if message_length <= 0 or codeword_length <= 0:
             raise BbcError("message and codeword lengths must be positive")
         if checksum_length < 0:
             raise BbcError("checksum length must not be negative")
+        if checksum_mode not in CHECKSUM_MODES:
+            raise BbcError("unknown checksum mode %r; expected one of %r"
+                           % (checksum_mode, list(CHECKSUM_MODES)))
         if codeword_length <= message_length:
             raise BbcError(
                 "codeword (%d B) must be longer than the message (%d B); BBC "
@@ -74,6 +100,7 @@ class _CodecBase(object):
         self.message_length = int(message_length)
         self.codeword_length = int(codeword_length)
         self.checksum_length = int(checksum_length)
+        self.checksum_mode = checksum_mode
 
         self.msg_bits = self.message_length * 8
         self.cod_bits = self.codeword_length * 8
@@ -86,9 +113,10 @@ class Encoder(_CodecBase):
     """Turn a fixed-length message into a fixed-length BBC codeword."""
 
     def __init__(self, message_length, codeword_length,
-                 checksum_length=DEFAULT_CHECKSUM_BITS):
+                 checksum_length=DEFAULT_CHECKSUM_BITS,
+                 checksum_mode=DEFAULT_CHECKSUM_MODE):
         _CodecBase.__init__(self, message_length, codeword_length,
-                            checksum_length)
+                            checksum_length, checksum_mode)
 
     def encode(self, message):
         """Encode ``message`` (bytes-like, ``message_length`` long).
@@ -112,7 +140,8 @@ class Encoder(_CodecBase):
             loc = glowworm.add_bit(bit) % self.cod_bits
             codeword[loc >> 3] |= 1 << (loc & 7)
 
-        for bit in checksum_bits(message, self.checksum_length):
+        for bit in checksum_bits(message, self.checksum_length,
+                                 self.checksum_mode):
             loc = glowworm.add_bit(bit) % self.cod_bits
             codeword[loc >> 3] |= 1 << (loc & 7)
 
@@ -136,9 +165,10 @@ class Decoder(_CodecBase):
     def __init__(self, message_length, codeword_length,
                  checksum_length=DEFAULT_CHECKSUM_BITS,
                  max_candidates=DEFAULT_MAX_CANDIDATES,
-                 max_steps=DEFAULT_MAX_STEPS):
+                 max_steps=DEFAULT_MAX_STEPS,
+                 checksum_mode=DEFAULT_CHECKSUM_MODE):
         _CodecBase.__init__(self, message_length, codeword_length,
-                            checksum_length)
+                            checksum_length, checksum_mode)
         self.max_candidates = int(max_candidates)
         self.max_steps = int(max_steps)
         #: True when the last decode hit ``max_candidates`` or ``max_steps``.
@@ -179,7 +209,8 @@ class Decoder(_CodecBase):
                 # below simply fails to find its mark and gets pruned.
                 for j, value in enumerate(
                         checksum_bits(candidate[:msg_bytes],
-                                      self.checksum_length)):
+                                      self.checksum_length,
+                                      self.checksum_mode)):
                     i = self.msg_bits + j
                     if value:
                         candidate[i >> 3] |= 1 << (i & 7)

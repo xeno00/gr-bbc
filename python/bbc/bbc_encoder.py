@@ -9,7 +9,7 @@
 import numpy as np
 from gnuradio import gr
 
-from .codec import Encoder, DEFAULT_CHECKSUM_BITS
+from .codec import Encoder, DEFAULT_CHECKSUM_BITS, DEFAULT_CHECKSUM_MODE
 
 
 class bbc_encoder(gr.sync_block):
@@ -20,7 +20,8 @@ class bbc_encoder(gr.sync_block):
     """
 
     def __init__(self, message_length=2**7, codeword_length=2**17,
-                 checksum_length=DEFAULT_CHECKSUM_BITS):
+                 checksum_length=DEFAULT_CHECKSUM_BITS,
+                 checksum_mode=DEFAULT_CHECKSUM_MODE):
         message_length = int(message_length)
         codeword_length = int(codeword_length)
 
@@ -31,7 +32,7 @@ class bbc_encoder(gr.sync_block):
             out_sig=[(np.uint8, codeword_length)])
 
         self.encoder = Encoder(message_length, codeword_length,
-                               int(checksum_length))
+                               int(checksum_length), checksum_mode)
 
     def work(self, input_items, output_items):
         messages = input_items[0]

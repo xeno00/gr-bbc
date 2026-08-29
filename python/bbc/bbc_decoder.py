@@ -12,7 +12,7 @@ import numpy as np
 import pmt
 from gnuradio import gr
 
-from .codec import Decoder, DEFAULT_CHECKSUM_BITS
+from .codec import Decoder, DEFAULT_CHECKSUM_BITS, DEFAULT_CHECKSUM_MODE
 
 
 class bbc_decoder(gr.basic_block):
@@ -32,7 +32,8 @@ class bbc_decoder(gr.basic_block):
     def __init__(self, message_length=2**7, codeword_length=2**17,
                  checksum_length=DEFAULT_CHECKSUM_BITS,
                  max_candidates=Decoder.DEFAULT_MAX_CANDIDATES,
-                 max_steps=Decoder.DEFAULT_MAX_STEPS):
+                 max_steps=Decoder.DEFAULT_MAX_STEPS,
+                 checksum_mode=DEFAULT_CHECKSUM_MODE):
         message_length = int(message_length)
         codeword_length = int(codeword_length)
 
@@ -44,7 +45,7 @@ class bbc_decoder(gr.basic_block):
 
         self.decoder = Decoder(message_length, codeword_length,
                                int(checksum_length), int(max_candidates),
-                               int(max_steps))
+                               int(max_steps), checksum_mode)
         self.pending = deque()
 
         self.message_port_name = pmt.intern("decoded")

@@ -60,12 +60,36 @@ checksum length**, or nothing decodes.
 
 ### The checksum
 
-Each message carries a few check bits derived from its content. The decoder
+Each message carries a few check bits, appended before encoding. The decoder
 *forces* those bits rather than searching them, so a wrong branch simply fails
 to find its mark and gets pruned. Without them a heavily jammed codeword
-produces a flood of false decodes — at 80% mark density, a 32-bit checksum cut
-a run from thousands of candidates to exactly one. It defaults to 32 bits;
-set it to 0 to disable.
+produces a flood of false decodes — at 80% mark density, 32 check bits cut a
+run from thousands of candidates to exactly one. It defaults to 32 bits; set it
+to 0 to disable.
+
+The bits are plain zeros (`checksum_mode='zeros'`), as described in the GRCon
+2022 paper and implemented upstream. That is the interoperable wire format and
+the default. A `'sha256'` mode also exists, but only to read codewords produced
+by an earlier revision of this fork — measured against zero-fill it prunes
+identically, because what removes a false path is its glowworm state putting
+the check marks somewhere else, not the check-bit values.
+
+### Conformance
+
+The glowworm hash has a published self-test: `glowwormInit()` returns the hash
+of the empty string, which must equal `CHECKVALUE = 0xCCA4220FC78D45E0` (Baird,
+Carlisle, Bahn and Smith, MILCOM 2012, Fig. 4). `qa_codec.py` asserts it:
+
+```python
+from bbc import Glowworm, CHECKVALUE
+assert Glowworm().init_hash == CHECKVALUE
+```
+
+Note the two mask widths in `glowworm.py` differ on purpose. The register words
+are 64-bit, so the shifts wrap modulo 2**64, but the set-bit inversion is
+32 bits (`INVERT_MASK`) even though `s` is `unsigned long long`. Widening it to
+the register width moves every mark location and breaks interoperability — the
+CHECKVALUE test exists to catch exactly that.
 
 ### Using the codec without GNU Radio
 
