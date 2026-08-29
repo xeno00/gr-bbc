@@ -18,8 +18,10 @@ if __package__ in (None, ''):
     sys.path.insert(
         0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from bbc.codec import Encoder, Decoder, BbcError, checksum_bits
-from bbc.glowworm import Glowworm
+from bbc.codec import (Encoder, Decoder, BbcError, checksum_bits,
+                       CHECKSUM_ZEROS, CHECKSUM_SHA256,
+                       DEFAULT_CHECKSUM_MODE)
+from bbc.glowworm import Glowworm, CHECKVALUE, INVERT_MASK, MASK64
 
 MSG_LEN = 8
 COD_LEN = 2**12
@@ -33,6 +35,40 @@ def jam(codeword, fraction, seed):
         bit = rng.randrange(len(jammed) * 8)
         jammed[bit >> 3] |= 1 << (bit & 7)
     return jammed
+
+
+class TestGlowwormConformance(unittest.TestCase):
+    """Baird et al., MILCOM 2012, Fig. 4 published a self-test constant.
+
+    glowwormInit() returns the hash of the empty string, which must equal
+    CHECKVALUE. Nothing asserted this before, which is how a one-character
+    change to the inversion mask silently altered every mark location.
+    """
+
+    def test_init_hash_matches_published_checkvalue(self):
+        self.assertEqual(Glowworm().init_hash, CHECKVALUE,
+                         "glowworm does not match the published CHECKVALUE; "
+                         "the wire format is not interoperable")
+
+    def test_inversion_mask_is_32_bits(self):
+        # The register words are 64-bit but the set-bit inversion is not, and
+        # widening it is exactly the mistake CHECKVALUE catches.
+        self.assertEqual(INVERT_MASK, 0xFFFFFFFF)
+        self.assertEqual(MASK64, 0xFFFFFFFFFFFFFFFF)
+
+    def test_widening_the_mask_breaks_the_checkvalue(self):
+        """Guard the guard: prove the test would catch the regression."""
+        state = [0] * 32
+        n = 0
+        h = 1
+        for _ in range(4096):
+            t = state[n % 32] ^ (MASK64 if (h & 1) else 0)
+            t = ((t | (t >> 1)) ^ ((t << 1) & MASK64)) & MASK64
+            t = (t ^ (t >> 4) ^ (t >> 8) ^ (t >> 16) ^ (t >> 32)) & MASK64
+            n += 1
+            state[n % 32] ^= t
+            h = state[n % 32]
+        self.assertNotEqual(h, CHECKVALUE)
 
 
 class TestGlowworm(unittest.TestCase):
@@ -154,16 +190,52 @@ class TestJamResistance(unittest.TestCase):
 
 class TestChecksum(unittest.TestCase):
 
-    def test_checksum_bits_are_deterministic(self):
-        self.assertEqual(checksum_bits(b"abc", 16), checksum_bits(b"abc", 16))
-        self.assertNotEqual(checksum_bits(b"abc", 16),
-                            checksum_bits(b"abd", 16))
+    def test_default_mode_is_zero_fill(self):
+        # The published description appends zeros; anything else is a private
+        # wire format. Keep the interoperable one as the default.
+        self.assertEqual(DEFAULT_CHECKSUM_MODE, CHECKSUM_ZEROS)
+        self.assertEqual(checksum_bits(b"abc", 8), [0] * 8)
+        self.assertEqual(Encoder(MSG_LEN, COD_LEN).checksum_mode,
+                         CHECKSUM_ZEROS)
+        self.assertEqual(Decoder(MSG_LEN, COD_LEN).checksum_mode,
+                         CHECKSUM_ZEROS)
+
+    def test_zero_fill_prunes_as_well_as_a_hash(self):
+        # Measured equal: what prunes is the mark location moving with the
+        # prefix, not the check-bit values.
+        msg = b"jamme.me"
+        counts = []
+        for mode in (CHECKSUM_ZEROS, CHECKSUM_SHA256):
+            codeword = Encoder(MSG_LEN, COD_LEN, 32, mode).encode(msg)
+            decoded = Decoder(MSG_LEN, COD_LEN, 32,
+                              checksum_mode=mode).decode(jam(codeword, 0.8, 2))
+            self.assertEqual(decoded, [msg], mode)
+            counts.append(len(decoded))
+        self.assertEqual(counts[0], counts[1])
+
+    def test_modes_do_not_interoperate(self):
+        msg = b"mismatch"
+        codeword = Encoder(MSG_LEN, COD_LEN, 32, CHECKSUM_ZEROS).encode(msg)
+        self.assertEqual(
+            Decoder(MSG_LEN, COD_LEN, 32,
+                    checksum_mode=CHECKSUM_SHA256).decode(codeword), [])
+
+    def test_sha256_bits_are_deterministic(self):
+        self.assertEqual(checksum_bits(b"abc", 16, CHECKSUM_SHA256),
+                         checksum_bits(b"abc", 16, CHECKSUM_SHA256))
+        self.assertNotEqual(checksum_bits(b"abc", 16, CHECKSUM_SHA256),
+                            checksum_bits(b"abd", 16, CHECKSUM_SHA256))
 
     def test_zero_length_checksum(self):
         self.assertEqual(checksum_bits(b"abc", 0), [])
 
-    def test_checksum_longer_than_digest_rejected(self):
-        self.assertRaises(BbcError, checksum_bits, b"abc", 257)
+    def test_sha256_longer_than_digest_rejected(self):
+        self.assertRaises(BbcError, checksum_bits, b"abc", 257,
+                          CHECKSUM_SHA256)
+
+    def test_unknown_mode_rejected(self):
+        self.assertRaises(BbcError, checksum_bits, b"abc", 8, 'crc32')
+        self.assertRaises(BbcError, Encoder, MSG_LEN, COD_LEN, 32, 'crc32')
 
 
 class TestValidation(unittest.TestCase):

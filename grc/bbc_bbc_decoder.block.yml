@@ -6,7 +6,7 @@ templates:
   imports: import bbc
   make: |-
       bbc.bbc_decoder(${message_length}, ${codeword_length}, ${checksum_length},
-          ${max_candidates}, ${max_steps})
+          ${max_candidates}, ${max_steps}, '${checksum_mode}')
 
 parameters:
 -   id: message_length
@@ -21,6 +21,13 @@ parameters:
     label: Checksum (bits)
     dtype: int
     default: '32'
+-   id: checksum_mode
+    label: Checksum Mode
+    dtype: enum
+    default: zeros
+    options: [zeros, sha256]
+    option_labels: [Zero-fill (interoperable), SHA-256 (local extension)]
+    hide: part
 -   id: max_candidates
     label: Max Candidates
     dtype: int
@@ -71,5 +78,12 @@ documentation: |-
         flowgraph. Hitting either limit logs a warning, and note that a
         truncated search can miss the real message -- keeping a checksum on is
         the better defence.
+
+    Checksum Mode
+        'zeros' appends plain zero bits, as in the published algorithm and
+        upstream gr-bbc -- this is the interoperable wire format and the
+        default. 'sha256' is a local extension that prunes no better; it exists
+        only to read codewords produced by an earlier revision of this fork.
+        Must match the other end.
 
 file_format: 1

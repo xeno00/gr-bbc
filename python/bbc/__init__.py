@@ -19,14 +19,17 @@ it can be driven from a plain script.
 
 # gr-bbc is pure Python: there is no compiled extension module to import.
 
-from .codec import Encoder, Decoder, BbcError, DEFAULT_CHECKSUM_BITS
-from .glowworm import Glowworm
+from .codec import (Encoder, Decoder, BbcError, DEFAULT_CHECKSUM_BITS,
+                    DEFAULT_CHECKSUM_MODE, CHECKSUM_ZEROS, CHECKSUM_SHA256)
+from .glowworm import Glowworm, CHECKVALUE
 from .bbc_encoder import bbc_encoder
 from .bbc_decoder import bbc_decoder
 from .OOKDemodulator import OOKDemodulator
 from .OOKModulator import OOKModulator
 
 __all__ = [
-    'Encoder', 'Decoder', 'BbcError', 'DEFAULT_CHECKSUM_BITS', 'Glowworm',
+    'Encoder', 'Decoder', 'BbcError', 'DEFAULT_CHECKSUM_BITS',
+    'DEFAULT_CHECKSUM_MODE', 'CHECKSUM_ZEROS', 'CHECKSUM_SHA256',
+    'Glowworm', 'CHECKVALUE',
     'bbc_encoder', 'bbc_decoder', 'OOKDemodulator', 'OOKModulator',
 ]
