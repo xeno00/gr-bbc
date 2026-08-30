@@ -41,6 +41,11 @@ parameters:
     dtype: real
     default: '0.25'
     hide: part
+-   id: flag
+    label: Flag
+    dtype: string
+    default: 'flag{n0_sh4r3d_s3cr3t}'
+    hide: part
 
 inputs:
 -   label: in
@@ -76,5 +81,9 @@ documentation: |-
         carrier. BBC tolerates added marks but not dropped ones, so this sits
         below the halfway point on purpose. Raise it if the channel has a noise
         floor; a threshold near zero turns noise into a solid wall of marks.
+
+    Flag
+        Unused. Carried over so 1.x flow graphs load without edits. The block
+        never reads it and nothing downstream does either.
 
 file_format: 1
