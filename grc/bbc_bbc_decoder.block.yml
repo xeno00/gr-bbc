@@ -4,48 +4,86 @@ category: '[bbc]'
 
 templates:
   imports: import bbc
-  make: bbc.bbc_decoder(${message_length}, ${codeword_length})
+  make: |-
+      bbc.bbc_decoder(${message_length}, ${codeword_length}, ${checksum_length},
+          ${max_candidates}, ${max_steps}, '${checksum_mode}')
 
-#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
-#     Keys include:
-#     * id (makes the value accessible as keyname, e.g. in the make entry)
-#     * label (label shown in the GUI)
-#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#     * default
 parameters:
-- id: message_length
-  label: Message Length
-  dtype: int
-  default: int(2**7)
-  
-- id: codeword_length
-  label: Codeword Length
-  dtype: int
-  default: int(2**17)
-#- id: ...
-#  label: ...
-#  dtype: ...
+-   id: message_length
+    label: Message Length (bytes)
+    dtype: int
+    default: '128'
+-   id: codeword_length
+    label: Codeword Length (bytes)
+    dtype: int
+    default: '131072'
+-   id: checksum_length
+    label: Checksum (bits)
+    dtype: int
+    default: '32'
+-   id: checksum_mode
+    label: Checksum Mode
+    dtype: enum
+    default: zeros
+    options: [zeros, sha256]
+    option_labels: [Zero-fill (interoperable), SHA-256 (local extension)]
+    hide: part
+-   id: max_candidates
+    label: Max Candidates
+    dtype: int
+    default: '256'
+    hide: part
+-   id: max_steps
+    label: Max Search Steps
+    dtype: int
+    default: '5000000'
+    hide: part
 
-#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
-#  Keys include:
-#      * label (an identifier for the GUI)
-#      * domain (optional - stream or message. Default is stream)
-#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
-#      * vlen (optional - data stream vector length. Default is 1)
-#      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: in
-  domain: stream
-  dtype: byte
-  vlen: ${ codeword_length }
+-   label: in
+    domain: stream
+    dtype: byte
+    vlen: ${ codeword_length }
 
 outputs:
-- label: out
-  domain: stream
-  dtype: byte
-  vlen: ${ message_length } 
-#  optional: ...
+-   label: out
+    domain: stream
+    dtype: byte
+    vlen: ${ message_length }
+-   label: decoded
+    domain: message
+    optional: true
 
-#  'file_format' specifies the version of the GRC yml format used in the file
-#  and should usually not be changed.
+asserts:
+- ${ message_length > 0 }
+- ${ codeword_length > message_length }
+- ${ 0 <= checksum_length <= 256 }
+- ${ max_candidates > 0 }
+- ${ max_steps > 0 }
+
+documentation: |-
+    Recover every message consistent with a received BBC codeword.
+
+    A codeword can carry more than one message, so this block produces a
+    variable number of message vectors per codeword. Each decoded message is
+    also published on the 'decoded' message port as a PMT u8vector, which is
+    usually the easiest way to reach a Message Debug block.
+
+    Message Length / Codeword Length / Checksum
+        Must match the encoder exactly, or nothing decodes.
+
+    Max Candidates / Max Search Steps
+        Bound the depth-first search. A codeword saturated with marks makes
+        every branch look plausible; without these limits it would wedge the
+        flowgraph. Hitting either limit logs a warning, and note that a
+        truncated search can miss the real message -- keeping a checksum on is
+        the better defence.
+
+    Checksum Mode
+        'zeros' appends plain zero bits, as in the published algorithm and
+        upstream gr-bbc -- this is the interoperable wire format and the
+        default. 'sha256' is a local extension that prunes no better; it exists
+        only to read codewords produced by an earlier revision of this fork.
+        Must match the other end.
+
 file_format: 1
